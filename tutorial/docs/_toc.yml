@@ -1,0 +1,16 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+- caption: Introduction to Geant4.jl 
+  chapters:
+  - file: geant4-jl-intro
+- caption: Building simulation applications
+  chapters:
+    - file: geant4-jl-applications
+- caption: Complete examples
+  chapters:
+  - file: examples/HBC30
+  
