@@ -407,7 +407,7 @@ document.write(`
 <h1>Defining Geant4.jl Geometries<a class="headerlink" href="#defining-geant4-jl-geometries" title="Link to this heading">#</a></h1>
 <p>Currently we can define G4 geometries by constructing them using the API  of the C++ classes or by reading a GDML file. This notebook will guide you on this task.</p>
 <p>It is very convenient to be able to visualize the geometry on the way. For this purpose we need to load the G4Vis extension. This is done this way:</p>
-<div class="cell docutils container">
+<div class="cell tag_scroll-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Geant4</span>
 <span class="k">using</span><span class="w"> </span><span class="n">Geant4</span><span class="o">.</span><span class="n">SystemOfUnits</span><span class="w">                </span><span class="c"># defines the usints used by Geant4 </span>
@@ -416,62 +416,65 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> CairoMakie
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CairoMakie
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RelocatableFolders
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PaddedViews
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LogExpFunctions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MakieCore
+<span class=" -Color -Color-Green">  ✓ </span>AxisAlgorithms
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StackViews
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OpenEXR_jll
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PaddedViews
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Pixman_jll
+<span class=" -Color -Color-Green">  ✓ </span>OpenEXR_jll
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libvorbis_jll
+<span class=" -Color -Color-Green">  ✓ </span>libsixel_jll
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libsixel_jll
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LogExpFunctions → LogExpFunctionsChainRulesCoreExt
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SortingAlgorithms
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SimplePartitions
-<span class=" -Color -Color-Green">  ✓ </span>FreeType2_jll
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>QuadGK
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalSets → IntervalSetsRecipesBaseExt
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AbstractFFTs → AbstractFFTsTestExt
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Rmath
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PDMats
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FreeType2_jll
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Isoband
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FillArrays → FillArraysPDMatsExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalArithmetic
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Rmath
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Ratios → RatiosFixedPointNumbersExt
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ArrayInterface → ArrayInterfaceStaticArraysCoreExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalSets → IntervalSetsStatisticsExt
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ArrayInterface
+<span class=" -Color -Color-Green">  ✓ </span>IntervalArithmetic
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Glib_jll
@@ -480,7 +483,53 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorTypes
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LogExpFunctions → LogExpFunctionsChainRulesCoreExt
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MosaicViews
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalSets → IntervalSetsStatisticsExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FillArrays → FillArraysPDMatsExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FreeType
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Fontconfig_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>GridLayoutBase
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ArrayInterface → ArrayInterfaceStaticArraysCoreExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Interpolations
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Automa
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>QOI
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ShaderAbstractions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Colors
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MKL_jll<span class=" -Color -Color-Yellow"> Waiting for background task / IO / timer.</span>
+[pid 4232] waiting for IO to finish:
+ Handle type        uv_handle_t-&gt;data
+ timer              0x1c9ffe0-&gt;0x7fc606ac6710
+This means that a package has started a background task or event source that has not finished running. For precompilation to complete successfully, the event source needs to be closed explicitly. See the developer documentation on fixing precompilation hangs for more help.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorVectorSpace
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StatsBase
@@ -489,62 +538,16 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SpecialFunctions
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FreeType
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>GridLayoutBase
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Fontconfig_jll
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AxisArrays
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FillArrays → FillArraysSparseArraysExt
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Automa
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AxisArrays
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FiniteDiff
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Interpolations
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ShaderAbstractions
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>QOI
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorVectorSpace
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Colors
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MKL_jll<span class=" -Color -Color-Yellow"> Waiting for background task / IO / timer.</span>
-[pid 4304] waiting for IO to finish:
- Handle type        uv_handle_t-&gt;data
- timer              0x166fa10-&gt;0x7f129c0c66b0
-This means that a package has started a background task or event source that has not finished running. For precompilation to complete successfully, the event source needs to be closed explicitly. See the developer documentation on fixing precompilation hangs for more help.
-</pre></div>
-</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Cairo_jll
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FillArrays → FillArraysStatisticsExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SpecialFunctions → SpecialFunctionsChainRulesCoreExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorVectorSpace → SpecialFunctionsExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FiniteDiff → FiniteDiffStaticArraysExt
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FiniteDiff
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Graphics
@@ -559,29 +562,46 @@ This means that a package has started a background task or event source that has
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OpenEXR
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorVectorSpace → SpecialFunctionsExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SpecialFunctions → SpecialFunctionsChainRulesCoreExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FillArrays → FillArraysStatisticsExt
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>HarfBuzz_jll
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DualNumbers
-<span class=" -Color -Color-Green">  ✓ </span>DiffRules
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FiniteDiff → FiniteDiffStaticArraysExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[pid 4232] waiting for IO to finish:
+ Handle type        uv_handle_t-&gt;data
+ timer              0x1c9ffe0-&gt;0x7fc606ac6710
+This means that a package has started a background task or event source that has not finished running. For precompilation to complete successfully, the event source needs to be closed explicitly. See the developer documentation on fixing precompilation hangs for more help.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorSchemes
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[pid 4304] waiting for IO to finish:
- Handle type        uv_handle_t-&gt;data
- timer              0x166fa10-&gt;0x7f129c0c66b0
-This means that a package has started a background task or event source that has not finished running. For precompilation to complete successfully, the event source needs to be closed explicitly. See the developer documentation on fixing precompilation hangs for more help.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Polynomials
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DualNumbers
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FreeTypeAbstraction
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DiffRules
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libass_jll
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Polynomials
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MKL_jll
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Pango_jll
@@ -590,7 +610,7 @@ This means that a package has started a background task or event source that has
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>HypergeometricFunctions
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MKL_jll
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MathTeXEngine
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ForwardDiff
@@ -600,9 +620,6 @@ This means that a package has started a background task or event source that has
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Cairo
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MathTeXEngine
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StatsFuns
@@ -617,31 +634,40 @@ This means that a package has started a background task or event source that has
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StatsFuns → StatsFunsChainRulesCoreExt
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PlotUtils
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>NLSolversBase
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalArithmetic → IntervalArithmeticRecipesBaseExt
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PlotUtils
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageCore
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LineSearches
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalArithmetic → IntervalArithmeticDiffRulesExt
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LineSearches
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageBase
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageCore
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FFTW
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Optim
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Distributions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageBase
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ExactPredicates
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Polynomials → PolynomialsFFTWExt
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>JpegTurbo
@@ -650,31 +676,10 @@ This means that a package has started a background task or event source that has
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Sixel
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PNGFiles
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Polynomials → PolynomialsFFTWExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageAxes
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Optim
-</pre></div>
-</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Distributions → DistributionsTestExt
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ExactPredicates
-</pre></div>
-</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Polynomials → PolynomialsChainRulesCoreExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Distributions → DistributionsChainRulesCoreExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageMetadata
 </pre></div>
 </div>
 </div>
@@ -695,11 +700,6 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4TubsAllocated(Ptr{Nothing} @0x00000001277fc4e0)
-</pre></div>
-</div>
-</div>
 </div>
 <p>We can easily draw the just constructed solid</p>
 <div class="cell docutils container">
@@ -709,9 +709,6 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/182a29520313df70f540216c5cc95751de03bdafeca962732a3c486b0bce328c.png" src="_images/182a29520313df70f540216c5cc95751de03bdafeca962732a3c486b0bce328c.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -720,9 +717,6 @@ The definition of the constructor parameters can be found <a class="reference ex
 <span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/33fc3e2b7ee2533957f33b8ee52cd157f9db6678926bbb7634dec43584401ca4.png" src="_images/33fc3e2b7ee2533957f33b8ee52cd157f9db6678926bbb7634dec43584401ca4.png" />
 </div>
 </div>
 <section id="building-boolean-solids">
@@ -735,14 +729,6 @@ The definition of the constructor parameters can be found <a class="reference ex
 <span class="n">cross</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4UnionSolid</span><span class="p">(</span><span class="s">&quot;cross&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CxxPtr</span><span class="p">(</span><span class="n">box</span><span class="p">),</span><span class="w"> </span><span class="n">CxxPtr</span><span class="p">(</span><span class="n">box</span><span class="p">),</span><span class="w"> </span><span class="n">t</span><span class="p">)</span>
 <span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">draw</span><span class="p">(</span><span class="n">cross</span><span class="p">)</span>
 <span class="n">isnothing</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IGLWrap_jll is not available for currrent platform arm64-apple-darwin22.4.0 and is needed for drawing boolean solids
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
 </pre></div>
 </div>
 </div>
@@ -764,9 +750,6 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/e78389219c2ef6bc5ebcf0d35d3891f24f42650eb63ddaac75280189f60139a8.png" src="_images/e78389219c2ef6bc5ebcf0d35d3891f24f42650eb63ddaac75280189f60139a8.png" />
-</div>
 </div>
 </section>
 </section>
@@ -782,15 +765,6 @@ The definition of the constructor parameters can be found <a class="reference ex
 
 <span class="n">m_water</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindOrBuildMaterial</span><span class="p">(</span><span class="n">nist</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;G4_WATER&quot;</span><span class="p">)</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetDensity</span><span class="p">(</span><span class="n">m_water</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">g</span><span class="o">/</span><span class="n">cm3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetDensity(m_air) / (g / cm3) = 0.0012047899999999999
-GetDensity(m_water) / (g / cm3) = 1.0
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
 </pre></div>
 </div>
 </div>
@@ -813,15 +787,6 @@ GetDensity(m_water) / (g / cm3) = 1.0
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetDensity(m_eU) / (g / cm3) = 19.1
-GetA(m_eU) / (g / mole) = 237.72800000000004
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>237.72800000000004
-</pre></div>
-</div>
-</div>
 </div>
 <p>or build a molecule</p>
 <div class="cell docutils container">
@@ -834,14 +799,6 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 <span class="n">AddElement</span><span class="p">(</span><span class="n">Lu₂SiO₅</span><span class="p">,</span><span class="w"> </span><span class="n">Si</span><span class="p">,</span><span class="w"> </span><span class="n">natoms</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w">  </span>
 <span class="n">AddElement</span><span class="p">(</span><span class="n">Lu₂SiO₅</span><span class="p">,</span><span class="w"> </span><span class="n">O</span><span class="p">,</span><span class="w"> </span><span class="n">natoms</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetRadlen</span><span class="p">(</span><span class="n">Lu₂SiO₅</span><span class="p">)</span><span class="o">/</span><span class="n">cm</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetRadlen(Lu₂SiO₅) / cm = 1.1427324172087883
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1427324172087883
 </pre></div>
 </div>
 </div>
@@ -865,11 +822,6 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4LogicalVolumeAllocated(Ptr{Nothing} @0x000000028aaa6ab0)
-</pre></div>
-</div>
-</div>
 </div>
 <p>We can also draw a logical volume</p>
 <div class="cell docutils container">
@@ -878,9 +830,6 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 <span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/6048f2315b7a0cd23b93d038482045cf58098e2016f3cec7e00de88f2e4dbab8.png" src="_images/6048f2315b7a0cd23b93d038482045cf58098e2016f3cec7e00de88f2e4dbab8.png" />
 </div>
 </div>
 </section>
@@ -927,9 +876,6 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/e8f8b6c19881ad51b7c5d60efcb6f9c3ceffbe3d8bcbf143cf8c209423d51d06.png" src="_images/e8f8b6c19881ad51b7c5d60efcb6f9c3ceffbe3d8bcbf143cf8c209423d51d06.png" />
-</div>
 </div>
 </section>
 <section id="building-the-full-detector">
@@ -962,19 +908,6 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 <span class="k">end</span>
 
 <span class="n">detector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DetectorB3</span><span class="p">(</span><span class="n">nb_cryst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DetectorB3
-  cryst_dX: Float64 60.0
-  cryst_dY: Float64 60.0
-  cryst_dZ: Float64 30.0
-  nb_cryst: Int32 64
-  nb_rings: Int32 9
-  patient_radius: Float64 80.0
-  patient_dZ: Float64 100.0
-  checkOverlaps: Bool false
 </pre></div>
 </div>
 </div>
@@ -1093,20 +1026,10 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>construct (generic function with 1 method)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct</span><span class="p">(</span><span class="n">detector</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4PVPlacementAllocated(Ptr{Nothing} @0x000000028acdd4c0)
 </pre></div>
 </div>
 </div>
@@ -1117,9 +1040,6 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 <span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/42710fb67d0d15581f46d986b799fab9fe1f15a2cb72d9b37ee6deba310a7a7a.png" src="_images/42710fb67d0d15581f46d986b799fab9fe1f15a2cb72d9b37ee6deba310a7a7a.png" />
 </div>
 </div>
 </section>
