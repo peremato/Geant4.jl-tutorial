@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./tutorial
+        working-directory: ./tutorial 
         shell: bash -l {0}
 
     steps:
@@ -42,10 +42,10 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./geant4.jl/docs/_build/html
+        publish_dir: ./tutorial/docs/_build/html
       if: github.event_name != 'pull_request'
     - name: Deploy preview
       uses: rossjrw/pr-preview-action@v1
       with:
-        source-dir: ./julia-intro/docs/_build/html
+        source-dir: ./tutorial/docs/_build/html
       if: github.event_name == 'pull_request'
