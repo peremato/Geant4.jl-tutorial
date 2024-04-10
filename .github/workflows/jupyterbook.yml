@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./julia-intro
+        working-directory: ./tutorial
         shell: bash -l {0}
 
     steps:
