@@ -409,81 +409,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> 
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>GeometryBasics
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>CSV
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">        Info</span> Given Geant4 was explicitly requested, output will be shown live 
-
-[3329] signal (2): Interrupt
-in expression starting at /home/runner/.julia/packages/Geant4/PERab/src/Geant4.jl:8
-_ZN4llvm16MCObjectStreamer24emitDwarfAdvanceLineAddrElPKNS_8MCSymbolES3_j at /opt/hostedtoolcache/julia/1.10.2/x64/bin/../lib/julia/libLLVM-15jl.so (unknown line)
-unknown function (ip: (nil))
-Allocations: 4908038 (Pool: 4906977; Big: 1061); GC: 7
-  ✗ Geant4
-  2 dependencies successfully precompiled in 23 seconds. 71 already precompiled.
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">following</span> <span class="mi">1</span> <span class="n">direct</span> <span class="n">dependency</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">precompile</span><span class="p">:</span>
-
-<span class="n">Geant4</span> <span class="p">[</span><span class="mi">559</span><span class="n">df036</span><span class="o">-</span><span class="n">b7a0</span><span class="o">-</span><span class="mi">42</span><span class="n">fd</span><span class="o">-</span><span class="mi">85</span><span class="n">df</span><span class="o">-</span><span class="mi">7</span><span class="n">d5dd9d70f44</span><span class="p">]</span>
-
-<span class="n">Failed</span> <span class="n">to</span> <span class="n">precompile</span> <span class="n">Geant4</span> <span class="p">[</span><span class="mi">559</span><span class="n">df036</span><span class="o">-</span><span class="n">b7a0</span><span class="o">-</span><span class="mi">42</span><span class="n">fd</span><span class="o">-</span><span class="mi">85</span><span class="n">df</span><span class="o">-</span><span class="mi">7</span><span class="n">d5dd9d70f44</span><span class="p">]</span> <span class="n">to</span> <span class="s2">&quot;/home/runner/.julia/compiled/v1.10/Geant4/jl_98y96K&quot;</span><span class="o">.</span>
-<span class="p">[</span><span class="mi">3329</span><span class="p">]</span> <span class="n">signal</span> <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">Interrupt</span>
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">Geant4</span><span class="o">/</span><span class="n">PERab</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Geant4</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">8</span>
-<span class="n">_ZN4llvm16MCObjectStreamer24emitDwarfAdvanceLineAddrElPKNS_8MCSymbolES3_j</span> <span class="n">at</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.10.2</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/../</span><span class="n">lib</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">libLLVM</span><span class="o">-</span><span class="mi">15</span><span class="n">jl</span><span class="o">.</span><span class="n">so</span> <span class="p">(</span><span class="n">unknown</span> <span class="n">line</span><span class="p">)</span>
-<span class="n">unknown</span> <span class="n">function</span> <span class="p">(</span><span class="n">ip</span><span class="p">:</span> <span class="p">(</span><span class="n">nil</span><span class="p">))</span>
-<span class="ne">Allocations</span>: 4908038 (Pool: 4906977; Big: 1061); GC: 
-
-<span class="ne">Stacktrace</span>:
-  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">pkgerror</span><span class="p">(</span><span class="n">msg</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">Types</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.10.2</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.10</span><span class="o">/</span><span class="n">Pkg</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Types</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">70</span>
-  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">precompile</span><span class="p">(</span><span class="n">ctx</span><span class="p">::</span><span class="n">Pkg</span><span class="o">.</span><span class="n">Types</span><span class="o">.</span><span class="n">Context</span><span class="p">,</span> <span class="n">pkgs</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">Pkg</span><span class="o">.</span><span class="n">Types</span><span class="o">.</span><span class="n">PackageSpec</span><span class="p">};</span> <span class="n">internal_call</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">strict</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">warn_loaded</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">already_instantiated</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">timing</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">_from_loading</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{</span><span class="n">io</span><span class="p">::</span><span class="n">IJulia</span><span class="o">.</span><span class="n">IJuliaStdio</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">PipeEndpoint</span><span class="p">}})</span>
-    <span class="o">@</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">API</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.10.2</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.10</span><span class="o">/</span><span class="n">Pkg</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">API</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1659</span>
-  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">precompile</span><span class="p">(</span><span class="n">pkgs</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">Pkg</span><span class="o">.</span><span class="n">Types</span><span class="o">.</span><span class="n">PackageSpec</span><span class="p">};</span> <span class="n">io</span><span class="p">::</span><span class="n">IJulia</span><span class="o">.</span><span class="n">IJuliaStdio</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">PipeEndpoint</span><span class="p">},</span> <span class="n">kwargs</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{</span><span class="n">_from_loading</span><span class="p">::</span><span class="n">Bool</span><span class="p">})</span>
-    <span class="o">@</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">API</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.10.2</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.10</span><span class="o">/</span><span class="n">Pkg</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">API</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">159</span>
-  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">precompile</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.10.2</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.10</span><span class="o">/</span><span class="n">Pkg</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">API</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">147</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="c1">#precompile#114</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.10.2</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.10</span><span class="o">/</span><span class="n">Pkg</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">API</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">146</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="c1">#invokelatest#2</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">894</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">invokelatest</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">889</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1963</span>
-  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">__require_prelocked</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1812</span>
- <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="c1">#invoke_in_world#3</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">926</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="n">invoke_in_world</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">923</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">_require_prelocked</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">env</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1803</span>
- <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1790</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">267</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">15</span><span class="p">]</span> <span class="n">__require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1753</span>
- <span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="c1">#invoke_in_world#3</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">926</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">17</span><span class="p">]</span> <span class="n">invoke_in_world</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">923</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">18</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1746</span>
-</pre></div>
-</div>
-</div>
 </div>
 <section id="define-the-function-that-will-construct-the-detector-geometry">
 <h2>Define the function that will construct the detector geometry.<a class="headerlink" href="#define-the-function-that-will-construct-the-detector-geometry" title="Link to this heading">#</a></h2>
@@ -508,7 +433,7 @@ for Application Developers, Appendix 10: Geant4 Materials Database.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&lt;&lt; Reference Physics List QBBC 
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.QBBCAllocated(Ptr{Nothing} @0x0000000146846b00)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.QBBCAllocated(Ptr{Nothing} @0x0000000001652190)
 </pre></div>
 </div>
 </div>
@@ -536,7 +461,7 @@ for Application Developers, Appendix 10: Geant4 Materials Database.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4JLActionInitializationAllocated(Ptr{Nothing} @0x0000000146a1d780)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4JLActionInitializationAllocated(Ptr{Nothing} @0x0000000001819060)
 </pre></div>
 </div>
 </div>
