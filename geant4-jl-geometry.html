@@ -437,6 +437,11 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4TubsAllocated(Ptr{Nothing} @0x0000000159d57f20)
+</pre></div>
+</div>
+</div>
 </div>
 <p>We can easily draw the just constructed solid</p>
 <div class="cell docutils container">
@@ -446,12 +451,40 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching draw(::Geant4.G4TubsAllocated; wireframe::Bool)
+
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="n">draw</span><span class="p">()</span> <span class="n">got</span> <span class="n">unsupported</span> <span class="n">keyword</span> <span class="n">argument</span> <span class="s2">&quot;wireframe&quot;</span>
+   <span class="o">@</span> <span class="n">Geant4</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">Geant4</span><span class="o">/</span><span class="n">PERab</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Geant4</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">43</span>
+
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">para</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4Para</span><span class="p">(</span><span class="s">&quot;parallelepiped&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">π</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="nb">π</span><span class="o">/</span><span class="mi">6</span><span class="p">)</span>
 <span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">draw</span><span class="p">(</span><span class="n">para</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching draw(::Geant4.G4ParaAllocated)
+
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="n">draw</span><span class="p">()</span>
+   <span class="o">@</span> <span class="n">Geant4</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">Geant4</span><span class="o">/</span><span class="n">PERab</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Geant4</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">43</span>
+
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -466,6 +499,20 @@ The definition of the constructor parameters can be found <a class="reference ex
 <span class="n">cross</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4UnionSolid</span><span class="p">(</span><span class="s">&quot;cross&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CxxPtr</span><span class="p">(</span><span class="n">box</span><span class="p">),</span><span class="w"> </span><span class="n">CxxPtr</span><span class="p">(</span><span class="n">box</span><span class="p">),</span><span class="w"> </span><span class="n">t</span><span class="p">)</span>
 <span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">draw</span><span class="p">(</span><span class="n">cross</span><span class="p">)</span>
 <span class="n">isnothing</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching draw(::Geant4.G4UnionSolidAllocated)
+
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="n">draw</span><span class="p">()</span>
+   <span class="o">@</span> <span class="n">Geant4</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">Geant4</span><span class="o">/</span><span class="n">PERab</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Geant4</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">43</span>
+
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span><span class="mi">4</span>
 </pre></div>
 </div>
 </div>
@@ -487,6 +534,37 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching *(::Geant4.CLHEP!Hep3VectorAllocated, ::SVector{3, Float64})
+
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="o">*</span><span class="p">(::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="o">...</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">587</span>
+  <span class="o">*</span><span class="p">(::</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">UniformScaling</span><span class="p">,</span> <span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="n">StaticArray</span><span class="p">{</span><span class="n">Tuple</span><span class="p">{</span><span class="n">N</span><span class="p">},</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="n">where</span> <span class="p">{</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">},</span> <span class="n">StaticArray</span><span class="p">{</span><span class="n">Tuple</span><span class="p">{</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">},</span> <span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="n">where</span> <span class="p">{</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">T</span><span class="p">}})</span>
+   <span class="o">@</span> <span class="n">StaticArrays</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">StaticArrays</span><span class="o">/</span><span class="n">EHHaF</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">linalg</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">43</span>
+  <span class="o">*</span><span class="p">(::</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">UniformScaling</span><span class="p">,</span> <span class="p">::</span><span class="n">AbstractVecOrMat</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">LinearAlgebra</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Julia</span><span class="o">-</span><span class="mf">1.10</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">Resources</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.10</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">uniformscaling</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">262</span>
+  <span class="o">...</span>
+
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">(::</span><span class="n">var</span><span class="s2">&quot;#1#2&quot;</span><span class="p">)(</span><span class="n">rp</span><span class="p">::</span><span class="n">SVector</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="n">Float64</span><span class="p">})</span>
+   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">none</span><span class="p">:</span><span class="mi">0</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">iterate</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">generator</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">47</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">iterate</span><span class="p">(::</span><span class="n">Base</span><span class="o">.</span><span class="n">Iterators</span><span class="o">.</span><span class="n">Filter</span><span class="p">{</span><span class="n">var</span><span class="s2">&quot;#4#6&quot;</span><span class="p">,</span> <span class="n">Base</span><span class="o">.</span><span class="n">Generator</span><span class="p">{</span><span class="n">Vector</span><span class="p">{</span><span class="n">SVector</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="n">Float64</span><span class="p">}},</span> <span class="n">var</span><span class="s2">&quot;#1#2&quot;</span><span class="p">}})</span>
+   <span class="o">@</span> <span class="n">Base</span><span class="o">.</span><span class="n">Iterators</span> <span class="o">./</span><span class="n">iterators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">516</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">iterate</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">generator</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">44</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">grow_to</span><span class="o">!(</span>dest::Vector<span class="o">{</span>SVector<span class="o">{</span><span class="m">3</span>,<span class="w"> </span>Float64<span class="o">}}</span>,<span class="w"> </span>itr::Base.Generator<span class="o">{</span>Base.Iterators.Filter<span class="o">{</span>var<span class="s2">&quot;#4#6&quot;</span>,<span class="w"> </span>Base.Generator<span class="o">{</span>Vector<span class="o">{</span>SVector<span class="o">{</span><span class="m">3</span>,<span class="w"> </span>Float64<span class="o">}}</span>,<span class="w"> </span>var<span class="s2">&quot;#1#2&quot;</span><span class="o">}}</span>,<span class="w"> </span>var<span class="s2">&quot;#3#5&quot;</span><span class="o">})</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">array</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">907</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">collect</span><span class="p">(</span><span class="n">itr</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Generator</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">Iterators</span><span class="o">.</span><span class="n">Filter</span><span class="p">{</span><span class="n">var</span><span class="s2">&quot;#4#6&quot;</span><span class="p">,</span> <span class="n">Base</span><span class="o">.</span><span class="n">Generator</span><span class="p">{</span><span class="n">Vector</span><span class="p">{</span><span class="n">SVector</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="n">Float64</span><span class="p">}},</span> <span class="n">var</span><span class="s2">&quot;#1#2&quot;</span><span class="p">}},</span> <span class="n">var</span><span class="s2">&quot;#3#5&quot;</span><span class="p">})</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">array</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">831</span>
+ <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span><span class="mi">9</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -502,6 +580,15 @@ The definition of the constructor parameters can be found <a class="reference ex
 
 <span class="n">m_water</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindOrBuildMaterial</span><span class="p">(</span><span class="n">nist</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;G4_WATER&quot;</span><span class="p">)</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetDensity</span><span class="p">(</span><span class="n">m_water</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">g</span><span class="o">/</span><span class="n">cm3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetDensity(m_air) / (g / cm3) = 0.0012047899999999999
+GetDensity(m_water) / (g / cm3) = 1.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
 </pre></div>
 </div>
 </div>
@@ -524,6 +611,15 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetDensity(m_eU) / (g / cm3) = 19.1
+GetA(m_eU) / (g / mole) = 237.72800000000004
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>237.72800000000004
+</pre></div>
+</div>
+</div>
 </div>
 <p>or build a molecule</p>
 <div class="cell docutils container">
@@ -536,6 +632,14 @@ The definition of the constructor parameters can be found <a class="reference ex
 <span class="n">AddElement</span><span class="p">(</span><span class="n">Lu₂SiO₅</span><span class="p">,</span><span class="w"> </span><span class="n">Si</span><span class="p">,</span><span class="w"> </span><span class="n">natoms</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w">  </span>
 <span class="n">AddElement</span><span class="p">(</span><span class="n">Lu₂SiO₅</span><span class="p">,</span><span class="w"> </span><span class="n">O</span><span class="p">,</span><span class="w"> </span><span class="n">natoms</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetRadlen</span><span class="p">(</span><span class="n">Lu₂SiO₅</span><span class="p">)</span><span class="o">/</span><span class="n">cm</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetRadlen(Lu₂SiO₅) / cm = 1.1427324172087883
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1427324172087883
 </pre></div>
 </div>
 </div>
@@ -559,12 +663,31 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4LogicalVolumeAllocated(Ptr{Nothing} @0x00000001165ac710)
+</pre></div>
+</div>
+</div>
 </div>
 <p>We can also draw a logical volume</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">draw</span><span class="p">(</span><span class="n">logicCryst</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching draw(::Geant4.G4LogicalVolumeAllocated)
+
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="n">draw</span><span class="p">()</span>
+   <span class="o">@</span> <span class="n">Geant4</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">Geant4</span><span class="o">/</span><span class="n">PERab</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Geant4</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">43</span>
+
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -613,6 +736,20 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching draw(::Geant4.G4LogicalVolumeAllocated)
+
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="n">draw</span><span class="p">()</span>
+   <span class="o">@</span> <span class="n">Geant4</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">Geant4</span><span class="o">/</span><span class="n">PERab</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Geant4</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">43</span>
+
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="building-the-full-detector">
@@ -645,6 +782,26 @@ The definition of the constructor parameters can be found <a class="reference ex
 <span class="k">end</span>
 
 <span class="n">detector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DetectorB3</span><span class="p">(</span><span class="n">nb_cryst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: Package Parameters not found in current path.
+<span class="o">-</span> <span class="n">Run</span> <span class="err">`</span><span class="kn">import</span> <span class="nn">Pkg</span><span class="p">;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Parameters&quot;</span><span class="p">)</span><span class="err">`</span> <span class="n">to</span> <span class="n">install</span> <span class="n">the</span> <span class="n">Parameters</span> <span class="n">package</span><span class="o">.</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1766</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">267</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">__require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1747</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1">#invoke_in_world#3</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">921</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">invoke_in_world</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">918</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1740</span>
 </pre></div>
 </div>
 </div>
@@ -763,10 +920,28 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `DetectorB3` not defined
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct</span><span class="p">(</span><span class="n">detector</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `detector` not defined
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -775,6 +950,81 @@ The definition of the constructor parameters can be found <a class="reference ex
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">draw</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `world` not defined
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Status</span> `~/.julia/environments/v1.10/Project.toml`
+  [861a8166] Combinatorics v1.0.2
+<span class=" -Color -Color-Yellow">⌅</span> [1f15a43c] CxxWrap v0.14.2
+  [a93c6f00] DataFrames v1.6.1
+  [eb32b910] EDM4hep v0.3.1 `~/Development/EDM4hep.jl`
+  [559df036] Geant4 v0.1.13
+  [7073ff75] IJulia v1.24.2
+  [f612022c] LorentzVectorHEP v0.1.6
+<span class=" -Color -Color-Green">⌃</span> [98572fba] Parquet2 v0.2.20
+<span class=" -Color -Color-Green">⌃</span> [91a5bcdd] Plots v1.40.1
+  [90137ffa] StaticArrays v1.9.3
+<span class=" -Color -Color-Green">⌃</span> [3cd96dde] UnROOT v0.10.22
+  [2e619515] Expat_jll v2.5.0+0
+  [872b6946] Geant4_jll v11.2.0+0
+  [637d83c4] Xerces_jll v3.2.4+0
+<span class=" -Color -Color-Bold -Color-Bold-Cyan">Info</span> Packages marked with <span class=" -Color -Color-Green">⌃</span> and <span class=" -Color -Color-Yellow">⌅</span> have new versions available. Those with <span class=" -Color -Color-Green">⌃</span> may be upgradable, but those with <span class=" -Color -Color-Yellow">⌅</span> are restricted by compatibility constraints from upgrading. To see why use `status --outdated`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">ENV</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Base.EnvDict with 59 entries:
+  &quot;XPC_FLAGS&quot;                     =&gt; &quot;0x0&quot;
+  &quot;COMMAND_MODE&quot;                  =&gt; &quot;unix2003&quot;
+  &quot;PATH&quot;                          =&gt; &quot;/Applications/Julia-1.10.app/Contents/Res…
+  &quot;PWD&quot;                           =&gt; &quot;/Users/mato/Development/Geant4.jl-tutoria…
+  &quot;DISPLAY&quot;                       =&gt; &quot;/private/tmp/com.apple.launchd.aM1UIhqIk4…
+  &quot;XPC_SERVICE_NAME&quot;              =&gt; &quot;0&quot;
+  &quot;HOMEBREW_PREFIX&quot;               =&gt; &quot;/opt/homebrew&quot;
+  &quot;TERM_PROGRAM&quot;                  =&gt; &quot;vscode&quot;
+  &quot;VSCODE_GIT_ASKPASS_NODE&quot;       =&gt; &quot;/Applications/Visual Studio Code.app/Cont…
+  &quot;SHELL&quot;                         =&gt; &quot;/bin/zsh&quot;
+  &quot;VSCODE_GIT_ASKPASS_MAIN&quot;       =&gt; &quot;/Applications/Visual Studio Code.app/Cont…
+  &quot;__CF_USER_TEXT_ENCODING&quot;       =&gt; &quot;0x1F5:0x0:0x0&quot;
+  &quot;VSCODE_INJECTION&quot;              =&gt; &quot;1&quot;
+  &quot;USER_ZDOTDIR&quot;                  =&gt; &quot;/Users/mato&quot;
+  &quot;GIT_ASKPASS&quot;                   =&gt; &quot;/Applications/Visual Studio Code.app/Cont…
+  &quot;__CFBundleIdentifier&quot;          =&gt; &quot;com.microsoft.VSCode&quot;
+  &quot;VSCODE_GIT_ASKPASS_EXTRA_ARGS&quot; =&gt; &quot;&quot;
+  &quot;VSCODE_GIT_IPC_HANDLE&quot;         =&gt; &quot;/var/folders/zz/gs4fh_9d5lx4k_q51gd7kvyr0…
+  &quot;TMPDIR&quot;                        =&gt; &quot;/var/folders/zz/gs4fh_9d5lx4k_q51gd7kvyr0…
+  &quot;MANPATH&quot;                       =&gt; &quot;/opt/homebrew/share/man:/usr/share/man:/u…
+  &quot;HOMEBREW_CELLAR&quot;               =&gt; &quot;/opt/homebrew/Cellar&quot;
+  &quot;CONDARC&quot;                       =&gt; &quot;/Users/mato/.julia/conda/3/aarch64/condar…
+  &quot;ORIGINAL_XDG_CURRENT_DESKTOP&quot;  =&gt; &quot;undefined&quot;
+  &quot;LANG&quot;                          =&gt; &quot;en_US.UTF-8&quot;
+  &quot;LOGNAME&quot;                       =&gt; &quot;mato&quot;
+  ⋮                               =&gt; ⋮
 </pre></div>
 </div>
 </div>

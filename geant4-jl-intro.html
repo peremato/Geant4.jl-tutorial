@@ -452,6 +452,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Any}:
+ Geant4.G4BoxAllocated
+ Geant4.G4BoxDereferenced
+</pre></div>
+</div>
+</div>
 </div>
 <p>To take the C++ pointer or the reference of a wrapped object, the <code class="docutils literal notranslate"><span class="pre">CxxWrap</span></code> module provides the functions <code class="docutils literal notranslate"><span class="pre">CxxPtr</span></code> and <code class="docutils literal notranslate"><span class="pre">CxxRef</span></code>. This is often needed to fullfil with the Geant4 C++ interfaces.</p>
 <div class="cell docutils container">
@@ -463,6 +470,11 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Test Passed</span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>The user can derefence a <code class="docutils literal notranslate"><span class="pre">CxxRef</span></code> or <code class="docutils literal notranslate"><span class="pre">CxxPtr</span></code> with the operator <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
 <div class="cell docutils container">
@@ -471,6 +483,15 @@ document.write(`
 <span class="nd">@show</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">p_box</span><span class="p">[])</span>
 <span class="nd">@test</span><span class="w"> </span><span class="n">r_box</span><span class="p">[]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">box</span>
 <span class="nd">@test</span><span class="w"> </span><span class="n">p_box</span><span class="p">[]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">box</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>typeof(r_box[]) = Geant4.G4BoxDereferenced
+typeof(p_box[]) = Geant4.G4BoxDereferenced
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Test Passed</span>
 </pre></div>
 </div>
 </div>
@@ -486,14 +507,21 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Test Passed</span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>We can see the methods defined for the function <code class="docutils literal notranslate"><span class="pre">GetCubicVolume</span></code> using the Julia builtin function <code class="docutils literal notranslate"><span class="pre">methods()</span></code></p>
-<div class="cell docutils container">
+<div class="cell tag_scroll-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">methods</span><span class="p">(</span><span class="n">GetCubicVolume</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"># 58 methods for generic function <b>GetCubicVolume</b> from [35mGeant4[39m:<ul><li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4SubtractionSolid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4UnionSolid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4TwistedTubs}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4BooleanSolid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4GenericTrap}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4TwistedTrd}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4TwistedBox}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Tet}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Paraboloid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4EllipticalCone}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4EllipticalTube}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4CutTubs}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Tubs}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Hype}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Para}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Torus}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Ellipsoid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Orb}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Sphere}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Cons}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Trap}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Trd}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4MultiUnion}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Box}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4DisplacedSolid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Polyhedra}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4Polycone}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4VCSGfaceted}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{Ptr{Nothing}, CxxPtr{<:G4VSolid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4SubtractionSolid, CxxRef{<:G4SubtractionSolid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4UnionSolid, CxxRef{<:G4UnionSolid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4TwistedTubs, CxxRef{<:G4TwistedTubs}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4BooleanSolid, CxxRef{<:G4BooleanSolid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4GenericTrap, CxxRef{<:G4GenericTrap}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4TwistedTrd, CxxRef{<:G4TwistedTrd}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4TwistedBox, CxxRef{<:G4TwistedBox}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Tet, CxxRef{<:G4Tet}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Paraboloid, CxxRef{<:G4Paraboloid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4EllipticalCone, CxxRef{<:G4EllipticalCone}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4EllipticalTube, CxxRef{<:G4EllipticalTube}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4CutTubs, CxxRef{<:G4CutTubs}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Tubs, CxxRef{<:G4Tubs}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Hype, CxxRef{<:G4Hype}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Para, CxxRef{<:G4Para}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Torus, CxxRef{<:G4Torus}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Ellipsoid, CxxRef{<:G4Ellipsoid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Orb, CxxRef{<:G4Orb}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Sphere, CxxRef{<:G4Sphere}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Cons, CxxRef{<:G4Cons}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Trap, CxxRef{<:G4Trap}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Trd, CxxRef{<:G4Trd}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4MultiUnion, CxxRef{<:G4MultiUnion}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Box, CxxRef{<:G4Box}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4DisplacedSolid, CxxRef{<:G4DisplacedSolid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4VCSGfaceted, CxxRef{<:G4VCSGfaceted}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Polycone, CxxRef{<:G4Polycone}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4Polyhedra, CxxRef{<:G4Polyhedra}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> <li> GetCubicVolume(arg1::<b>Union{G4VSolid, CxxRef{<:G4VSolid}}</b>) in Geant4 at <a href="file:///Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl" target="_blank">/Users/mato/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:624</a></li> </ul></div></div>
 </div>
 </section>
 <section id="calling-static-class-methods">
@@ -502,6 +530,11 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">G4Random!getTheSeed</span><span class="p">()</span><span class="w">   </span><span class="c"># This will call the C++ class method G4Random::getTheSeed()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
 </pre></div>
 </div>
 </div>
@@ -517,6 +550,11 @@ document.write(`
 <span class="nd">@test</span><span class="w"> </span><span class="n">CxxPtr</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">box</span><span class="w">  </span><span class="c"># same instance</span>
 <span class="nd">@test</span><span class="w"> </span><span class="n">solid</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">box</span><span class="w">        </span><span class="c"># these are two diffrent instances</span>
 <span class="nd">@test</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">solid</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Test Passed</span>
 </pre></div>
 </div>
 </div>
@@ -540,6 +578,15 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetCubicVolume(union) = 40.00017222413403
+DistanceToIn(union, G4ThreeVector(10, 10, 10)) = 9.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.0
+</pre></div>
+</div>
+</div>
 </div>
 <p>now force a GC</p>
 <div class="cell docutils container">
@@ -548,6 +595,14 @@ document.write(`
 <span class="n">GC</span><span class="o">.</span><span class="n">gc</span><span class="p">()</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">union</span><span class="p">)</span><span class="w">                     </span><span class="c"># G4BooleanSolid cashes the volume</span>
 <span class="c"># DistanceToIn(union, G4ThreeVector(10,10,10))  # this will probably crash the program</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetCubicVolume(union) = 40.00017222413403
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40.00017222413403
 </pre></div>
 </div>
 </div>
@@ -563,14 +618,54 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetCubicVolume(union) = 39.99985174389303
+DistanceToIn(union, G4ThreeVector(10, 10, 10)) = 9.0
+</pre></div>
+</div>
+</div>
 </div>
 <p>forcing now a GC will still work</p>
-<div class="cell docutils container">
+<div class="cell tag_scroll-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">box1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">box2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">GC</span><span class="o">.</span><span class="n">gc</span><span class="p">()</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">union</span><span class="p">)</span><span class="w">                          </span><span class="c"># G4BooleanSolid cashes the volume</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">DistanceToIn</span><span class="p">(</span><span class="n">union</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span><span class="w">  </span><span class="c"># this will probabluy crash the program</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetCubicVolume(union) = 39.99985174389303
+DistanceToIn(union, G4ThreeVector(10, 10, 10)) = 9.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_scroll-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Status</span> `~/.julia/environments/v1.10/Project.toml`
+  [861a8166] Combinatorics v1.0.2
+<span class=" -Color -Color-Yellow">⌅</span> [1f15a43c] CxxWrap v0.14.2
+  [a93c6f00] DataFrames v1.6.1
+  [eb32b910] EDM4hep v0.3.1 `~/Development/EDM4hep.jl`
+  [559df036] Geant4 v0.1.13
+  [7073ff75] IJulia v1.24.2
+  [f612022c] LorentzVectorHEP v0.1.6
+<span class=" -Color -Color-Green">⌃</span> [98572fba] Parquet2 v0.2.20
+<span class=" -Color -Color-Green">⌃</span> [91a5bcdd] Plots v1.40.1
+  [90137ffa] StaticArrays v1.9.3
+<span class=" -Color -Color-Green">⌃</span> [3cd96dde] UnROOT v0.10.22
+  [2e619515] Expat_jll v2.5.0+0
+  [872b6946] Geant4_jll v11.2.0+0
+  [637d83c4] Xerces_jll v3.2.4+0
+<span class=" -Color -Color-Bold -Color-Bold-Cyan">Info</span> Packages marked with <span class=" -Color -Color-Green">⌃</span> and <span class=" -Color -Color-Yellow">⌅</span> have new versions available. Those with <span class=" -Color -Color-Green">⌃</span> may be upgradable, but those with <span class=" -Color -Color-Yellow">⌅</span> are restricted by compatibility constraints from upgrading. To see why use `status --outdated`
 </pre></div>
 </div>
 </div>
