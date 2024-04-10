@@ -415,6 +415,39 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>CSV
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">        Info</span> Given Geant4 was explicitly requested, output will be shown live 
+
+[2848] signal (2): Interrupt
+in expression starting at none:1
+apply_cl at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/flisp/flisp.c:1334
+do_trycatch at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/flisp/flisp.c:895
+apply_cl at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/flisp/flisp.c:1804
+do_trycatch at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/flisp/flisp.c:895
+apply_cl at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/flisp/flisp.c:1804
+_applyn at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/flisp/flisp.c:679
+fl_applyn at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/flisp/flisp.c:719
+ijl_expand_with_loc_warn at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/ast.c:1271
+jl_toplevel_eval_flex at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/toplevel.c:730
+ijl_toplevel_eval_in at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/toplevel.c:985
+eval at ./boot.jl:385 [inlined]
+wrap_reference_converters at /home/runner/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:691
+wrapfunctions at /home/runner/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:725
+wrapmodule at /home/runner/.julia/packages/CxxWrap/5IZvn/src/CxxWrap.jl:763
+_jl_invoke at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/gf.c:2894 [inlined]
+ijl_apply_generic at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/gf.c:3076
+jl_apply at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/julia.h:1982 [inlined]
+do_call at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/interpreter.c:126
+eval_value at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/interpreter.c:223
+eval_stmt_value at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/interpreter.c:174 [inlined]
+eval_body at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/interpreter.c:617
+jl_interpret_toplevel_thunk at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/interpreter.c:775
+jl_toplevel_eval_flex at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/toplevel.c:934
+jl_eval_module_expr at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/toplevel.c:215 [inlined]
+jl_toplevel_eval_flex at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/toplevel.c:736
+jl_toplevel_eval_flex at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/toplevel.c:877
+ijl_toplevel_eval_in at /cache/build/builder-amdci5-1/julialang/julia-release-1-dot-10/src/toplevel.c:985
+</pre></div>
+</div>
 </div>
 </div>
 <section id="define-the-function-that-will-construct-the-detector-geometry">
