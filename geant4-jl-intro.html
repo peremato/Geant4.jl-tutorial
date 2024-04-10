@@ -146,8 +146,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="_static/juliaheplogo.png" class="logo__image only-light" alt="Geant4.jl Tutorials - Home"/>
+    <script>document.write(`<img src="_static/juliaheplogo.png" class="logo__image only-dark" alt="Geant4.jl Tutorials - Home"/>`);</script>
   
-    <p class="title logo__title">Geant4.jl Tutorials</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -400,7 +406,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-geant4-jl">
 <h1>Introduction to Geant4.jl<a class="headerlink" href="#introduction-to-geant4-jl" title="Link to this heading">#</a></h1>
 <p>Geant4.jl provides the Julia bindings for the <a class="reference external" href="https://geant4.web.cern.ch">Geant4</a> particle transportation toolkit. It is using <a class="reference external" href="https://github.com/JuliaInterop/CxxWrap.jl">CxxWrap.jl</a> package to wrap C++ types and functions to Julia. Since the Geant4 toolkit is rather large and complex, writing the wrapper code by hand is not really an option. For this we use the package <a class="reference external" href="https://github.com/grasph/wrapit">WrapIt</a> that automates the generation of the wrapper code making use of the clang library.</p>
-<p>Documentation of the concepts and how to write applications with the Geant4 toolkit can be found with the <a class="reference external" href="https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/index.html">Application Developer Guide</a> or the <a class="reference external" href="https://geant4.kek.jp/Reference/11.2.0/index.html">Classes and Members reference guide</a> for a detailed description of each C++ class. In this tutorial we will only highlight the differences between the Julia and the C++ API. We will document the additional types that have been added on top of the C++ classes to make the user interface more Julia friendly. To distinguish these new types from the types coming directly from C++ via the CxxWrap wrappers, these types are prefixed with <code class="docutils literal notranslate"><span class="pre">G4JL</span></code>.</p>
+<p>Documentation of the concepts and how to write applications with the Geant4 toolkit can be found with the <a class="reference external" href="https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/index.html">Application Developer Guide</a> or the <a class="reference external" href="https://geant4.kek.jp/Reference/11.2.0/index.html">Classes and Members reference guide</a> for a detailed description of each C++ class. In this tutorial we will only highlight the differences between the Julia and the C++ API. Therefore it is assumed some prior knowledge of the Geant4 C++ interfaces.</p>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
 <p>The Geant4.jl package does no require any special installation. Stable releases are registered to the Julia general registry, and therefore, it can be deployed with the standard <code class="docutils literal notranslate"><span class="pre">Pkg</span></code> Julia package manager.</p>
@@ -414,9 +420,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> registry at `~/.julia/registries/General.toml`
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/work/Geant4.jl-tutorial/Geant4.jl-tutorial/Project.toml`
@@ -426,7 +430,215 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> project...
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RangeArrays
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LaTeXStrings
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AbstractFFTs
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Combinatorics
+<span class=" -Color -Color-Green">  ✓ </span>Calculus
+<span class=" -Color -Color-Green">  ✓ </span>PositiveFactorizations
+<span class=" -Color -Color-Green">  ✓ </span>IndirectArrays
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PolygonOps
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>TensorCore
+<span class=" -Color -Color-Green">  ✓ </span>StatsAPI
+<span class=" -Color -Color-Green">  ✓ </span>AbstractLattices
+<span class=" -Color -Color-Green">  ✓ </span>Contour
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>CEnum
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>TriplotBase
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>UnPack
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntegerMathUtils
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>CompilerSupportLibraries_jll
+<span class=" -Color -Color-Green">  ✓ </span>Format
+<span class=" -Color -Color-Green">  ✓ </span>OffsetArrays
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FillArrays
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RealDot
+<span class=" -Color -Color-Green">  ✓ </span>Observables
+<span class=" -Color -Color-Green">  ✓ </span>EnumX
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PkgVersion
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Grisu
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Reexport
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AbstractTrees
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DocStringExtensions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RoundingEmulator
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>NaNMath
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ProgressMeter
+<span class=" -Color -Color-Green">  ✓ </span>IrrationalConstants
+<span class=" -Color -Color-Green">  ✓ </span>LazyModules
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Ratios
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>UnicodeFun
+<span class=" -Color -Color-Green">  ✓ </span>Multisets
+<span class=" -Color -Color-Green">  ✓ </span>RingLists
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Inflate
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Scratch
+<span class=" -Color -Color-Green">  ✓ </span>Mods
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MappedArrays
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Missings
+<span class=" -Color -Color-Green">  ✓ </span>CommonSubexpressions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SimpleTraits
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SuiteSparse
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>WoodburyMatrices
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DiffResults
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OpenSSL_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DataStructures
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RecipesBase
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libmount_jll
+<span class=" -Color -Color-Green">  ✓ </span>Graphite2_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LLVMOpenMP_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Bzip2_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Rmath_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libpng_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libfdk_aac_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Imath_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntelOpenMP_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FileIO
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LAME_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>CRlibm_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>JpegTurbo_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Ogg_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>x265_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>x264_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libaom_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LZO_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IGLWrap_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Opus_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>isoband_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libffi_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FFTW_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FriBidi_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libuuid_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SignedDistanceFields
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LightXML
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libXrender_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Setfield
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AbstractFFTs → AbstractFFTsChainRulesCoreExt
+<span class=" -Color -Color-Green">  ✓ </span>Packing
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Parameters
+<span class=" -Color -Color-Green">  ✓ </span>Permutations
 </pre></div>
 </div>
 </div>
@@ -450,11 +662,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4BoxAllocated(Ptr{Nothing} @0x0000000122536410)
-</pre></div>
-</div>
-</div>
 </div>
 <p>The returned object is a pointer (<code class="docutils literal notranslate"><span class="pre">Ptr</span></code>) to the wrapped C++ object. The <code class="docutils literal notranslate"><span class="pre">CxxWrap</span></code> package encodes (with the type <code class="docutils literal notranslate"><span class="pre">Geant4.G4BoxAllocated</span></code>) that the object has been allocated from Julia and will by default be garbage collected when not needed.</p>
 <div class="cell docutils container">
@@ -464,13 +671,6 @@ document.write(`
 <span class="nd">@test</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="k">isa</span><span class="w"> </span><span class="n">G4Box</span><span class="w">                         </span><span class="c"># but is also a G4Box (G4BoxAllocated inherits from G4Box)</span>
 
 <span class="n">subtypes</span><span class="p">(</span><span class="n">G4Box</span><span class="p">)</span><span class="w">                             </span><span class="c"># this shows all the subtypes of G4Box</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Any}:
- Geant4.G4BoxAllocated
- Geant4.G4BoxDereferenced
 </pre></div>
 </div>
 </div>
@@ -485,11 +685,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Test Passed</span>
-</pre></div>
-</div>
-</div>
 </div>
 <p>The user can derefence a <code class="docutils literal notranslate"><span class="pre">CxxRef</span></code> or <code class="docutils literal notranslate"><span class="pre">CxxPtr</span></code> with the operator <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
 <div class="cell docutils container">
@@ -498,15 +693,6 @@ document.write(`
 <span class="nd">@show</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">p_box</span><span class="p">[])</span>
 <span class="nd">@test</span><span class="w"> </span><span class="n">r_box</span><span class="p">[]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">box</span>
 <span class="nd">@test</span><span class="w"> </span><span class="n">p_box</span><span class="p">[]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">box</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>typeof(r_box[]) = Geant4.G4BoxDereferenced
-typeof(p_box[]) = Geant4.G4BoxDereferenced
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Test Passed</span>
 </pre></div>
 </div>
 </div>
@@ -519,11 +705,6 @@ typeof(p_box[]) = Geant4.G4BoxDereferenced
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">vol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="w">   </span><span class="c"># In C++ this would be box.GetCubicVolume()</span>
 <span class="nd">@test</span><span class="w"> </span><span class="n">vol</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">GetXHalfLength</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">GetYHalfLength</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">GetZHalfLength</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="w"> </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Test Passed</span>
 </pre></div>
 </div>
 </div>
@@ -546,11 +727,6 @@ typeof(p_box[]) = Geant4.G4BoxDereferenced
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="working-in-the-inheritance">
@@ -563,11 +739,6 @@ typeof(p_box[]) = Geant4.G4BoxDereferenced
 <span class="nd">@test</span><span class="w"> </span><span class="n">CxxPtr</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">box</span><span class="w">  </span><span class="c"># same instance</span>
 <span class="nd">@test</span><span class="w"> </span><span class="n">solid</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">box</span><span class="w">        </span><span class="c"># these are two diffrent instances</span>
 <span class="nd">@test</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">solid</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Test Passed</span>
 </pre></div>
 </div>
 </div>
@@ -591,19 +762,6 @@ typeof(p_box[]) = Geant4.G4BoxDereferenced
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `G4Box` not defined
-
-
-
-<span class="ne">Stacktrace</span>:
-
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-
-   <span class="o">@</span> <span class="o">~/</span><span class="n">Development</span><span class="o">/</span><span class="n">Geant4</span><span class="o">.</span><span class="n">jl</span><span class="o">-</span><span class="n">tutorial</span><span class="o">/</span><span class="n">tutorial</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">geant4</span><span class="o">-</span><span class="n">jl</span><span class="o">-</span><span class="n">intro</span><span class="o">.</span><span class="n">ipynb</span><span class="p">:</span><span class="mi">1</span>
-</pre></div>
-</div>
-</div>
 </div>
 <p>now force a GC</p>
 <div class="cell docutils container">
@@ -611,7 +769,30 @@ typeof(p_box[]) = Geant4.G4BoxDereferenced
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">box1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">box2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nothing</span>
 <span class="n">GC</span><span class="o">.</span><span class="n">gc</span><span class="p">()</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">union</span><span class="p">)</span><span class="w">                     </span><span class="c"># G4BooleanSolid cashes the volume</span>
-<span class="c"># DistanceToIn(union, G4ThreeVector(10,10,10))  # this will probabluy crash the program</span>
+<span class="c"># DistanceToIn(union, G4ThreeVector(10,10,10))  # this will probably crash the program</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To avoid this problem the <strong>user must transfer object ownership to the C++ side</strong> using the provided function <code class="docutils literal notranslate"><span class="pre">move!()</span></code>. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">box1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4Box</span><span class="p">(</span><span class="s">&quot;box1&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w">                                  </span><span class="c"># construct boxes</span>
+<span class="n">box2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4Box</span><span class="p">(</span><span class="s">&quot;box2&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">                                  </span>
+<span class="n">union</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4UnionSolid</span><span class="p">(</span><span class="s">&quot;union&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">move!</span><span class="p">(</span><span class="n">box1</span><span class="p">),</span><span class="w"> </span><span class="n">move!</span><span class="p">(</span><span class="n">box2</span><span class="p">))</span><span class="w">      </span><span class="c"># construct a union solid with the same box</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">union</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">DistanceToIn</span><span class="p">(</span><span class="n">union</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>forcing now a GC will still work</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">box1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">box2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">GC</span><span class="o">.</span><span class="n">gc</span><span class="p">()</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">union</span><span class="p">)</span><span class="w">                          </span><span class="c"># G4BooleanSolid cashes the volume</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">DistanceToIn</span><span class="p">(</span><span class="n">union</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span><span class="w">  </span><span class="c"># this will probabluy crash the program</span>
 </pre></div>
 </div>
 </div>
