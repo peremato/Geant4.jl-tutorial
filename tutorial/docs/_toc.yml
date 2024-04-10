@@ -8,10 +8,10 @@ parts:
   chapters:
   - file: geant4-jl-intro
   - file: geant4-jl-geometry
-- caption: Building simulation applications
+- caption: Building Simulation Applications
   chapters:
     - file: geant4-jl-applications
-- caption: Complete examples
+- caption: Complete Examples
   chapters:
   - file: examples/HBC30
   
