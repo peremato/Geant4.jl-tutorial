@@ -1,0 +1,892 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Water Phantom Simulation with Scoring &#8212; Geant4.jl Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/WaterPhantom/WaterPhantom';</script>
+    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Scintillating Detector Example" href="../Scintillation/Scintillation.html" />
+    <link rel="prev" title="CERN Liquid Hydrogen Bubble Chamber" href="../HBC30/HBC30.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/juliaheplogo.png" class="logo__image only-light" alt="Geant4.jl Tutorials - Home"/>
+    <script>document.write(`<img src="../../_static/juliaheplogo.png" class="logo__image only-dark" alt="Geant4.jl Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Welcome to Geant4.jl Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Building Simulation Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../01-introduction.html">Introduction to Geant4.jl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02-wrapped-classes.html">Interacting with the wrapped classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03-geometry.html">Defining Geant4.jl Geometries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04-physics-list.html">Defining Physics Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05-primary-particles.html">Defining Primary Particles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06-field.html">Defining Magnetic Field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07-applications.html">Building Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08-sensitive-detectors.html">Sensitive Detectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09-scoring-meshes.html">Scoring Meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10-histograms.html">Histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11-event-display.html">Event Display</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Complete Examples</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HBC30/HBC30.html">CERN Liquid Hydrogen Bubble Chamber</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Water Phantom Simulation with Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Scintillation/Scintillation.html">Scintillating Detector Example</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/peremato/Geant4.jl-tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/peremato/Geant4.jl-tutorial/issues/new?title=Issue%20on%20page%20%2Fexamples/WaterPhantom/WaterPhantom.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/examples/WaterPhantom/WaterPhantom.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Water Phantom Simulation with Scoring</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detector-description">Detector description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-primary-particle-generator">Define the primary particle generator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-the-scoring-with-the-the-scoring-interface">Setup the scoring with the the scoring interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instantiate-the-geant4-application">Instantiate the Geant4 Application</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-initiliaze-and-run">Configure, initiliaze and run</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-detector-setup">Visualize the Detector Setup</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-plotting-functions">Define plotting functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electron-20-mev">Electron 20 Mev</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proton-200-mev">Proton 200 MeV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c12-ion-3-gev">C<sub>12</sub> ion 3 GeV</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="water-phantom-simulation-with-scoring">
+<h1>Water Phantom Simulation with Scoring<a class="headerlink" href="#water-phantom-simulation-with-scoring" title="Link to this heading">#</a></h1>
+<p>Example originated from the example in Geant4Py. It is using a very simple phantom model (a box of water) and exercises the scoring interface.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Geant4</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Geant4</span><span class="o">.</span><span class="n">SystemOfUnits</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="detector-description">
+<h2>Detector description<a class="headerlink" href="#detector-description" title="Link to this heading">#</a></h2>
+<p>The main parameters are stored in the <code class="docutils literal notranslate"><span class="pre">RE03Detector</span></code> struct with some default values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">RE03Detector</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4JLDetector</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">worldXY</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">worldZ</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">phantomXY</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">phantomZ</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">RE03Detector</span><span class="p">(;</span><span class="n">worldXY</span><span class="o">=</span><span class="mi">100</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="n">worldZ</span><span class="o">=</span><span class="mi">300</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="n">phantomXY</span><span class="o">=</span><span class="mf">30.5</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="n">phantomZ</span><span class="o">=</span><span class="mi">30</span><span class="n">cm</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="p">(</span><span class="n">worldXY</span><span class="p">,</span><span class="w"> </span><span class="n">worldZ</span><span class="p">,</span><span class="w"> </span><span class="n">phantomXY</span><span class="p">,</span><span class="w"> </span><span class="n">phantomZ</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">construct</span><span class="p">(</span><span class="n">det</span><span class="o">::</span><span class="kt">RE03Detector</span><span class="p">)</span><span class="o">::</span><span class="kt">CxxPtr</span><span class="p">{</span><span class="kt">G4VPhysicalVolume</span><span class="p">}</span>
+<span class="w">    </span><span class="c">#---Materials----------------------------------------------------------------------------------</span>
+<span class="w">    </span><span class="n">nist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4NistManager!Instance</span><span class="p">()</span>
+<span class="w">    </span><span class="n">fAir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindOrBuildMaterial</span><span class="p">(</span><span class="n">nist</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;G4_AIR&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">fWater</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindOrBuildMaterial</span><span class="p">(</span><span class="n">nist</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;G4_WATER&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c">#---World--------------------------------------------------------------------------------------</span>
+<span class="w">    </span><span class="n">worldSolid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4Box</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">,</span><span class="n">det</span><span class="o">.</span><span class="n">worldXY</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">det</span><span class="o">.</span><span class="n">worldXY</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">det</span><span class="o">.</span><span class="n">worldZ</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="n">worldLogical</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4LogicalVolume</span><span class="p">(</span><span class="n">worldSolid</span><span class="p">,</span><span class="n">fAir</span><span class="p">,</span><span class="s">&quot;World&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">worldPhys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4PVPlacement</span><span class="p">(</span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(),</span><span class="w"> </span><span class="n">worldLogical</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">nothing</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c">#---Phantom------------------------------------------------------------------------------------</span>
+<span class="w">    </span><span class="n">phantomSolid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4Box</span><span class="p">(</span><span class="s">&quot;Phantom&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">det</span><span class="o">.</span><span class="n">phantomXY</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">det</span><span class="o">.</span><span class="n">phantomXY</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">det</span><span class="o">.</span><span class="n">phantomZ</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="n">phantomLogical</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4LogicalVolume</span><span class="p">(</span><span class="n">phantomSolid</span><span class="p">,</span><span class="w"> </span><span class="n">fWater</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Phantom&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">phantomPhys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4PVPlacement</span><span class="p">(</span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(),</span><span class="w"> </span><span class="n">phantomLogical</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Phantom&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">worldLogical</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c">#---Visualization attributes-------------------------------------------------------------------</span>
+<span class="w">    </span><span class="n">SetVisAttributes</span><span class="p">(</span><span class="n">worldLogical</span><span class="p">,</span><span class="w"> </span><span class="n">G4VisAttributes!GetInvisible</span><span class="p">())</span>
+<span class="w">    </span><span class="n">simpleBoxVisAtt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4VisAttributes</span><span class="p">(</span><span class="n">G4Colour</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">))</span>
+<span class="w">    </span><span class="n">SetVisibility</span><span class="p">(</span><span class="n">simpleBoxVisAtt</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+<span class="w">    </span><span class="n">SetVisAttributes</span><span class="p">(</span><span class="n">phantomLogical</span><span class="p">,</span><span class="w"> </span><span class="n">simpleBoxVisAtt</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">worldPhys</span>
+<span class="k">end</span>
+
+<span class="n">Geant4</span><span class="o">.</span><span class="n">getConstructor</span><span class="p">(</span><span class="o">::</span><span class="kt">RE03Detector</span><span class="p">)</span><span class="o">::</span><span class="kt">Function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-the-primary-particle-generator">
+<h2>Define the primary particle generator<a class="headerlink" href="#define-the-primary-particle-generator" title="Link to this heading">#</a></h2>
+<p>We define the <code class="docutils literal notranslate"><span class="pre">MedicalBeam</span></code> particle generator. This is similar to the particle gun but with direction of the particles randomly distributed within some aperture cone. It consists of</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MedicalBeamData</span></code> data structure with the parameters of the beam</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">init</span></code> function that will be called at initialization time.</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">generate</span></code> function hat is called at each event and create the primary particle and primary vertex.</p></li>
+<li><p>A set of setter functions (<code class="docutils literal notranslate"><span class="pre">SetParticleByName</span></code>, <code class="docutils literal notranslate"><span class="pre">SetParticleEnergy</span></code>) to change parameters at run time</p></li>
+</ul>
+<p>The function to construct the generator is <code class="docutils literal notranslate"><span class="pre">MedicalBeam(...)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">MedicalBeamData</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4JLGeneratorData</span>
+<span class="w">  </span><span class="n">particleName</span><span class="o">::</span><span class="kt">String</span>
+<span class="w">  </span><span class="n">particlePtr</span><span class="o">::</span><span class="kt">CxxPtr</span><span class="p">{</span><span class="kt">G4ParticleDefinition</span><span class="p">}</span>
+<span class="w">  </span><span class="n">energy</span><span class="o">::</span><span class="kt">Float64</span><span class="w"> </span>
+<span class="w">  </span><span class="n">ssd</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">  </span><span class="n">fieldXY</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">  </span><span class="n">surfaceZ</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">generateBeamDir</span><span class="p">(</span><span class="n">ssd</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">fxy</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span>
+<span class="w">  </span><span class="n">dr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">√</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">fxy</span>
+<span class="w">  </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">√</span><span class="p">(</span><span class="n">ssd</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dr</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">  </span><span class="n">cos0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ssd</span><span class="o">/</span><span class="n">R</span>
+<span class="w">  </span><span class="n">xymax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fxy</span><span class="o">/</span><span class="n">ssd</span><span class="o">/</span><span class="mi">2</span>
+<span class="w">  </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">    </span><span class="n">dz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos0</span><span class="p">)</span><span class="o">+</span><span class="w"> </span><span class="n">cos0</span>
+<span class="w">    </span><span class="n">dsin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">√</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">dz</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="n">dphi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="nb">π</span>
+<span class="w">    </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dsin</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">dphi</span><span class="p">)</span>
+<span class="w">    </span><span class="n">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dsin</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">dphi</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">xymax</span><span class="o">*</span><span class="n">dz</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">xymax</span><span class="o">*</span><span class="n">dz</span><span class="w"> </span>
+<span class="w">      </span><span class="k">break</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="w">  </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">dy</span><span class="p">,</span><span class="w"> </span><span class="n">dz</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">MedicalBeam</span><span class="p">(;</span><span class="n">particle</span><span class="o">=</span><span class="s">&quot;e-&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">energy</span><span class="o">=</span><span class="mi">10</span><span class="n">MeV</span><span class="p">,</span><span class="w"> </span><span class="n">ssd</span><span class="o">=</span><span class="mi">100</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="n">fieldXY</span><span class="o">=</span><span class="mi">10</span><span class="n">cm</span><span class="p">)</span>
+<span class="w">  </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MedicalBeamData</span><span class="p">(</span><span class="n">particle</span><span class="p">,</span><span class="w"> </span><span class="kt">CxxPtr</span><span class="p">{</span><span class="kt">G4ParticleDefinition</span><span class="p">}(</span><span class="nb">C_NULL</span><span class="p">),</span><span class="w"> </span><span class="n">energy</span><span class="p">,</span><span class="w"> </span><span class="n">ssd</span><span class="p">,</span><span class="w"> </span><span class="n">fieldXY</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">)</span>
+<span class="w">  </span><span class="k">function</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">data</span><span class="o">::</span><span class="kt">MedicalBeamData</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">particlePtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindParticle</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">particleName</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">surfaceZ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">app</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">phantomZ</span><span class="o">/</span><span class="mi">2</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="w">  </span><span class="k">function</span><span class="w"> </span><span class="n">generate</span><span class="p">(</span><span class="w"> </span><span class="n">evt</span><span class="o">::</span><span class="kt">G4Event</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">::</span><span class="kt">MedicalBeamData</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">    </span><span class="n">mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">particlePtr</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetPDGMass</span>
+<span class="w">    </span><span class="n">momemtum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">√</span><span class="p">((</span><span class="n">mass</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">energy</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mass</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="n">pvec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">momemtum</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">generateBeamDir</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">ssd</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">fieldXY</span><span class="p">);</span>
+<span class="w">    </span><span class="n">primary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4PrimaryParticle</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">particlePtr</span><span class="p">,</span><span class="w"> </span><span class="n">pvec</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">pvec</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">pvec</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="n">vertex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4PrimaryVertex</span><span class="p">(</span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">surfaceZ</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">ssd</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="n">ns</span><span class="p">)</span>
+<span class="w">    </span><span class="n">SetPrimary</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span><span class="w"> </span><span class="n">move!</span><span class="p">(</span><span class="n">primary</span><span class="p">))</span><span class="w">    </span><span class="c"># note that we give up ownership of the objects just created</span>
+<span class="w">    </span><span class="n">AddPrimaryVertex</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span><span class="w"> </span><span class="n">move!</span><span class="p">(</span><span class="n">vertex</span><span class="p">))</span><span class="w">  </span><span class="c"># note that we give up ownership of the objects just created</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="w">  </span><span class="n">G4JLPrimaryGenerator</span><span class="p">(</span><span class="s">&quot;MedicalBeam&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w"> </span><span class="n">init_method</span><span class="o">=</span><span class="n">init</span><span class="p">,</span><span class="w"> </span><span class="n">generate_method</span><span class="o">=</span><span class="n">generate</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">SetParticleByName</span><span class="p">(</span><span class="n">gen</span><span class="o">::</span><span class="kt">G4JLPrimaryGenerator</span><span class="p">{</span><span class="kt">MedicalBeamData</span><span class="p">},</span><span class="w"> </span><span class="n">particle</span><span class="o">::</span><span class="kt">String</span><span class="p">)</span>
+<span class="w">  </span><span class="n">gen</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">particleName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">particle</span>
+<span class="w">  </span><span class="n">gen</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">particlePtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindParticle</span><span class="p">(</span><span class="n">particle</span><span class="p">)</span>
+<span class="w">  </span><span class="k">return</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">SetParticleEnergy</span><span class="p">(</span><span class="n">gen</span><span class="o">::</span><span class="kt">G4JLPrimaryGenerator</span><span class="p">{</span><span class="kt">MedicalBeamData</span><span class="p">},</span><span class="w"> </span><span class="n">energy</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span><span class="w"> </span>
+<span class="w">  </span><span class="n">gen</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">energy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">energy</span>
+<span class="w">  </span><span class="k">return</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SetParticleEnergy (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="setup-the-scoring-with-the-the-scoring-interface">
+<h2>Setup the scoring with the the scoring interface<a class="headerlink" href="#setup-the-scoring-with-the-the-scoring-interface" title="Link to this heading">#</a></h2>
+<p>Create a box shaped mesh and define the number of bins. The quantity to be monitor is <code class="docutils literal notranslate"><span class="pre">dose</span></code>. Later accessing the attribute <code class="docutils literal notranslate"><span class="pre">dose</span></code> on the scoring mesh will return a tuple with the sum of dose, sum square and number of entries for each mesh cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLScoringMesh</span><span class="p">(</span><span class="s">&quot;boxMesh_1&quot;</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">BoxMesh</span><span class="p">(</span><span class="mf">15.25</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="mf">15.25</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="n">cm</span><span class="p">),</span>
+<span class="w">                      </span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">61</span><span class="p">,</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w"> </span><span class="mi">150</span><span class="p">),</span>
+<span class="w">                      </span><span class="n">quantities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">doseDeposit</span><span class="p">(</span><span class="s">&quot;dose&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">]</span>
+<span class="w">                      </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="instantiate-the-geant4-application">
+<h2>Instantiate the Geant4 Application<a class="headerlink" href="#instantiate-the-geant4-application" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLApplication</span><span class="p">(;</span><span class="n">detector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RE03Detector</span><span class="p">(),</span><span class="w">                    </span><span class="c"># detector with parameters</span>
+<span class="w">                       </span><span class="n">generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MedicalBeam</span><span class="p">(),</span><span class="w">                    </span><span class="c"># promary partcile generator</span>
+<span class="w">                       </span><span class="n">nthreads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">                                 </span><span class="c"># define the number of threads</span>
+<span class="w">                       </span><span class="n">physics_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FTFP_BERT</span><span class="p">,</span><span class="w">                     </span><span class="c"># what physics list to instantiate</span>
+<span class="w">                       </span><span class="n">scorers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">sc1</span><span class="p">]</span><span class="w">                               </span><span class="c"># list of scorers </span>
+<span class="w">                      </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**************************************************************
+ Geant4 version Name: geant4-11-02 [MT]   (8-December-2023)
+  &lt;&lt; in Multi-threaded mode &gt;&gt; 
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="configure-initiliaze-and-run">
+<h2>Configure, initiliaze and run<a class="headerlink" href="#configure-initiliaze-and-run" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- G4CoupledTransportation is used 
+.... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4ScoringManager has 1 scoring meshes.
+G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+ Size (x, y, z): (15.25, 15.25, 15) [cm]
+ # of segments: (61, 61, 150)
+ displacement: (0, 0, 0) [cm]
+ registered primitve scorers : 
+   0  dose
+G4WT7 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT1 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT7 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT7 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT5 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT7 &gt;  Size (x, y, z): (15.25, 15.25, 15) [cm]
+G4WT7 &gt;  # of segments: (61, 61, 150)
+G4WT7 &gt;  displacement: (0, 0, 0) [cm]
+G4WT7 &gt;  registered primitve scorers : 
+G4WT7 &gt;    0  dose
+G4WT1 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT1 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT1 &gt;  Size (x, y, z): (15.25, 15.25, 15) [cm]
+G4WT1 &gt;  # of segments: (61, 61, 150)
+G4WT0 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT4 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT5 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT5 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT5 &gt;  Size (x, y, z): (15.25, 15.25, 15) [cm]
+G4WT5 &gt;  # of segments: (61, 61, 150)
+G4WT5 &gt;  displacement: (0, 0, 0) [cm]
+G4WT0 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT0 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT5 &gt;  registered primitve scorers : 
+G4WT0 &gt;  Size (x, y, z): (15.25, 15.25, 15) [cm]
+G4WT5 &gt;    0  dose
+G4WT0 &gt;  # of segments: (61, 61, 150)
+G4WT0 &gt;  displacement: (0, 0, 0) [cm]
+G4WT0 &gt;  registered primitve scorers : 
+G4WT0 &gt;    0  dose
+G4WT3 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT3 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT3 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT3 &gt;  Size (x, y, z): (15.25, 15.25, 15) [cm]
+G4WT3 &gt;  # of segments: (61, 61, 150)
+G4WT3 &gt;  displacement: (0, 0, 0) [cm]
+G4WT3 &gt;  registered primitve scorers : 
+G4WT3 &gt;    0  dose
+G4WT1 &gt;  displacement: (0, 0, 0) [cm]
+G4WT1 &gt;  registered primitve scorers : 
+G4WT1 &gt;    0  dose
+G4WT6 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT2 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT4 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT4 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT4 &gt;  Size (x, y, z): (15.25, 15.25, 15) [cm]
+G4WT4 &gt;  # of segments: (61, 61, 150)
+G4WT4 &gt;  displacement: (0, 0, 0) [cm]
+G4WT4 &gt;  registered primitve scorers : 
+G4WT4 &gt;    0  dose
+G4WT2 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT2 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT2 &gt;  Size (x, y, z): (15.25, 15.25, 15) [cm]
+G4WT2 &gt;  # of segments: (61, 61, 150)
+G4WT2 &gt;  displacement: (0, 0, 0) [cm]
+G4WT2 &gt;  registered primitve scorers : 
+G4WT2 &gt;    0  dose
+G4WT6 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT6 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT6 &gt;  Size (x, y, z): (15.25, 15.25, 15) [cm]
+G4WT6 &gt;  # of segments: (61, 61, 150)
+G4WT6 &gt;  displacement: (0, 0, 0) [cm]
+G4WT6 &gt;  registered primitve scorers : 
+G4WT6 &gt;    0  dose
+</pre></div>
+</div>
+</div>
+</div>
+<section id="visualize-the-detector-setup">
+<h3>Visualize the Detector Setup<a class="headerlink" href="#visualize-the-detector-setup" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="define-plotting-functions">
+<h2>Define plotting functions<a class="headerlink" href="#define-plotting-functions" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">do_plots</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+<span class="w">      </span><span class="n">dose</span><span class="p">,</span><span class="w"> </span><span class="n">dose2</span><span class="p">,</span><span class="w"> </span><span class="n">nentry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sc</span><span class="o">.</span><span class="n">dose</span>
+<span class="w">      </span><span class="n">xaxisvalues</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">range</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">sc</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">dx</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="n">sc</span><span class="o">.</span><span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="w">      </span><span class="n">zaxisvalues</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">range</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">sc</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">dz</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="n">sc</span><span class="o">.</span><span class="n">bins</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="w">      </span><span class="n">cbin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">round</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">      </span><span class="n">fig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot</span><span class="p">(</span><span class="w"> </span><span class="n">layout</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">800</span><span class="p">),</span>
+<span class="w">                  </span><span class="n">heatmap</span><span class="p">(</span><span class="n">zaxisvalues</span><span class="p">,</span><span class="w"> </span><span class="n">xaxisvalues</span><span class="p">,</span><span class="w"> </span><span class="n">dose</span><span class="p">[</span><span class="n">cbin</span><span class="p">,</span><span class="o">:</span><span class="p">,</span><span class="o">:</span><span class="p">],</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Dose (XZ)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:thermal</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Z (cm)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;X (cm)&quot;</span><span class="p">),</span><span class="w"> </span>
+<span class="w">                  </span><span class="n">plot</span><span class="p">(</span><span class="n">zaxisvalues</span><span class="p">,</span><span class="w"> </span><span class="n">dose</span><span class="p">[</span><span class="n">cbin</span><span class="p">,</span><span class="n">cbin</span><span class="p">,</span><span class="o">:</span><span class="p">],</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Depth Dose (center)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Z (cm)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;dose&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">)</span>
+<span class="w">      </span><span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fig</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>do_plots (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="electron-20-mev">
+<h2>Electron 20 Mev<a class="headerlink" href="#electron-20-mev" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">SetParticleByName</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">generator</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;e-&quot;</span><span class="p">)</span>
+<span class="n">SetParticleEnergy</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">generator</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="n">MeV</span><span class="p">)</span>
+
+<span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">do_plots</span><span class="p">(</span><span class="n">sc1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/aa2d8262d761a23ee44fa9db82d366a1ab3882a3312c77f88504bf5b43c6be2a.png" src="../../_images/aa2d8262d761a23ee44fa9db82d366a1ab3882a3312c77f88504bf5b43c6be2a.png" />
+</div>
+</div>
+</section>
+<section id="proton-200-mev">
+<h2>Proton 200 MeV<a class="headerlink" href="#proton-200-mev" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">SetParticleByName</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">generator</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;proton&quot;</span><span class="p">)</span>
+<span class="n">SetParticleEnergy</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">generator</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="n">MeV</span><span class="p">)</span>
+
+<span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">do_plots</span><span class="p">(</span><span class="n">sc1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3f2113c5454f4374140ff3350b7f2b2856078b48276a335869b53063bba16b74.png" src="../../_images/3f2113c5454f4374140ff3350b7f2b2856078b48276a335869b53063bba16b74.png" />
+</div>
+</div>
+</section>
+<section id="c12-ion-3-gev">
+<h2>C<sub>12</sub> ion 3 GeV<a class="headerlink" href="#c12-ion-3-gev" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">SetParticleByName</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">generator</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C12&quot;</span><span class="p">)</span>
+<span class="n">SetParticleEnergy</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">generator</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="n">GeV</span><span class="p">)</span>
+
+<span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">do_plots</span><span class="p">(</span><span class="n">sc1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d7dcf8b07d52f55c77ca4087b1e7a9fd0f526972b26ce4eeb75de2a4d43cb8ee.png" src="../../_images/d7dcf8b07d52f55c77ca4087b1e7a9fd0f526972b26ce4eeb75de2a4d43cb8ee.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.10"
+        },
+        kernelOptions: {
+            name: "julia-1.10",
+            path: "./examples/WaterPhantom"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.10'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../HBC30/HBC30.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">CERN Liquid Hydrogen Bubble Chamber</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Scintillation/Scintillation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Scintillating Detector Example</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detector-description">Detector description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-primary-particle-generator">Define the primary particle generator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-the-scoring-with-the-the-scoring-interface">Setup the scoring with the the scoring interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instantiate-the-geant4-application">Instantiate the Geant4 Application</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-initiliaze-and-run">Configure, initiliaze and run</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-detector-setup">Visualize the Detector Setup</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-plotting-functions">Define plotting functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electron-20-mev">Electron 20 Mev</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proton-200-mev">Proton 200 MeV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c12-ion-3-gev">C<sub>12</sub> ion 3 GeV</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Pere Mato
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright CERN, The Contributors 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

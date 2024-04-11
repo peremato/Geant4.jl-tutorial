@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to Geant4.jl Tutorial &#8212; Geant4.jl Tutorials</title>
+    <title>Sensitive Detectors &#8212; Geant4.jl Tutorials</title>
   
   
   
@@ -57,11 +57,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '08-sensitive-detectors';</script>
     <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction to Geant4.jl" href="01-introduction.html" />
+    <link rel="next" title="Scoring Meshes" href="09-scoring-meshes.html" />
+    <link rel="prev" title="Building Applications" href="07-applications.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -141,7 +140,7 @@
 
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -172,14 +171,14 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
                     Welcome to Geant4.jl Tutorial
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Building Simulation Applications</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-introduction.html">Introduction to Geant4.jl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-wrapped-classes.html">Interacting with the wrapped classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-geometry.html">Defining Geant4.jl Geometries</a></li>
@@ -187,7 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="05-primary-particles.html">Defining Primary Particles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06-field.html">Defining Magnetic Field</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07-applications.html">Building Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08-sensitive-detectors.html">Sensitive Detectors</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sensitive Detectors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09-scoring-meshes.html">Scoring Meshes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10-histograms.html">Histograms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="11-event-display.html">Event Display</a></li>
@@ -268,7 +267,7 @@
       
       
       
-      <li><a href="https://github.com/peremato/Geant4.jl-tutorial/issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/peremato/Geant4.jl-tutorial/issues/new?title=Issue%20on%20page%20%2F08-sensitive-detectors.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -298,7 +297,7 @@
       
       
       
-      <li><a href="_sources/index.md" target="_blank"
+      <li><a href="_sources/08-sensitive-detectors.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -308,7 +307,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -369,9 +368,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -382,21 +379,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome to Geant4.jl Tutorial</h1>
+    <h1>Sensitive Detectors</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geant4-jl-particle-transport-in-julia">Geant4.jl: Particle transport in Julia</a><ul class="nav section-nav flex-column">
-</ul>
-</li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -406,38 +393,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-geant4-jl-tutorial">
-<h1>Welcome to Geant4.jl Tutorial<a class="headerlink" href="#welcome-to-geant4-jl-tutorial" title="Link to this heading">#</a></h1>
-<p>This is a short introductory tutorial for the <a class="reference external" href="https://github.com/JuliaHEP/Geant4.jl">Geant4.jl</a> package.</p>
-<p>This tutorial is supported by the <a class="reference external" href="https://hepsoftwarefoundation.org/workinggroups/juliahep.html">HSF JuliaHEP</a> team and currently it is maintained by <a class="reference external" href="https://github.com/peremato">Pere Mato</a>.</p>
-<section id="geant4-jl-particle-transport-in-julia">
-<h2>Geant4.jl: Particle transport in Julia<a class="headerlink" href="#geant4-jl-particle-transport-in-julia" title="Link to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Building Simulation Applications</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="01-introduction.html">Introduction to Geant4.jl</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02-wrapped-classes.html">Interacting with the wrapped classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-geometry.html">Defining Geant4.jl Geometries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-physics-list.html">Defining Physics Lists</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05-primary-particles.html">Defining Primary Particles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06-field.html">Defining Magnetic Field</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07-applications.html">Building Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08-sensitive-detectors.html">Sensitive Detectors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09-scoring-meshes.html">Scoring Meshes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10-histograms.html">Histograms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11-event-display.html">Event Display</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Complete Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="examples/HBC30/HBC30.html">CERN Liquid Hydrogen Bubble Chamber</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/WaterPhantom/WaterPhantom.html">Water Phantom Simulation with Scoring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/Scintillation/Scintillation.html">Scintillating Detector Example</a></li>
-</ul>
-</div>
-<p>This material is release under a Creative Commons Attribution 4.0 International Public License, <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>. Please see the <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> file.</p>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="sensitive-detectors">
+<h1>Sensitive Detectors<a class="headerlink" href="#sensitive-detectors" title="Link to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -470,12 +427,21 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="07-applications.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Building Applications</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="01-introduction.html"
+       href="09-scoring-meshes.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Geant4.jl</p>
+        <p class="prev-next-title">Scoring Meshes</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -486,22 +452,7 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geant4-jl-particle-transport-in-julia">Geant4.jl: Particle transport in Julia</a><ul class="nav section-nav flex-column">
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
+                <div class="bd-sidebar-secondary bd-toc"></div>
               
             
           </div>

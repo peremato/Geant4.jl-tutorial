@@ -57,12 +57,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'geant4-jl-geometry';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03-geometry';</script>
     <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Basic/B1 Example" href="geant4-jl-applications.html" />
-    <link rel="prev" title="Introduction to Geant4.jl" href="geant4-jl-intro.html" />
+    <link rel="next" title="Defining Physics Lists" href="04-physics-list.html" />
+    <link rel="prev" title="Interacting with the wrapped classes" href="02-wrapped-classes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,18 +177,25 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Geant4.jl</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Building Simulation Applications</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="geant4-jl-intro.html">Introduction to Geant4.jl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-introduction.html">Introduction to Geant4.jl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-wrapped-classes.html">Interacting with the wrapped classes</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Defining Geant4.jl Geometries</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Building Simulation Applications</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="geant4-jl-applications.html">Basic/B1 Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-physics-list.html">Defining Physics Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-primary-particles.html">Defining Primary Particles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-field.html">Defining Magnetic Field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-applications.html">Building Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-sensitive-detectors.html">Sensitive Detectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-scoring-meshes.html">Scoring Meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-histograms.html">Histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-event-display.html">Event Display</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Complete Examples</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="examples/HBC30.html">CERN Liquid Hydrogen Bubble Chamber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/HBC30/HBC30.html">CERN Liquid Hydrogen Bubble Chamber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/WaterPhantom/WaterPhantom.html">Water Phantom Simulation with Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/Scintillation/Scintillation.html">Scintillating Detector Example</a></li>
 </ul>
 
     </div>
@@ -260,7 +267,7 @@
       
       
       
-      <li><a href="https://github.com/peremato/Geant4.jl-tutorial/issues/new?title=Issue%20on%20page%20%2Fgeant4-jl-geometry.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/peremato/Geant4.jl-tutorial/issues/new?title=Issue%20on%20page%20%2F03-geometry.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -290,7 +297,7 @@
       
       
       
-      <li><a href="_sources/geant4-jl-geometry.ipynb" target="_blank"
+      <li><a href="_sources/03-geometry.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -407,7 +414,7 @@ document.write(`
 <h1>Defining Geant4.jl Geometries<a class="headerlink" href="#defining-geant4-jl-geometries" title="Link to this heading">#</a></h1>
 <p>Currently we can define G4 geometries by constructing them using the API  of the C++ classes or by reading a GDML file. This notebook will guide you on this task.</p>
 <p>It is very convenient to be able to visualize the geometry on the way. For this purpose we need to load the G4Vis extension. This is done this way:</p>
-<div class="cell tag_scroll-output docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Geant4</span>
 <span class="k">using</span><span class="w"> </span><span class="n">Geant4</span><span class="o">.</span><span class="n">SystemOfUnits</span><span class="w">                </span><span class="c"># defines the usints used by Geant4 </span>
@@ -419,14 +426,315 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> CairoMakie
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RelocatableFolders
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LaTeXStrings
+<span class=" -Color -Color-Green">  ✓ </span>RangeArrays
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LogExpFunctions
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AbstractFFTs
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Combinatorics
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PositiveFactorizations
+<span class=" -Color -Color-Green">  ✓ </span>IndirectArrays
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Calculus
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PolygonOps
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>TensorCore
+<span class=" -Color -Color-Green">  ✓ </span>StatsAPI
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AbstractLattices
+<span class=" -Color -Color-Green">  ✓ </span>Contour
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>CEnum
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>TriplotBase
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>UnPack
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntegerMathUtils
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OffsetArrays
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>CompilerSupportLibraries_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Format
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FillArrays
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PkgVersion
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Observables
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Reexport
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>EnumX
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DocStringExtensions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Grisu
+<span class=" -Color -Color-Green">  ✓ </span>AbstractTrees
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RoundingEmulator
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>NaNMath
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LazyModules
+<span class=" -Color -Color-Green">  ✓ </span>IrrationalConstants
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ProgressMeter
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Ratios
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RingLists
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Multisets
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>UnicodeFun
+<span class=" -Color -Color-Green">  ✓ </span>Inflate
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Mods
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Scratch
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MappedArrays
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Missings
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SimpleTraits
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>CommonSubexpressions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SuiteSparse
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>WoodburyMatrices
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DataStructures
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RecipesBase
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DiffResults
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Graphite2_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OpenSSL_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libmount_jll
+<span class=" -Color -Color-Green">  ✓ </span>FileIO
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LLVMOpenMP_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Rmath_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Bzip2_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libpng_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libfdk_aac_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Imath_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntelOpenMP_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LAME_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>CRlibm_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Ogg_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>JpegTurbo_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>x265_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>x264_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libaom_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LZO_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Opus_jll
+<span class=" -Color -Color-Green">  ✓ </span>Libffi_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>isoband_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FFTW_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FriBidi_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libuuid_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SignedDistanceFields
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LightXML
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libXrender_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Setfield
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AbstractFFTs → AbstractFFTsChainRulesCoreExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Packing
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Parameters
+<span class=" -Color -Color-Green">  ✓ </span>FixedPointNumbers
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Permutations
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OffsetArrays → OffsetArraysAdaptExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Primes
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Gettext_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OpenSpecFun_jll
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MakieCore
-<span class=" -Color -Color-Green">  ✓ </span>AxisAlgorithms
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FilePaths
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Showoff
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LogExpFunctions
+<span class=" -Color -Color-Green">  ✓ </span>RelocatableFolders
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ArrayInterface
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PDMats
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AxisAlgorithms
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SortingAlgorithms
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Automa
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalSets → IntervalSetsRecipesBaseExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Pixman_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>QuadGK
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FreeType2_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Rmath
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OpenEXR_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libvorbis_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libsixel_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Isoband
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalArithmetic
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>GridLayoutBase
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AbstractFFTs → AbstractFFTsTestExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Ratios → RatiosFixedPointNumbersExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SimplePartitions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorTypes
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StackViews
@@ -435,58 +743,16 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PaddedViews
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Pixman_jll
-<span class=" -Color -Color-Green">  ✓ </span>OpenEXR_jll
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libvorbis_jll
-<span class=" -Color -Color-Green">  ✓ </span>libsixel_jll
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SortingAlgorithms
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SimplePartitions
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>QuadGK
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalSets → IntervalSetsRecipesBaseExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AbstractFFTs → AbstractFFTsTestExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PDMats
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FreeType2_jll
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Isoband
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Rmath
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Ratios → RatiosFixedPointNumbersExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ArrayInterface
-<span class=" -Color -Color-Green">  ✓ </span>IntervalArithmetic
-</pre></div>
-</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Glib_jll
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorTypes
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ArrayInterface → ArrayInterfaceStaticArraysCoreExt
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LogExpFunctions → LogExpFunctionsChainRulesCoreExt
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MosaicViews
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Unitful
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalSets → IntervalSetsStatisticsExt
@@ -501,35 +767,25 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Fontconfig_jll
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>GridLayoutBase
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ArrayInterface → ArrayInterfaceStaticArraysCoreExt
-</pre></div>
-</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Interpolations
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Automa
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>QOI
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ShaderAbstractions
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorVectorSpace
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>QOI
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Colors
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MKL_jll<span class=" -Color -Color-Yellow"> Waiting for background task / IO / timer.</span>
-[pid 4232] waiting for IO to finish:
- Handle type        uv_handle_t-&gt;data
- timer              0x1c9ffe0-&gt;0x7fc606ac6710
-This means that a package has started a background task or event source that has not finished running. For precompilation to complete successfully, the event source needs to be closed explicitly. See the developer documentation on fixing precompilation hangs for more help.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MosaicViews
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorVectorSpace
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FiniteDiff
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StatsBase
@@ -538,7 +794,15 @@ This means that a package has started a background task or event source that has
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SpecialFunctions
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Unitful → ConstructionBaseUnitfulExt
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>AxisArrays
+MKL_jll<span class=" -Color -Color-Yellow"> Waiting for background task / IO / timer.</span>
+[pid 4296] waiting for IO to finish:
+ Handle type        uv_handle_t-&gt;data
+ timer              0x27f5b80-&gt;0x7f805c2ce920
+This means that a package has started a background task or event source that has not finished running. For precompilation to complete successfully, the event source needs to be closed explicitly. See the developer documentation on fixing precompilation hangs for more help.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FillArrays → FillArraysSparseArraysExt
@@ -547,10 +811,10 @@ This means that a package has started a background task or event source that has
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Cairo_jll
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FiniteDiff
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Graphics
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Graphics
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Interpolations → InterpolationsUnitfulExt
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Animations
@@ -562,64 +826,62 @@ This means that a package has started a background task or event source that has
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OpenEXR
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FiniteDiff → FiniteDiffStaticArraysExt
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorVectorSpace → SpecialFunctionsExt
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SpecialFunctions → SpecialFunctionsChainRulesCoreExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FillArrays → FillArraysStatisticsExt
+<span class=" -Color -Color-Green">  ✓ </span>FillArrays → FillArraysStatisticsExt
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>HarfBuzz_jll
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FiniteDiff → FiniteDiffStaticArraysExt
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[pid 4232] waiting for IO to finish:
- Handle type        uv_handle_t-&gt;data
- timer              0x1c9ffe0-&gt;0x7fc606ac6710
-This means that a package has started a background task or event source that has not finished running. For precompilation to complete successfully, the event source needs to be closed explicitly. See the developer documentation on fixing precompilation hangs for more help.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FreeTypeAbstraction
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorSchemes
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Polynomials
-</pre></div>
-</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DualNumbers
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FreeTypeAbstraction
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DiffRules
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[pid 4296] waiting for IO to finish:
+ Handle type        uv_handle_t-&gt;data
+ timer              0x27f5b80-&gt;0x7f805c2ce920
+This means that a package has started a background task or event source that has not finished running. For precompilation to complete successfully, the event source needs to be closed explicitly. See the developer documentation on fixing precompilation hangs for more help.
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libass_jll
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MKL_jll
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Polynomials
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Pango_jll
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>HypergeometricFunctions
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MKL_jll
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MathTeXEngine
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ForwardDiff
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>HypergeometricFunctions
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FFMPEG_jll
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Cairo
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ForwardDiff
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StatsFuns
@@ -631,37 +893,31 @@ This means that a package has started a background task or event source that has
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalArithmetic → IntervalArithmeticForwardDiffExt
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StatsFuns → StatsFunsChainRulesCoreExt
-</pre></div>
-</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PlotUtils
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>NLSolversBase
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StatsFuns → StatsFunsChainRulesCoreExt
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalArithmetic → IntervalArithmeticRecipesBaseExt
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LineSearches
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>NLSolversBase
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalArithmetic → IntervalArithmeticDiffRulesExt
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageCore
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LineSearches
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FFTW
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Optim
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageCore
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Distributions
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageBase
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ExactPredicates
@@ -670,7 +926,13 @@ This means that a package has started a background task or event source that has
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Polynomials → PolynomialsFFTWExt
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Optim
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>JpegTurbo
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageBase
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Sixel
@@ -680,6 +942,109 @@ This means that a package has started a background task or event source that has
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Polynomials → PolynomialsChainRulesCoreExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Distributions → DistributionsChainRulesCoreExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageAxes
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Polynomials → PolynomialsMakieCoreExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PNGFiles
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SimpleRandom
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SimplePolynomials
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageMetadata
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>KernelDensity
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>TiffImages
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LinearAlgebraX
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Netpbm
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ImageIO
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SimpleGraphs
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DelaunayTriangulation
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Makie
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>CairoMakie
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  193 dependencies successfully precompiled in 216 seconds. 63 already precompiled.
+  <span class=" -Color -Color-Yellow">1</span> dependency had output during precompilation:
+<span class=" -Color -Color-Yellow">┌ </span>MKL_jll
+<span class=" -Color -Color-Yellow">│  </span><span class=" -Color -Color-Bold -Color-Bold-Green"> Downloading</span> artifact: MKL
+<span class=" -Color -Color-Yellow">│  </span>
+<span class=" -Color -Color-Yellow">│  </span>[pid 4296] waiting for IO to finish:
+<span class=" -Color -Color-Yellow">│  </span> Handle type        uv_handle_t-&gt;data
+<span class=" -Color -Color-Yellow">│  </span> timer              0x27f5b80-&gt;0x7f805c2ce920
+<span class=" -Color -Color-Yellow">│  </span>This means that a package has started a background task or event source that has not finished running. For precompilation to complete successfully, the event source needs to be closed explicitly. See the developer documentation on fixing precompilation hangs for more help.
+<span class=" -Color -Color-Yellow">│  </span>
+<span class=" -Color -Color-Yellow">│  </span>[pid 4296] waiting for IO to finish:
+<span class=" -Color -Color-Yellow">│  </span> Handle type        uv_handle_t-&gt;data
+<span class=" -Color -Color-Yellow">│  </span> timer              0x27f5b80-&gt;0x7f805c2ce920
+<span class=" -Color -Color-Yellow">│  </span>This means that a package has started a background task or event source that has not finished running. For precompilation to complete successfully, the event source needs to be closed explicitly. See the developer documentation on fixing precompilation hangs for more help.
+<span class=" -Color -Color-Yellow">└  </span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> Rotations
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RealDot
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Quaternions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Rotations
+  3 dependencies successfully precompiled in 2 seconds. 13 already precompiled.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> RotationsRecipesBaseExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Rotations → RotationsRecipesBaseExt
+  1 dependency successfully precompiled in 1 seconds. 17 already precompiled.
+<span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> IGLWrap_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IGLWrap_jll
+  1 dependency successfully precompiled in 0 seconds. 4 already precompiled.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4Vis
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IntervalArithmetic → IntervalArithmeticForwardDiffExt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Geant4 → G4Vis
+  2 dependencies successfully precompiled in 8 seconds. 276 already precompiled.
 </pre></div>
 </div>
 </div>
@@ -700,6 +1065,11 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4TubsAllocated(Ptr{Nothing} @0x00000000027d9bb0)
+</pre></div>
+</div>
+</div>
 </div>
 <p>We can easily draw the just constructed solid</p>
 <div class="cell docutils container">
@@ -709,6 +1079,9 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/182a29520313df70f540216c5cc95751de03bdafeca962732a3c486b0bce328c.png" src="_images/182a29520313df70f540216c5cc95751de03bdafeca962732a3c486b0bce328c.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -717,6 +1090,9 @@ The definition of the constructor parameters can be found <a class="reference ex
 <span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/33fc3e2b7ee2533957f33b8ee52cd157f9db6678926bbb7634dec43584401ca4.png" src="_images/33fc3e2b7ee2533957f33b8ee52cd157f9db6678926bbb7634dec43584401ca4.png" />
 </div>
 </div>
 <section id="building-boolean-solids">
@@ -731,6 +1107,9 @@ The definition of the constructor parameters can be found <a class="reference ex
 <span class="n">isnothing</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a83831dd06010b0f859273a46b53464cde858bec293002ce4a611b41281a3202.png" src="_images/a83831dd06010b0f859273a46b53464cde858bec293002ce4a611b41281a3202.png" />
 </div>
 </div>
 <p>Lets use some geometry functionality to experiment with the created solid</p>
@@ -750,6 +1129,26 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: Package StaticArrays not found in current path.
+<span class="o">-</span> <span class="n">Run</span> <span class="err">`</span><span class="kn">import</span> <span class="nn">Pkg</span><span class="p">;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;StaticArrays&quot;</span><span class="p">)</span><span class="err">`</span> <span class="n">to</span> <span class="n">install</span> <span class="n">the</span> <span class="n">StaticArrays</span> <span class="n">package</span><span class="o">.</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1772</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">267</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">__require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1753</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1">#invoke_in_world#3</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">926</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">invoke_in_world</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">923</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1746</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -765,6 +1164,15 @@ The definition of the constructor parameters can be found <a class="reference ex
 
 <span class="n">m_water</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindOrBuildMaterial</span><span class="p">(</span><span class="n">nist</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;G4_WATER&quot;</span><span class="p">)</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetDensity</span><span class="p">(</span><span class="n">m_water</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">g</span><span class="o">/</span><span class="n">cm3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetDensity(m_air) / (g / cm3) = 0.0012047899999999999
+GetDensity(m_water) / (g / cm3) = 1.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
 </pre></div>
 </div>
 </div>
@@ -787,6 +1195,15 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetDensity(m_eU) / (g / cm3) = 19.1
+GetA(m_eU) / (g / mole) = 237.72800000000004
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>237.72800000000004
+</pre></div>
+</div>
+</div>
 </div>
 <p>or build a molecule</p>
 <div class="cell docutils container">
@@ -799,6 +1216,14 @@ The definition of the constructor parameters can be found <a class="reference ex
 <span class="n">AddElement</span><span class="p">(</span><span class="n">Lu₂SiO₅</span><span class="p">,</span><span class="w"> </span><span class="n">Si</span><span class="p">,</span><span class="w"> </span><span class="n">natoms</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w">  </span>
 <span class="n">AddElement</span><span class="p">(</span><span class="n">Lu₂SiO₅</span><span class="p">,</span><span class="w"> </span><span class="n">O</span><span class="p">,</span><span class="w"> </span><span class="n">natoms</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetRadlen</span><span class="p">(</span><span class="n">Lu₂SiO₅</span><span class="p">)</span><span class="o">/</span><span class="n">cm</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetRadlen(Lu₂SiO₅) / cm = 1.1427324172087883
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1427324172087883
 </pre></div>
 </div>
 </div>
@@ -822,6 +1247,11 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4LogicalVolumeAllocated(Ptr{Nothing} @0x000000028aaa6ab0)
+</pre></div>
+</div>
+</div>
 </div>
 <p>We can also draw a logical volume</p>
 <div class="cell docutils container">
@@ -830,6 +1260,9 @@ The definition of the constructor parameters can be found <a class="reference ex
 <span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6048f2315b7a0cd23b93d038482045cf58098e2016f3cec7e00de88f2e4dbab8.png" src="_images/6048f2315b7a0cd23b93d038482045cf58098e2016f3cec7e00de88f2e4dbab8.png" />
 </div>
 </div>
 </section>
@@ -876,6 +1309,9 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/e8f8b6c19881ad51b7c5d60efcb6f9c3ceffbe3d8bcbf143cf8c209423d51d06.png" src="_images/e8f8b6c19881ad51b7c5d60efcb6f9c3ceffbe3d8bcbf143cf8c209423d51d06.png" />
+</div>
 </div>
 </section>
 <section id="building-the-full-detector">
@@ -908,6 +1344,19 @@ The definition of the constructor parameters can be found <a class="reference ex
 <span class="k">end</span>
 
 <span class="n">detector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DetectorB3</span><span class="p">(</span><span class="n">nb_cryst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DetectorB3
+  cryst_dX: Float64 60.0
+  cryst_dY: Float64 60.0
+  cryst_dZ: Float64 30.0
+  nb_cryst: Int32 64
+  nb_rings: Int32 9
+  patient_radius: Float64 80.0
+  patient_dZ: Float64 100.0
+  checkOverlaps: Bool false
 </pre></div>
 </div>
 </div>
@@ -1026,10 +1475,20 @@ The definition of the constructor parameters can be found <a class="reference ex
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>construct (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">construct</span><span class="p">(</span><span class="n">detector</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4PVPlacementAllocated(Ptr{Nothing} @0x000000028acdd4c0)
 </pre></div>
 </div>
 </div>
@@ -1040,6 +1499,9 @@ The definition of the constructor parameters can be found <a class="reference ex
 <span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/42710fb67d0d15581f46d986b799fab9fe1f15a2cb72d9b37ee6deba310a7a7a.png" src="_images/42710fb67d0d15581f46d986b799fab9fe1f15a2cb72d9b37ee6deba310a7a7a.png" />
 </div>
 </div>
 </section>
@@ -1076,20 +1538,20 @@ The definition of the constructor parameters can be found <a class="reference ex
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="geant4-jl-intro.html"
+       href="02-wrapped-classes.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to Geant4.jl</p>
+        <p class="prev-next-title">Interacting with the wrapped classes</p>
       </div>
     </a>
     <a class="right-next"
-       href="geant4-jl-applications.html"
+       href="04-physics-list.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Basic/B1 Example</p>
+        <p class="prev-next-title">Defining Physics Lists</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

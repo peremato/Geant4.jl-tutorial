@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Defining Physics Lists &#8212; Geant4.jl Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04-physics-list';</script>
+    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Defining Primary Particles" href="05-primary-particles.html" />
+    <link rel="prev" title="Defining Geant4.jl Geometries" href="03-geometry.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/juliaheplogo.png" class="logo__image only-light" alt="Geant4.jl Tutorials - Home"/>
+    <script>document.write(`<img src="_static/juliaheplogo.png" class="logo__image only-dark" alt="Geant4.jl Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Welcome to Geant4.jl Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Building Simulation Applications</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-introduction.html">Introduction to Geant4.jl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-wrapped-classes.html">Interacting with the wrapped classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-geometry.html">Defining Geant4.jl Geometries</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Defining Physics Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-primary-particles.html">Defining Primary Particles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-field.html">Defining Magnetic Field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-applications.html">Building Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-sensitive-detectors.html">Sensitive Detectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-scoring-meshes.html">Scoring Meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-histograms.html">Histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-event-display.html">Event Display</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Complete Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="examples/HBC30/HBC30.html">CERN Liquid Hydrogen Bubble Chamber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/WaterPhantom/WaterPhantom.html">Water Phantom Simulation with Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/Scintillation/Scintillation.html">Scintillating Detector Example</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/peremato/Geant4.jl-tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/peremato/Geant4.jl-tutorial/issues/new?title=Issue%20on%20page%20%2F04-physics-list.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/04-physics-list.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Defining Physics Lists</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-standard-physics-lists">Using Standard Physics Lists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-custom-physics-list">Defining a custom physics list</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="defining-physics-lists">
+<h1>Defining Physics Lists<a class="headerlink" href="#defining-physics-lists" title="Link to this heading">#</a></h1>
+<p>We need to provide a type to the <code class="docutils literal notranslate"><span class="pre">G4JLApplication</span></code> that represents the selected physics list. The easiest is to use one of the pre-packaged physics list (e.g. <code class="docutils literal notranslate"><span class="pre">FTFP_BERT</span></code>, <code class="docutils literal notranslate"><span class="pre">QGS_BIC</span></code>, <code class="docutils literal notranslate"><span class="pre">QBBC</span></code> and others can be added on demand). The toolkit will use the provided type to instantiate the physics list at the right moment during the initialization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Geant4</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="using-standard-physics-lists">
+<h2>Using Standard Physics Lists<a class="headerlink" href="#using-standard-physics-lists" title="Link to this heading">#</a></h2>
+<p>Lets play a bit one of these pre-packaged physics list</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FTFP_BERT</span><span class="p">()</span>
+<span class="nd">@test</span><span class="w"> </span><span class="n">fl</span><span class="w"> </span><span class="k">isa</span><span class="w"> </span><span class="n">G4VUserPhysicsList</span>
+<span class="n">DumpList</span><span class="p">(</span><span class="n">fl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&lt;&lt; Geant4 Physics List simulation engine: FTFP_BERT
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is normal that created instance by hand is empty. It needs to be created by the <code class="docutils literal notranslate"><span class="pre">G4RunManager</span></code> during initialization. Let’s try to do it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#---The next will be hidden in new versions-------------------------</span>
+<span class="c"># create a empty world filled with vacumm</span>
+<span class="k">struct</span> <span class="kt">World</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4JLDetector</span><span class="w"> </span><span class="k">end</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Geant4</span><span class="o">.</span><span class="n">PhysicalConstants</span><span class="o">:</span><span class="w"> </span><span class="n">universe_mean_density</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Geant4</span><span class="o">.</span><span class="n">SystemOfUnits</span><span class="o">:</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">mole</span><span class="p">,</span><span class="w"> </span><span class="n">kelvin</span><span class="p">,</span><span class="w"> </span><span class="n">pascal</span>
+<span class="k">function</span><span class="w"> </span><span class="n">bigbang</span><span class="p">(</span><span class="o">::</span><span class="kt">World</span><span class="p">)</span>
+<span class="w">    </span><span class="n">vacuum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4Material</span><span class="p">(</span><span class="s">&quot;Vacuum&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">=</span><span class="mf">1.01</span><span class="n">g</span><span class="o">/</span><span class="n">mole</span><span class="p">,</span><span class="w"> </span><span class="n">density</span><span class="o">=</span><span class="n">universe_mean_density</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="o">=</span><span class="n">kStateGas</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                        </span><span class="n">temperature</span><span class="o">=</span><span class="mf">2.73</span><span class="o">*</span><span class="n">kelvin</span><span class="p">,</span><span class="w"> </span><span class="n">pressure</span><span class="o">=</span><span class="mf">3.e-18</span><span class="o">*</span><span class="n">pascal</span><span class="p">)</span>
+<span class="w">    </span><span class="n">G4PVPlacement</span><span class="p">(</span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(),</span>
+<span class="w">                  </span><span class="n">G4LogicalVolume</span><span class="p">(</span><span class="n">G4Box</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">),</span><span class="w"> </span><span class="n">move!</span><span class="p">(</span><span class="n">vacuum</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p">),</span>
+<span class="w">                  </span><span class="s">&quot;World&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
+<span class="k">end</span><span class="w">  </span>
+<span class="n">Geant4</span><span class="o">.</span><span class="n">getConstructor</span><span class="p">(</span><span class="o">::</span><span class="kt">World</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bigbang</span>
+<span class="c">#---end-------------------------------------------------------------</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLApplication</span><span class="p">(</span>
+<span class="w">    </span><span class="n">detector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">World</span><span class="p">(),</span><span class="w">               </span><span class="c"># should be the default</span>
+<span class="w">    </span><span class="n">generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLGunGenerator</span><span class="p">(),</span><span class="w">   </span><span class="c"># should be the default</span>
+<span class="w">    </span><span class="n">physics_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FTFP_BERT</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**************************************************************
+ Geant4 version Name: geant4-11-02 [MT]   (8-December-2023)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4JLApplication{World, Geant4.G4JLNoData}(Geant4.G4RunManagerAllocated(Ptr{Nothing} @0x0000000003157fe0), World(), [Geant4.G4JLNoData()], G4JLGunGenerator(&quot;ParticleGun&quot;, Geant4.G4JLParticleGunData(nothing, &quot;e-&quot;, G4ThreeVector(0.0,0.0,0.0), G4ThreeVector(0.0,0.0,0.0), 10.0), Geant4.var&quot;#init#19&quot;(), Geant4.var&quot;#gen#20&quot;(), G4JLGeneratorAction[]), nothing, nothing, 0, 0, G4RunManager, G4JLDetectorConstruction, FTFP_BERT, G4JLRunAction, G4JLEventAction, G4JLTrackingAction, G4JLSteppingAction, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, nothing, Dict{String, Geant4.G4JLProtoSD}(), Dict{String, Vector{G4JLSensitiveDetector}}(), G4JLScoringMesh[], nothing, nothing)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">DumpList</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">physics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>B+, B-, B0, Bc+
+Bc-, Bs0, D+, D-
+D0, Ds+, Ds-, GenericIon
+He3, J/psi, N(1440)+, N(1440)0
+N(1520)+, N(1520)0, N(1535)+, N(1535)0
+N(1650)+, N(1650)0, N(1675)+, N(1675)0
+N(1680)+, N(1680)0, N(1700)+, N(1700)0
+N(1710)+, N(1710)0, N(1720)+, N(1720)0
+N(1900)+, N(1900)0, N(1990)+, N(1990)0
+N(2090)+, N(2090)0, N(2190)+, N(2190)0
+N(2220)+, N(2220)0, N(2250)+, N(2250)0
+Upsilon, a0(1450)+, a0(1450)-, a0(1450)0
+a0(980)+, a0(980)-, a0(980)0, a1(1260)+
+a1(1260)-, a1(1260)0, a2(1320)+, a2(1320)-
+a2(1320)0, alpha, anti_B0, anti_Bs0
+anti_D0, anti_He3, anti_N(1440)+, anti_N(1440)0
+anti_N(1520)+, anti_N(1520)0, anti_N(1535)+, anti_N(1535)0
+anti_N(1650)+, anti_N(1650)0, anti_N(1675)+, anti_N(1675)0
+anti_N(1680)+, anti_N(1680)0, anti_N(1700)+, anti_N(1700)0
+anti_N(1710)+, anti_N(1710)0, anti_N(1720)+, anti_N(1720)0
+anti_N(1900)+, anti_N(1900)0, anti_N(1990)+, anti_N(1990)0
+anti_N(2090)+, anti_N(2090)0, anti_N(2190)+, anti_N(2190)0
+anti_N(2220)+, anti_N(2220)0, anti_N(2250)+, anti_N(2250)0
+anti_alpha, anti_b_quark, anti_bb1_diquark, anti_bc0_diquark
+anti_bc1_diquark, anti_bd0_diquark, anti_bd1_diquark, anti_bs0_diquark
+anti_bs1_diquark, anti_bu0_diquark, anti_bu1_diquark, anti_c_quark
+anti_cc1_diquark, anti_cd0_diquark, anti_cd1_diquark, anti_cs0_diquark
+anti_cs1_diquark, anti_cu0_diquark, anti_cu1_diquark, anti_d_quark
+anti_dd1_diquark, anti_delta(1600)+, anti_delta(1600)++, anti_delta(1600)-
+anti_delta(1600)0, anti_delta(1620)+, anti_delta(1620)++, anti_delta(1620)-
+anti_delta(1620)0, anti_delta(1700)+, anti_delta(1700)++, anti_delta(1700)-
+anti_delta(1700)0, anti_delta(1900)+, anti_delta(1900)++, anti_delta(1900)-
+anti_delta(1900)0, anti_delta(1905)+, anti_delta(1905)++, anti_delta(1905)-
+anti_delta(1905)0, anti_delta(1910)+, anti_delta(1910)++, anti_delta(1910)-
+anti_delta(1910)0, anti_delta(1920)+, anti_delta(1920)++, anti_delta(1920)-
+anti_delta(1920)0, anti_delta(1930)+, anti_delta(1930)++, anti_delta(1930)-
+anti_delta(1930)0, anti_delta(1950)+, anti_delta(1950)++, anti_delta(1950)-
+anti_delta(1950)0, anti_delta+, anti_delta++, anti_delta-
+anti_delta0, anti_deuteron, anti_doublehyperH4, anti_doublehyperdoubleneutron
+anti_hyperH4, anti_hyperHe5, anti_hyperalpha, anti_hypertriton
+anti_k(1460)0, anti_k0_star(1430)0, anti_k1(1270)0, anti_k1(1400)0
+anti_k2(1770)0, anti_k2_star(1430)0, anti_k2_star(1980)0, anti_k3_star(1780)0
+anti_k_star(1410)0, anti_k_star(1680)0, anti_k_star0, anti_kaon0
+anti_lambda, anti_lambda(1405), anti_lambda(1520), anti_lambda(1600)
+anti_lambda(1670), anti_lambda(1690), anti_lambda(1800), anti_lambda(1810)
+anti_lambda(1820), anti_lambda(1830), anti_lambda(1890), anti_lambda(2100)
+anti_lambda(2110), anti_lambda_b, anti_lambda_c+, anti_neutron
+anti_nu_e, anti_nu_mu, anti_nu_tau, anti_omega-
+anti_omega_b-, anti_omega_c0, anti_proton, anti_s_quark
+anti_sd0_diquark, anti_sd1_diquark, anti_sigma(1385)+, anti_sigma(1385)-
+anti_sigma(1385)0, anti_sigma(1660)+, anti_sigma(1660)-, anti_sigma(1660)0
+anti_sigma(1670)+, anti_sigma(1670)-, anti_sigma(1670)0, anti_sigma(1750)+
+anti_sigma(1750)-, anti_sigma(1750)0, anti_sigma(1775)+, anti_sigma(1775)-
+anti_sigma(1775)0, anti_sigma(1915)+, anti_sigma(1915)-, anti_sigma(1915)0
+anti_sigma(1940)+, anti_sigma(1940)-, anti_sigma(1940)0, anti_sigma(2030)+
+anti_sigma(2030)-, anti_sigma(2030)0, anti_sigma+, anti_sigma-
+anti_sigma0, anti_sigma_b+, anti_sigma_b-, anti_sigma_b0
+anti_sigma_c+, anti_sigma_c++, anti_sigma_c0, anti_ss1_diquark
+anti_su0_diquark, anti_su1_diquark, anti_t_quark, anti_triton
+anti_u_quark, anti_ud0_diquark, anti_ud1_diquark, anti_uu1_diquark
+anti_xi(1530)-, anti_xi(1530)0, anti_xi(1690)-, anti_xi(1690)0
+anti_xi(1820)-, anti_xi(1820)0, anti_xi(1950)-, anti_xi(1950)0
+anti_xi(2030)-, anti_xi(2030)0, anti_xi-, anti_xi0
+anti_xi_b-, anti_xi_b0, anti_xi_c+, anti_xi_c0
+b1(1235)+, b1(1235)-, b1(1235)0, b_quark
+bb1_diquark, bc0_diquark, bc1_diquark, bd0_diquark
+bd1_diquark, bs0_diquark, bs1_diquark, bu0_diquark
+bu1_diquark, c_quark, cc1_diquark, cd0_diquark
+cd1_diquark, chargedgeantino, cs0_diquark, cs1_diquark
+cu0_diquark, cu1_diquark, d_quark, dd1_diquark
+delta(1600)+, delta(1600)++, delta(1600)-, delta(1600)0
+delta(1620)+, delta(1620)++, delta(1620)-, delta(1620)0
+delta(1700)+, delta(1700)++, delta(1700)-, delta(1700)0
+delta(1900)+, delta(1900)++, delta(1900)-, delta(1900)0
+delta(1905)+, delta(1905)++, delta(1905)-, delta(1905)0
+delta(1910)+, delta(1910)++, delta(1910)-, delta(1910)0
+delta(1920)+, delta(1920)++, delta(1920)-, delta(1920)0
+delta(1930)+, delta(1930)++, delta(1930)-, delta(1930)0
+delta(1950)+, delta(1950)++, delta(1950)-, delta(1950)0
+delta+, delta++, delta-, delta0
+deuteron, doublehyperH4, doublehyperdoubleneutron, e+
+e-, eta, eta(1295), eta(1405)
+eta(1475), eta2(1645), eta2(1870), eta_prime
+etac, f0(1370), f0(1500), f0(1710)
+f0(500), f0(980), f1(1285), f1(1420)
+f2(1270), f2(1810), f2(2010), f2_prime(1525)
+gamma, geantino, gluon, h1(1170)
+h1(1380), hyperH4, hyperHe5, hyperalpha
+hypertriton, k(1460)+, k(1460)-, k(1460)0
+k0_star(1430)+, k0_star(1430)-, k0_star(1430)0, k1(1270)+
+k1(1270)-, k1(1270)0, k1(1400)+, k1(1400)-
+k1(1400)0, k2(1770)+, k2(1770)-, k2(1770)0
+k2_star(1430)+, k2_star(1430)-, k2_star(1430)0, k2_star(1980)+
+k2_star(1980)-, k2_star(1980)0, k3_star(1780)+, k3_star(1780)-
+k3_star(1780)0, k_star(1410)+, k_star(1410)-, k_star(1410)0
+k_star(1680)+, k_star(1680)-, k_star(1680)0, k_star+
+k_star-, k_star0, kaon+, kaon-
+kaon0, kaon0L, kaon0S, lambda
+lambda(1405), lambda(1520), lambda(1600), lambda(1670)
+lambda(1690), lambda(1800), lambda(1810), lambda(1820)
+lambda(1830), lambda(1890), lambda(2100), lambda(2110)
+lambda_b, lambda_c+, mu+, mu-
+neutron, nu_e, nu_mu, nu_tau
+omega, omega(1420), omega(1650), omega-
+omega3(1670), omega_b-, omega_c0, opticalphoton
+phi, phi(1680), phi3(1850), pi(1300)+
+pi(1300)-, pi(1300)0, pi+, pi-
+pi0, pi2(1670)+, pi2(1670)-, pi2(1670)0
+proton, rho(1450)+, rho(1450)-, rho(1450)0
+rho(1700)+, rho(1700)-, rho(1700)0, rho+
+rho-, rho0, rho3(1690)+, rho3(1690)-
+rho3(1690)0, s_quark, sd0_diquark, sd1_diquark
+sigma(1385)+, sigma(1385)-, sigma(1385)0, sigma(1660)+
+sigma(1660)-, sigma(1660)0, sigma(1670)+, sigma(1670)-
+sigma(1670)0, sigma(1750)+, sigma(1750)-, sigma(1750)0
+sigma(1775)+, sigma(1775)-, sigma(1775)0, sigma(1915)+
+sigma(1915)-, sigma(1915)0, sigma(1940)+, sigma(1940)-
+sigma(1940)0, sigma(2030)+, sigma(2030)-, sigma(2030)0
+sigma+, sigma-, sigma0, sigma_b+
+sigma_b-, sigma_b0, sigma_c+, sigma_c++
+sigma_c0, ss1_diquark, su0_diquark, su1_diquark
+t_quark, tau+, tau-, triton
+u_quark, ud0_diquark, ud1_diquark, uu1_diquark
+xi(1530)-, xi(1530)0, xi(1690)-, xi(1690)0
+xi(1820)-, xi(1820)0, xi(1950)-, xi(1950)0
+xi(2030)-, xi(2030)0, xi-, xi0
+xi_b-, xi_b0, xi_c+, xi_c0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="defining-a-custom-physics-list">
+<h2>Defining a custom physics list<a class="headerlink" href="#defining-a-custom-physics-list" title="Link to this heading">#</a></h2>
+<p>The way we can achieve it is by defining a dummy <code class="docutils literal notranslate"><span class="pre">struct</span></code> inheriting from <code class="docutils literal notranslate"><span class="pre">G4VUserPhysicsList</span></code> that provides a default constructor. In the constructor we can build the physics list and return an object that inherits from <code class="docutils literal notranslate"><span class="pre">G4VUserPhysicsList</span></code> to comply with the interface.</p>
+<p>Here is an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="sa">ui</span><span class="sb">`/run/verbose 1`</span>
+<span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="n">GC</span><span class="o">.</span><span class="n">gc</span><span class="p">()</span>
+<span class="n">G4RunManager!GetRunManager</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CxxPtr{G4RunManager}(Ptr{G4RunManager} @0x0000000003157fe0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">MyPhysicsList</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4VUserPhysicsList</span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">MyPhysicsList</span><span class="p">(</span><span class="n">verbose</span><span class="p">)</span>
+<span class="w">        </span><span class="n">pl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4VModularPhysicsList</span><span class="p">()</span>
+<span class="w">        </span><span class="n">RegisterPhysics</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="w"> </span><span class="n">move!</span><span class="p">(</span><span class="n">G4EmStandardPhysics</span><span class="p">(</span><span class="n">verbose</span><span class="p">)))</span>
+<span class="w">        </span><span class="n">RegisterPhysics</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="w"> </span><span class="n">move!</span><span class="p">(</span><span class="n">G4OpticalPhysics</span><span class="p">(</span><span class="n">verbose</span><span class="p">)))</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">pl</span>
+<span class="w">    </span><span class="k">end</span><span class="w"> </span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLApplication</span><span class="p">(</span>
+<span class="w">    </span><span class="n">detector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">World</span><span class="p">(),</span><span class="w">               </span><span class="c"># should be the default</span>
+<span class="w">    </span><span class="n">generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLGunGenerator</span><span class="p">(),</span><span class="w">   </span><span class="c"># should be the default</span>
+<span class="w">    </span><span class="n">physics_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyPhysicsList</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">DumpList</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">physics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>B+, B-, B0, Bc+
+Bc-, Bs0, D+, D-
+D0, Ds+, Ds-, GenericIon
+He3, J/psi, N(1440)+, N(1440)0
+N(1520)+, N(1520)0, N(1535)+, N(1535)0
+N(1650)+, N(1650)0, N(1675)+, N(1675)0
+N(1680)+, N(1680)0, N(1700)+, N(1700)0
+N(1710)+, N(1710)0, N(1720)+, N(1720)0
+N(1900)+, N(1900)0, N(1990)+, N(1990)0
+N(2090)+, N(2090)0, N(2190)+, N(2190)0
+N(2220)+, N(2220)0, N(2250)+, N(2250)0
+Upsilon, a0(1450)+, a0(1450)-, a0(1450)0
+a0(980)+, a0(980)-, a0(980)0, a1(1260)+
+a1(1260)-, a1(1260)0, a2(1320)+, a2(1320)-
+a2(1320)0, alpha, anti_B0, anti_Bs0
+anti_D0, anti_He3, anti_N(1440)+, anti_N(1440)0
+anti_N(1520)+, anti_N(1520)0, anti_N(1535)+, anti_N(1535)0
+anti_N(1650)+, anti_N(1650)0, anti_N(1675)+, anti_N(1675)0
+anti_N(1680)+, anti_N(1680)0, anti_N(1700)+, anti_N(1700)0
+anti_N(1710)+, anti_N(1710)0, anti_N(1720)+, anti_N(1720)0
+anti_N(1900)+, anti_N(1900)0, anti_N(1990)+, anti_N(1990)0
+anti_N(2090)+, anti_N(2090)0, anti_N(2190)+, anti_N(2190)0
+anti_N(2220)+, anti_N(2220)0, anti_N(2250)+, anti_N(2250)0
+anti_alpha, anti_b_quark, anti_bb1_diquark, anti_bc0_diquark
+anti_bc1_diquark, anti_bd0_diquark, anti_bd1_diquark, anti_bs0_diquark
+anti_bs1_diquark, anti_bu0_diquark, anti_bu1_diquark, anti_c_quark
+anti_cc1_diquark, anti_cd0_diquark, anti_cd1_diquark, anti_cs0_diquark
+anti_cs1_diquark, anti_cu0_diquark, anti_cu1_diquark, anti_d_quark
+anti_dd1_diquark, anti_delta(1600)+, anti_delta(1600)++, anti_delta(1600)-
+anti_delta(1600)0, anti_delta(1620)+, anti_delta(1620)++, anti_delta(1620)-
+anti_delta(1620)0, anti_delta(1700)+, anti_delta(1700)++, anti_delta(1700)-
+anti_delta(1700)0, anti_delta(1900)+, anti_delta(1900)++, anti_delta(1900)-
+anti_delta(1900)0, anti_delta(1905)+, anti_delta(1905)++, anti_delta(1905)-
+anti_delta(1905)0, anti_delta(1910)+, anti_delta(1910)++, anti_delta(1910)-
+anti_delta(1910)0, anti_delta(1920)+, anti_delta(1920)++, anti_delta(1920)-
+anti_delta(1920)0, anti_delta(1930)+, anti_delta(1930)++, anti_delta(1930)-
+anti_delta(1930)0, anti_delta(1950)+, anti_delta(1950)++, anti_delta(1950)-
+anti_delta(1950)0, anti_delta+, anti_delta++, anti_delta-
+anti_delta0, anti_deuteron, anti_doublehyperH4, anti_doublehyperdoubleneutron
+anti_hyperH4, anti_hyperHe5, anti_hyperalpha, anti_hypertriton
+anti_k(1460)0, anti_k0_star(1430)0, anti_k1(1270)0, anti_k1(1400)0
+anti_k2(1770)0, anti_k2_star(1430)0, anti_k2_star(1980)0, anti_k3_star(1780)0
+anti_k_star(1410)0, anti_k_star(1680)0, anti_k_star0, anti_kaon0
+anti_lambda, anti_lambda(1405), anti_lambda(1520), anti_lambda(1600)
+anti_lambda(1670), anti_lambda(1690), anti_lambda(1800), anti_lambda(1810)
+anti_lambda(1820), anti_lambda(1830), anti_lambda(1890), anti_lambda(2100)
+anti_lambda(2110), anti_lambda_b, anti_lambda_c+, anti_neutron
+anti_nu_e, anti_nu_mu, anti_nu_tau, anti_omega-
+anti_omega_b-, anti_omega_c0, anti_proton, anti_s_quark
+anti_sd0_diquark, anti_sd1_diquark, anti_sigma(1385)+, anti_sigma(1385)-
+anti_sigma(1385)0, anti_sigma(1660)+, anti_sigma(1660)-, anti_sigma(1660)0
+anti_sigma(1670)+, anti_sigma(1670)-, anti_sigma(1670)0, anti_sigma(1750)+
+anti_sigma(1750)-, anti_sigma(1750)0, anti_sigma(1775)+, anti_sigma(1775)-
+anti_sigma(1775)0, anti_sigma(1915)+, anti_sigma(1915)-, anti_sigma(1915)0
+anti_sigma(1940)+, anti_sigma(1940)-, anti_sigma(1940)0, anti_sigma(2030)+
+anti_sigma(2030)-, anti_sigma(2030)0, anti_sigma+, anti_sigma-
+anti_sigma0, anti_sigma_b+, anti_sigma_b-, anti_sigma_b0
+anti_sigma_c+, anti_sigma_c++, anti_sigma_c0, anti_ss1_diquark
+anti_su0_diquark, anti_su1_diquark, anti_t_quark, anti_triton
+anti_u_quark, anti_ud0_diquark, anti_ud1_diquark, anti_uu1_diquark
+anti_xi(1530)-, anti_xi(1530)0, anti_xi(1690)-, anti_xi(1690)0
+anti_xi(1820)-, anti_xi(1820)0, anti_xi(1950)-, anti_xi(1950)0
+anti_xi(2030)-, anti_xi(2030)0, anti_xi-, anti_xi0
+anti_xi_b-, anti_xi_b0, anti_xi_c+, anti_xi_c0
+b1(1235)+, b1(1235)-, b1(1235)0, b_quark
+bb1_diquark, bc0_diquark, bc1_diquark, bd0_diquark
+bd1_diquark, bs0_diquark, bs1_diquark, bu0_diquark
+bu1_diquark, c_quark, cc1_diquark, cd0_diquark
+cd1_diquark, chargedgeantino, cs0_diquark, cs1_diquark
+cu0_diquark, cu1_diquark, d_quark, dd1_diquark
+delta(1600)+, delta(1600)++, delta(1600)-, delta(1600)0
+delta(1620)+, delta(1620)++, delta(1620)-, delta(1620)0
+delta(1700)+, delta(1700)++, delta(1700)-, delta(1700)0
+delta(1900)+, delta(1900)++, delta(1900)-, delta(1900)0
+delta(1905)+, delta(1905)++, delta(1905)-, delta(1905)0
+delta(1910)+, delta(1910)++, delta(1910)-, delta(1910)0
+delta(1920)+, delta(1920)++, delta(1920)-, delta(1920)0
+delta(1930)+, delta(1930)++, delta(1930)-, delta(1930)0
+delta(1950)+, delta(1950)++, delta(1950)-, delta(1950)0
+delta+, delta++, delta-, delta0
+deuteron, doublehyperH4, doublehyperdoubleneutron, e+
+e-, eta, eta(1295), eta(1405)
+eta(1475), eta2(1645), eta2(1870), eta_prime
+etac, f0(1370), f0(1500), f0(1710)
+f0(500), f0(980), f1(1285), f1(1420)
+f2(1270), f2(1810), f2(2010), f2_prime(1525)
+gamma, geantino, gluon, h1(1170)
+h1(1380), hyperH4, hyperHe5, hyperalpha
+hypertriton, k(1460)+, k(1460)-, k(1460)0
+k0_star(1430)+, k0_star(1430)-, k0_star(1430)0, k1(1270)+
+k1(1270)-, k1(1270)0, k1(1400)+, k1(1400)-
+k1(1400)0, k2(1770)+, k2(1770)-, k2(1770)0
+k2_star(1430)+, k2_star(1430)-, k2_star(1430)0, k2_star(1980)+
+k2_star(1980)-, k2_star(1980)0, k3_star(1780)+, k3_star(1780)-
+k3_star(1780)0, k_star(1410)+, k_star(1410)-, k_star(1410)0
+k_star(1680)+, k_star(1680)-, k_star(1680)0, k_star+
+k_star-, k_star0, kaon+, kaon-
+kaon0, kaon0L, kaon0S, lambda
+lambda(1405), lambda(1520), lambda(1600), lambda(1670)
+lambda(1690), lambda(1800), lambda(1810), lambda(1820)
+lambda(1830), lambda(1890), lambda(2100), lambda(2110)
+lambda_b, lambda_c+, mu+, mu-
+neutron, nu_e, nu_mu, nu_tau
+omega, omega(1420), omega(1650), omega-
+omega3(1670), omega_b-, omega_c0, opticalphoton
+phi, phi(1680), phi3(1850), pi(1300)+
+pi(1300)-, pi(1300)0, pi+, pi-
+pi0, pi2(1670)+, pi2(1670)-, pi2(1670)0
+proton, rho(1450)+, rho(1450)-, rho(1450)0
+rho(1700)+, rho(1700)-, rho(1700)0, rho+
+rho-, rho0, rho3(1690)+, rho3(1690)-
+rho3(1690)0, s_quark, sd0_diquark, sd1_diquark
+sigma(1385)+, sigma(1385)-, sigma(1385)0, sigma(1660)+
+sigma(1660)-, sigma(1660)0, sigma(1670)+, sigma(1670)-
+sigma(1670)0, sigma(1750)+, sigma(1750)-, sigma(1750)0
+sigma(1775)+, sigma(1775)-, sigma(1775)0, sigma(1915)+
+sigma(1915)-, sigma(1915)0, sigma(1940)+, sigma(1940)-
+sigma(1940)0, sigma(2030)+, sigma(2030)-, sigma(2030)0
+sigma+, sigma-, sigma0, sigma_b+
+sigma_b-, sigma_b0, sigma_c+, sigma_c++
+sigma_c0, ss1_diquark, su0_diquark, su1_diquark
+t_quark, tau+, tau-, triton
+u_quark, ud0_diquark, ud1_diquark, uu1_diquark
+xi(1530)-, xi(1530)0, xi(1690)-, xi(1690)0
+xi(1820)-, xi(1820)0, xi(1950)-, xi(1950)0
+xi(2030)-, xi(2030)0, xi-, xi0
+xi_b-, xi_b0, xi_c+, xi_c0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.10"
+        },
+        kernelOptions: {
+            name: "julia-1.10",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.10'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03-geometry.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Defining Geant4.jl Geometries</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="05-primary-particles.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Defining Primary Particles</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-standard-physics-lists">Using Standard Physics Lists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-custom-physics-list">Defining a custom physics list</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Pere Mato
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright CERN, The Contributors 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
