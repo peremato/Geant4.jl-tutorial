@@ -4,14 +4,23 @@
 format: jb-book
 root: index
 parts:
-- caption: Introduction to Geant4.jl 
-  chapters:
-  - file: geant4-jl-intro
-  - file: geant4-jl-geometry
 - caption: Building Simulation Applications
   chapters:
-  - file: geant4-jl-applications
+  - file: 01-introduction
+  - file: 02-wrapped-classes
+  - file: 03-geometry
+  - file: 04-physics-list
+  - file: 05-primary-particles
+  - file: 06-field
+  - file: 07-applications
+  - file: 08-sensitive-detectors
+  - file: 09-scoring-meshes
+  - file: 10-histograms
+  - file: 11-event-display
 - caption: Complete Examples
   chapters:
-  - file: examples/HBC30
+  - file: examples/HBC30/HBC30
+  - file: examples/WaterPhantom/WaterPhantom
+  - file: examples/Scintillation/Scintillation
+
   
