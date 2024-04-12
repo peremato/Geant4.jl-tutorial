@@ -33,8 +33,10 @@ jobs:
     - uses: julia-actions/julia-buildpkg@v1
 
 
-    - name: Build the book
+    - name: Precompile project
       run: julia --project -e 'using Pkg;Pkg.precompile()'
+
+    - name: Build the book
       run: |
         jupyter-book build ./docs
 
