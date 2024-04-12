@@ -34,6 +34,7 @@ jobs:
 
 
     - name: Build the book
+      run: julia --project -e 'using Pkg;Pkg.precompile()'
       run: |
         jupyter-book build ./docs
 
