@@ -22,5 +22,7 @@ parts:
   - file: examples/HBC30/HBC30
   - file: examples/WaterPhantom/WaterPhantom
   - file: examples/Scintillation/Scintillation
+  - file: examples/TestEm3/TestEm3
+  
 
   
