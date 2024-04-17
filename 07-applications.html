@@ -196,6 +196,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples/HBC30/HBC30.html">CERN Liquid Hydrogen Bubble Chamber</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/WaterPhantom/WaterPhantom.html">Water Phantom Simulation with Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/Scintillation/Scintillation.html">Scintillating Detector Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TestEm3/TestEm3.html">TestEM3 Example</a></li>
 </ul>
 
     </div>
@@ -368,7 +369,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -384,6 +387,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-actions">User Actions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-simulation-data">Defining Simulation Data</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -395,6 +407,248 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="building-applications">
 <h1>Building Applications<a class="headerlink" href="#building-applications" title="Link to this heading">#</a></h1>
+<p>What is still missing to build complete applications is to add user actions or sensitive detectors or scorers. In this tutorial we have a look at the user actions.</p>
+<section id="user-actions">
+<h2>User Actions<a class="headerlink" href="#user-actions" title="Link to this heading">#</a></h2>
+<p>User actions are native Julia functions that will be called by the Geant4 toolkit at the defined moment during the simulation. They</p>
+<p>The following are the possible user actions:</p>
+<ul class="simple">
+<li><p><strong>stepping action</strong>. Called on each simulation step. The signature is <code class="docutils literal notranslate"><span class="pre">(::G4Step,</span> <span class="pre">::G4JLApplication)::Nothing</span></code>. Consult the <a class="reference external" href="https://geant4.kek.jp/Reference/11.2.0/classG4Step.html">G4Step</a> reference manual to see what you can get from it.</p></li>
+<li><p><strong>pre-tracking action</strong>. Called at the creation of a new participle being tracked. The signature is <code class="docutils literal notranslate"><span class="pre">(::G4Track,</span> <span class="pre">::G4JLApplication)::Nothing</span></code>. Consult the <a class="reference external" href="https://geant4.kek.jp/Reference/11.2.0/classG4Track.html">G4Step</a> reference manual to see what you can get from it.</p></li>
+<li><p><strong>post-tracking action</strong>. Called at the end of the particle being tracked. The signature is <code class="docutils literal notranslate"><span class="pre">(::G4Track,</span> <span class="pre">::G4JLApplication)::Nothing</span></code>. Consult the <a class="reference external" href="https://geant4.kek.jp/Reference/11.2.0/classG4Track.html">G4Track</a> reference manual to see what you can get from it.</p></li>
+<li><p><strong>begin-event action</strong>. Called at the beginning of each event. The signature is <code class="docutils literal notranslate"><span class="pre">(::G4Event,</span> <span class="pre">::G4JLApplication)::Nothing</span></code>. Consult the <a class="reference external" href="https://geant4.kek.jp/Reference/11.2.0/classG4Event.html">G4Event</a> reference manual to see what you can get from it.</p></li>
+<li><p><strong>end-event action</strong>. Called at the end of each event. The signature is <code class="docutils literal notranslate"><span class="pre">(::G4Event,</span> <span class="pre">::G4JLApplication)::Nothing</span></code>. Consult the <a class="reference external" href="https://geant4.kek.jp/Reference/11.2.0/classG4Event.html">G4Event</a> reference manual to see what you can get from it.</p></li>
+<li><p><strong>begin-run action</strong>. Called at the beginning of a run. The signature is <code class="docutils literal notranslate"><span class="pre">(::G4Run,</span> <span class="pre">::G4JLApplication)::Nothing</span></code>. Consult the <a class="reference external" href="https://geant4.kek.jp/Reference/11.2.0/classG4Run.html">G4Run</a> reference manual to see what you can get from it.</p></li>
+<li><p><strong>end-run action</strong>. Called at the end of a run. The signature is <code class="docutils literal notranslate"><span class="pre">(::G4Run,</span> <span class="pre">::G4JLApplication)::Nothing</span></code>. Consult the <a class="reference external" href="https://geant4.kek.jp/Reference/11.2.0/classG4Run.html">G4Run</a> reference manual to see what you can get from it.</p></li>
+<li><p><strong>stack action</strong>. Called when a particle is going to be put back on the particle stack. The signature is <code class="docutils literal notranslate"><span class="pre">(::G4Track,</span> <span class="pre">::G4JLApplication)::G4ClassificationOfNewTrack</span></code>. Consult the <a class="reference external" href="https://geant4.kek.jp/Reference/11.2.0/classG4Track.html">G4Track</a> reference manual to see what you can get from it.</p></li>
+</ul>
+<p>All user actions receive in addition to the standard G4 arguments a reference to the G4JLApplication object from which the user can get additional information on the application. These are the available field:</p>
+<ul class="simple">
+<li><p><strong>detector</strong> - user defined detector parameters object</p></li>
+<li><p><strong>simdata</strong> - vector of the user defined simulation data objects (one per worker thread plus the accumulated one). The function <code class="docutils literal notranslate"><span class="pre">getSIMdata(app)</span></code> return the simulation data corresponding to the <code class="docutils literal notranslate"><span class="pre">threadid</span></code> of the worker calling the user action.</p></li>
+<li><p><strong>generator</strong> - primary particle generator</p></li>
+<li><p><strong>field</strong> - magnetic field</p></li>
+<li><p><strong>nthreads</strong> - number of worker threads</p></li>
+<li><p><strong>verbose</strong> - verbosity level</p></li>
+</ul>
+<p><strong>Ploase note that:</strong> user actions need to be coded as thread-safe (global data should not be modified without any protection). However, this notebook not use multi-threading in order to be able to re-configure the <code class="docutils literal notranslate"><span class="pre">G4JLApplication</span></code> with different actions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Geant4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s begin with something very simple. To define a begin event action that prints a message (notice that we use <code class="docutils literal notranslate"><span class="pre">G4JL_println</span></code> instead of the native  <code class="docutils literal notranslate"><span class="pre">println</span></code> to ensure thread safety.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">beginevent</span><span class="p">(</span><span class="n">evt</span><span class="o">::</span><span class="kt">G4Event</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span>
+<span class="w">    </span><span class="n">G4JL_println</span><span class="p">(</span><span class="s">&quot;started event </span><span class="si">$</span><span class="p">(</span><span class="n">evt</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetEventID</span><span class="p">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>beginevent (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLApplication</span><span class="p">(</span><span class="n">begineventaction_method</span><span class="o">=</span><span class="n">beginevent</span><span class="p">)</span>
+<span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**************************************************************
+ Geant4 version Name: geant4-11-02 [MT]   (8-December-2023)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>started event 0
+started event 1
+started event 2
+started event 3
+started event 4
+</pre></div>
+</div>
+</div>
+</div>
+<p>Please notice that the output message would be prefixed by the working thread ID and the order of execution of the events is not sequential in case we enable multi-threading.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">endevent</span><span class="p">(</span><span class="n">evt</span><span class="o">::</span><span class="kt">G4Event</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span>
+<span class="w">    </span><span class="n">G4JL_println</span><span class="p">(</span><span class="s">&quot;end event </span><span class="si">$</span><span class="p">(</span><span class="n">evt</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetEventID</span><span class="p">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>endevent (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLApplication</span><span class="p">(</span><span class="n">begineventaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beginevent</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">endeventaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endevent</span><span class="p">)</span>
+<span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>started event 0
+end event 0
+started event 1
+end event 1
+started event 2
+end event 2
+started event 3
+end event 3
+started event 4
+end event 4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">stepaction</span><span class="p">(</span><span class="n">step</span><span class="o">::</span><span class="kt">G4Step</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span>
+<span class="w">    </span><span class="n">G4JL_println</span><span class="p">(</span><span class="s">&quot;step with length </span><span class="si">$</span><span class="p">(</span><span class="n">step</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetStepLength</span><span class="p">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stepaction (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLApplication</span><span class="p">(</span><span class="n">begineventaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beginevent</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">endeventaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endevent</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">stepaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stepaction</span><span class="p">)</span>
+<span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>started event 0
+step with length 1000.0
+end event 0
+started event 1
+step with length 1000.0
+end event 1
+started event 2
+step with length 1000.0
+end event 2
+started event 3
+step with length 1000.0
+end event 3
+started event 4
+step with length 1000.0
+end event 4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="defining-simulation-data">
+<h2>Defining Simulation Data<a class="headerlink" href="#defining-simulation-data" title="Link to this heading">#</a></h2>
+<p>The user can define a custom data structure to collect simulation data during the execution of the user actions. Here is an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">DataFrames</span>
+<span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">MySimData</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4JLSimulationData</span>
+<span class="w">    </span><span class="n">steps</span><span class="o">::</span><span class="kt">DataFrame</span>
+<span class="w">    </span><span class="n">MySimData</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="p">(</span><span class="n">DataFrame</span><span class="p">(</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Float64</span><span class="p">[],</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Float64</span><span class="p">[],</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Float64</span><span class="p">[],</span>
+<span class="w">                                 </span><span class="n">KinE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Float64</span><span class="p">[],</span><span class="w"> </span><span class="n">dE</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="kt">Float64</span><span class="p">[],</span><span class="w"> </span><span class="n">StepLeng</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Float64</span><span class="p">[]))</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">stepaction</span><span class="p">(</span><span class="n">step</span><span class="o">::</span><span class="kt">G4Step</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span>
+<span class="w">    </span><span class="n">steps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSIMdata</span><span class="p">(</span><span class="n">app</span><span class="p">)</span><span class="o">.</span><span class="n">steps</span><span class="w">                     </span><span class="c"># Get it own copy of the simdata (avoid data racing in MT mode)</span>
+<span class="w">    </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">  </span><span class="n">GetPreStepPoint</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetPosition</span>
+<span class="w">    </span><span class="n">push!</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">point</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">z</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">step</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetTrack</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetKineticEnergy</span><span class="p">,</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetTotalEnergyDeposit</span><span class="p">,</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetStepLength</span><span class="w"> </span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="k">end</span>
+
+<span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLApplication</span><span class="p">(</span><span class="n">simdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MySimData</span><span class="p">(),</span>
+<span class="w">                      </span><span class="n">begineventaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beginevent</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">endeventaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endevent</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">stepaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stepaction</span><span class="p">)</span>
+<span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>started event 0
+end event 0
+started event 1
+end event 1
+started event 2
+end event 2
+started event 3
+end event 3
+started event 4
+end event 4
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get the results we can access <code class="docutils literal notranslate"><span class="pre">app.simdata[1]</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MySimData(<span class=" -Color -Color-Bold">5×6 DataFrame</span>
+<span class=" -Color -Color-Bold"> Row │ X        Y        Z        KinE     dE           StepLeng</span>
+<span class=" -Color -Color-Bold">     │ Float64  Float64  Float64  Float64  Float64      Float64</span>
+<span class=" -Color -Color-Bold">─────┼───────────────────────────────────────────────────────────</span>
+<span class=" -Color -Color-Bold">   1 │     0.0      0.0      0.0     10.0  3.03438e-23    1000.0</span>
+<span class=" -Color -Color-Bold">   2 │     0.0      0.0      0.0     10.0  3.03438e-23    1000.0</span>
+<span class=" -Color -Color-Bold">   3 │     0.0      0.0      0.0     10.0  3.03438e-23    1000.0</span>
+<span class=" -Color -Color-Bold">   4 │     0.0      0.0      0.0     10.0  3.03438e-23    1000.0</span>
+<span class=" -Color -Color-Bold">   5 │     0.0      0.0      0.0     10.0  3.03438e-23    1000.0)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -406,16 +660,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "julia-1.10"
         },
         kernelOptions: {
-            name: "python3",
+            name: "julia-1.10",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'julia-1.10'</script>
 
                 </article>
               
@@ -452,7 +706,21 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-actions">User Actions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-simulation-data">Defining Simulation Data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

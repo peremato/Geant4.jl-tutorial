@@ -1,0 +1,1485 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>TestEM3 Example &#8212; Geant4.jl Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/TestEm3/TestEm3';</script>
+    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Scintillating Detector Example" href="../Scintillation/Scintillation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/juliaheplogo.png" class="logo__image only-light" alt="Geant4.jl Tutorials - Home"/>
+    <script>document.write(`<img src="../../_static/juliaheplogo.png" class="logo__image only-dark" alt="Geant4.jl Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Welcome to Geant4.jl Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Building Simulation Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../01-introduction.html">Introduction to Geant4.jl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02-wrapped-classes.html">Interacting with the wrapped classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03-geometry.html">Defining Geant4.jl Geometries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04-physics-list.html">Defining Physics Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05-primary-particles.html">Defining Primary Particles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06-field.html">Defining Magnetic Field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07-applications.html">Building Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08-sensitive-detectors.html">Sensitive Detectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09-scoring-meshes.html">Scoring Meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10-histograms.html">Histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11-event-display.html">Event Display</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Complete Examples</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HBC30/HBC30.html">CERN Liquid Hydrogen Bubble Chamber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WaterPhantom/WaterPhantom.html">Water Phantom Simulation with Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Scintillation/Scintillation.html">Scintillating Detector Example</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">TestEM3 Example</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/peremato/Geant4.jl-tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/peremato/Geant4.jl-tutorial/issues/new?title=Issue%20on%20page%20%2Fexamples/TestEm3/TestEm3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/examples/TestEm3/TestEm3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>TestEM3 Example</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-geometry">The Geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-data">Simulation Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-actions">User Actions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-initial-run">Start the initial run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-the-particle-gun-energy">Change the particle gun energy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-the-geometry-and-re-start-the-run">Change the geometry and re-start the run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-the-definition-of-the-action-and-re-start">Change the definition of the action and re-start</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="testem3-example">
+<h1>TestEM3 Example<a class="headerlink" href="#testem3-example" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>How to collect energy deposition in a sampling calorimeter.</p></li>
+<li><p>How to survey energy flow.</p></li>
+<li><p>How to print stopping power.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Geant4</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Geant4</span><span class="o">.</span><span class="n">SystemOfUnits</span>
+<span class="k">using</span><span class="w"> </span><span class="n">FHist</span><span class="p">,</span><span class="w"> </span><span class="n">Printf</span><span class="p">,</span><span class="w"> </span><span class="n">Plots</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-geometry">
+<h2>The Geometry<a class="headerlink" href="#the-geometry" title="Link to this heading">#</a></h2>
+<p>The calorimeter is a box made of a given number of layers.
+A layer consists of a sequence of various absorbers (maximum MaxAbsor=9).
+The layer is replicated.</p>
+<p>Parameters defining the calorimeter :
+- the number of layers,
+- the number of absorbers within a layer,		
+- the material of the absorbers,
+- the thickness of the absorbers,
+- the transverse size of the calorimeter (the input face is a square).</p>
+<p>In addition a transverse uniform magnetic field can be applied.</p>
+<p>The default geometry is constructed in DetectorConstruction class, but all
+of the above parameters can be modified interactively via the commands
+defined in the DetectorMessenger class.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="o">|&lt;----</span><span class="n">layer</span> <span class="mi">0</span><span class="o">----------&gt;|&lt;----</span><span class="n">layer</span> <span class="mi">1</span><span class="o">----------&gt;|&lt;----</span><span class="n">layer</span> <span class="mi">2</span><span class="o">----------&gt;|</span>
+        <span class="o">|</span>           <span class="o">|</span>           <span class="o">|</span>                       <span class="o">|</span>                       <span class="o">|</span>
+        <span class="o">==========================================================================</span>
+        <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>
+        <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>
+        <span class="o">||</span>   <span class="nb">abs</span> <span class="mi">1</span>  <span class="o">|</span> <span class="nb">abs</span> <span class="mi">2</span>     <span class="o">||</span>   <span class="nb">abs</span> <span class="mi">1</span>  <span class="o">|</span> <span class="nb">abs</span> <span class="mi">2</span>     <span class="o">||</span>   <span class="nb">abs</span> <span class="mi">1</span>  <span class="o">|</span> <span class="nb">abs</span> <span class="mi">2</span>     <span class="o">||</span>
+        <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>
+        <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>
+ <span class="n">beam</span>   <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>
+<span class="o">======&gt;</span> <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>
+        <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>
+        <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>
+        <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>
+        <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>          <span class="o">|</span>           <span class="o">||</span>
+        <span class="o">||</span>   <span class="n">cell</span> <span class="mi">1</span> <span class="o">|</span> <span class="n">cell</span> <span class="mi">2</span>    <span class="o">||</span>   <span class="n">cell</span> <span class="mi">3</span> <span class="o">|</span> <span class="n">cell</span> <span class="mi">4</span>    <span class="o">||</span>   <span class="n">cell</span> <span class="mi">5</span> <span class="o">|</span> <span class="n">cell</span> <span class="mi">6</span>    <span class="o">||</span>
+        <span class="o">==========================================================================</span>
+        <span class="o">^</span>           <span class="o">^</span>           <span class="o">^</span>           <span class="o">^</span>           <span class="o">^</span>           <span class="o">^</span>           <span class="o">^</span>
+        <span class="n">pln1</span>        <span class="n">pln2</span>        <span class="n">pln3</span>       <span class="n">pln4</span>        <span class="n">pln5</span>        <span class="n">pln6</span>       <span class="n">pln7</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#---Define Detector Parameters struct--------------------------------------------------------------</span>
+<span class="n">include</span><span class="p">(</span><span class="n">joinpath</span><span class="p">(</span><span class="nd">@__DIR__</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DetectorTestEm3.jl&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulation-data">
+<h2>Simulation Data<a class="headerlink" href="#simulation-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#---Define Simulation Data struct------------------------------------------------------------------</span>
+<span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">TestEm3SimData</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4JLSimulationData</span>
+<span class="w">    </span><span class="c">#---Run data-----------------------------------------------------------------------------------</span>
+<span class="w">    </span><span class="n">fParticle</span><span class="o">::</span><span class="kt">CxxPtr</span><span class="p">{</span><span class="kt">G4ParticleDefinition</span><span class="p">}</span>
+<span class="w">    </span><span class="n">fEkin</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">fChargedStep</span><span class="o">::</span><span class="kt">Int32</span>
+<span class="w">    </span><span class="n">fNeutralStep</span><span class="o">::</span><span class="kt">Int32</span>
+
+<span class="w">    </span><span class="n">fN_gamma</span><span class="o">::</span><span class="kt">Int32</span>
+<span class="w">    </span><span class="n">fN_elec</span><span class="o">::</span><span class="kt">Int32</span>
+<span class="w">    </span><span class="n">fN_pos</span><span class="o">::</span><span class="kt">Int32</span>
+
+<span class="w">    </span><span class="n">fEnergyDeposit</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}</span><span class="w">     </span><span class="c"># Energy deposit per event</span>
+<span class="w">    </span><span class="n">fTrackLengthCh</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}</span><span class="w">     </span><span class="c"># Track length per event</span>
+
+<span class="w">    </span><span class="n">fEdepEventHistos</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Hist1D</span><span class="p">}</span>
+<span class="w">    </span><span class="n">fTrackLengthChHistos</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Hist1D</span><span class="p">}</span>
+<span class="w">    </span><span class="n">fEdepHistos</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Hist1D</span><span class="p">}</span>
+<span class="w">    </span><span class="n">fAbsorLabel</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">String</span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">TestEm3SimData</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="p">()</span>
+<span class="k">end</span>
+<span class="c">#---add function-----------------------------------------------------------------------------------</span>
+<span class="k">function</span><span class="w"> </span><span class="n">add!</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">TestEm3SimData</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">::</span><span class="kt">TestEm3SimData</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="o">.</span><span class="n">fChargedStep</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="o">.</span><span class="n">fChargedStep</span>
+<span class="w">    </span><span class="n">x</span><span class="o">.</span><span class="n">fNeutralStep</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="o">.</span><span class="n">fNeutralStep</span>
+<span class="w">    </span><span class="n">x</span><span class="o">.</span><span class="n">fN_gamma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="o">.</span><span class="n">fN_gamma</span>
+<span class="w">    </span><span class="n">x</span><span class="o">.</span><span class="n">fN_elec</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="o">.</span><span class="n">fN_elec</span>
+<span class="w">    </span><span class="n">x</span><span class="o">.</span><span class="n">fN_pos</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="o">.</span><span class="n">fN_pos</span>
+<span class="w">    </span><span class="n">x</span><span class="o">.</span><span class="n">fEdepEventHistos</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="o">.</span><span class="n">fEdepEventHistos</span>
+<span class="w">    </span><span class="n">x</span><span class="o">.</span><span class="n">fTrackLengthChHistos</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="o">.</span><span class="n">fTrackLengthChHistos</span>
+<span class="w">    </span><span class="n">x</span><span class="o">.</span><span class="n">fEdepHistos</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="o">.</span><span class="n">fEdepHistos</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>add! (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#---Plot the Sumulation data-----------------------------------------------------------------------</span>
+<span class="k">function</span><span class="w"> </span><span class="n">do_plot</span><span class="p">(</span><span class="n">data</span><span class="o">::</span><span class="kt">TestEm3SimData</span><span class="p">)</span>
+<span class="w">    </span><span class="p">(;</span><span class="n">fEdepHistos</span><span class="p">,</span><span class="w"> </span><span class="n">fEdepEventHistos</span><span class="p">,</span><span class="w"> </span><span class="n">fTrackLengthChHistos</span><span class="p">,</span><span class="w"> </span><span class="n">fAbsorLabel</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span>
+<span class="w">    </span><span class="n">lay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@layout</span><span class="w"> </span><span class="p">[</span><span class="n">°</span><span class="p">;</span><span class="w"> </span><span class="n">°</span><span class="w"> </span><span class="n">°</span><span class="p">]</span>
+<span class="w">    </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot</span><span class="p">(</span><span class="n">layout</span><span class="o">=</span><span class="n">lay</span><span class="p">,</span><span class="w"> </span><span class="n">show</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">800</span><span class="p">))</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">zip</span><span class="p">(</span><span class="n">fEdepHistos</span><span class="p">,</span><span class="w"> </span><span class="n">fAbsorLabel</span><span class="p">)</span>
+<span class="w">        </span><span class="n">plot!</span><span class="p">(</span><span class="n">subplot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Energy Deposition&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;layer #&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">show</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">zip</span><span class="p">(</span><span class="n">fEdepEventHistos</span><span class="p">,</span><span class="w"> </span><span class="n">fAbsorLabel</span><span class="p">)</span>
+<span class="w">        </span><span class="n">plot!</span><span class="p">(</span><span class="n">subplot</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Energy/event Distribution&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;MeV&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">zip</span><span class="p">(</span><span class="n">fTrackLengthChHistos</span><span class="p">,</span><span class="w"> </span><span class="n">fAbsorLabel</span><span class="p">)</span>
+<span class="w">        </span><span class="n">plot!</span><span class="p">(</span><span class="n">subplot</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Track Lengh Distribution&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;mm&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>do_plot (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#---Particle Gun initialization--------------------------------------------------------------------</span>
+<span class="n">particlegun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLGunGenerator</span><span class="p">(</span><span class="n">particle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;e-&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                               </span><span class="n">energy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">GeV</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                               </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span>
+<span class="w">                               </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w">  </span><span class="c"># temporary potition, will update once the detector is constructed</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4JLGunGenerator(&quot;ParticleGun&quot;, Geant4.G4JLParticleGunData(nothing, &quot;e-&quot;, G4ThreeVector(1.0,0.0,0.0), G4ThreeVector(0.0,0.0,0.0), 1000.0), Geant4.var&quot;#init#19&quot;(), Geant4.var&quot;#gen#20&quot;(), G4JLGeneratorAction[])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="user-actions">
+<h2>User Actions<a class="headerlink" href="#user-actions" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#---Step action------------------------------------------------------------------------------------</span>
+<span class="k">function</span><span class="w"> </span><span class="n">stepaction</span><span class="p">(</span><span class="n">step</span><span class="o">::</span><span class="kt">G4Step</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSIMdata</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="w">    </span><span class="n">detector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">detector</span>
+<span class="w">    </span><span class="n">prepoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetPreStepPoint</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+<span class="w">    </span><span class="n">endPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetPostStepPoint</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+<span class="w">    </span><span class="n">track</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetTrack</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+<span class="w"> </span>
+<span class="w">    </span><span class="c"># Return if step in not in the world volume</span>
+<span class="w">    </span><span class="n">prepoint</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetPhysicalVolume</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetLogicalVolume</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetMaterial</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">detector</span><span class="o">.</span><span class="n">fWorldMaterial</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w"> </span>
+<span class="w">    </span><span class="n">particle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetDefinition</span><span class="p">(</span><span class="n">track</span><span class="p">)</span>
+<span class="w">    </span><span class="n">charge</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">GetPDGCharge</span><span class="p">(</span><span class="n">particle</span><span class="p">)</span>
+<span class="w">    </span><span class="n">stepl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">charge</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mf">0.</span>
+<span class="w">        </span><span class="n">stepl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetStepLength</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+<span class="w">        </span><span class="n">data</span><span class="o">.</span><span class="n">fChargedStep</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">data</span><span class="o">.</span><span class="n">fNeutralStep</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">edep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetTotalEnergyDeposit</span><span class="p">(</span><span class="n">step</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">GetWeight</span><span class="p">(</span><span class="n">track</span><span class="p">)</span>
+<span class="w">    </span><span class="n">absorNum</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">GetCopyNumber</span><span class="p">(</span><span class="n">GetTouchable</span><span class="p">(</span><span class="n">prepoint</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">layerNum</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">GetCopyNumber</span><span class="p">(</span><span class="n">GetTouchable</span><span class="p">(</span><span class="n">prepoint</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c"># replicas copynumber starts at 0</span>
+
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fEnergyDeposit</span><span class="p">[</span><span class="n">absorNum</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">edep</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fTrackLengthCh</span><span class="p">[</span><span class="n">absorNum</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">stepl</span><span class="w"> 	</span>
+
+<span class="w">    </span><span class="n">push!</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">fEdepHistos</span><span class="p">[</span><span class="n">absorNum</span><span class="p">],</span><span class="w"> </span><span class="n">layerNum</span><span class="p">,</span><span class="w"> </span><span class="n">edep</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">nothing</span>
+<span class="k">end</span>
+
+<span class="c">#---Tracking pre-action----------------------------------------------------------------------------</span>
+<span class="k">let</span><span class="w"> </span><span class="n">G4Gamma</span><span class="p">,</span><span class="w"> </span><span class="n">G4Electron</span><span class="p">,</span><span class="w"> </span><span class="n">G4Positron</span><span class="p">,</span><span class="w"> </span><span class="n">first</span><span class="o">=</span><span class="nb">true</span>
+<span class="k">global</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">pretrackaction</span><span class="p">(</span><span class="n">track</span><span class="o">::</span><span class="kt">G4Track</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">first</span>
+<span class="w">        </span><span class="n">G4Gamma</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">FindParticle</span><span class="p">(</span><span class="s">&quot;gamma&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">G4Electron</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindParticle</span><span class="p">(</span><span class="s">&quot;e-&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">G4Positron</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindParticle</span><span class="p">(</span><span class="s">&quot;e+&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSIMdata</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="w">    </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetDefinition</span><span class="p">(</span><span class="n">track</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">G4Gamma</span><span class="w"> </span>
+<span class="w">        </span><span class="n">data</span><span class="o">.</span><span class="n">fN_gamma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">elseif</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">G4Electron</span>
+<span class="w">        </span><span class="n">data</span><span class="o">.</span><span class="n">fN_elec</span><span class="w"> </span><span class="o">+=</span><span class="mi">1</span>
+<span class="w">    </span><span class="k">elseif</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">G4Positron</span>
+<span class="w">        </span><span class="n">data</span><span class="o">.</span><span class="n">fN_pos</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="nb">nothing</span>
+<span class="k">end</span>
+<span class="k">end</span>
+<span class="c">#---Tracking post-action---------------------------------------------------------------------------</span>
+<span class="k">function</span><span class="w"> </span><span class="n">posttrackaction</span><span class="p">(</span><span class="n">track</span><span class="o">::</span><span class="kt">G4Track</span><span class="p">,</span><span class="w"> </span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">  </span><span class="k">return</span>
+<span class="k">end</span>
+<span class="c">#---Begin Run Action-------------------------------------------------------------------------------</span>
+<span class="k">function</span><span class="w"> </span><span class="n">beginrun</span><span class="p">(</span><span class="n">run</span><span class="o">::</span><span class="kt">G4Run</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSIMdata</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="w">    </span><span class="p">(;</span><span class="w"> </span><span class="n">fNbOfAbsor</span><span class="p">,</span><span class="w"> </span><span class="n">fNbOfLayers</span><span class="p">,</span><span class="w"> </span><span class="n">fAbsorMaterial</span><span class="p">,</span><span class="w"> </span><span class="n">fAbsorThickness</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">detector</span>
+<span class="w">    </span><span class="n">gun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">gun</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fParticle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetParticleDefinition</span><span class="p">(</span><span class="n">gun</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fEkin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetParticleEnergy</span><span class="p">(</span><span class="n">gun</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fN_gamma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">fN_elec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">fN_pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fChargedStep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">fNeutralStep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="c"># init arrays</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fEnergyDeposit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">fNbOfAbsor</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fTrackLengthCh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">fNbOfAbsor</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fEdepHistos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">Hist1D</span><span class="p">(</span><span class="kt">Float64</span><span class="p">;</span><span class="w"> </span><span class="n">bins</span><span class="o">=</span><span class="mf">0.</span><span class="o">:</span><span class="mf">1.0</span><span class="o">:</span><span class="n">fNbOfLayers</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">fNbOfAbsor</span><span class="p">]</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fEdepEventHistos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">Hist1D</span><span class="p">(;</span><span class="n">bins</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">fNbOfAbsor</span><span class="p">]</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fTrackLengthChHistos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">Hist1D</span><span class="p">(;</span><span class="n">bins</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="mi">20</span><span class="o">:</span><span class="mi">2000</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">fNbOfAbsor</span><span class="p">]</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">fAbsorLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;</span><span class="si">$</span><span class="p">(</span><span class="n">fAbsorThickness</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="s">mm of </span><span class="si">$</span><span class="p">(</span><span class="n">fAbsorMaterial</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetName</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="s">&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">fNbOfAbsor</span><span class="p">]</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="k">end</span>
+<span class="c">#---End Run Action---------------------------------------------------------------------------------</span>
+<span class="k">function</span><span class="w"> </span><span class="n">endrun</span><span class="p">(</span><span class="n">run</span><span class="o">::</span><span class="kt">G4Run</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">    </span><span class="c">#---end run action is called for each workwer thread and the master onc</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">G4Threading!G4GetThreadId</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w">   </span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">        </span><span class="c">#---This is the master thread, so we need to add all the simuation results-----------------</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span>
+<span class="w">            </span><span class="n">add!</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="n">nEvt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNumberOfEvent</span><span class="p">(</span><span class="n">run</span><span class="p">)</span>
+<span class="w">        </span><span class="n">norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nEvt</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="n">nEvt</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1.</span>
+
+<span class="w">        </span><span class="nd">@printf</span><span class="w"> </span><span class="s">&quot;------------------------------------------------------------</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nd">@printf</span><span class="w"> </span><span class="s">&quot; Beam particle </span><span class="si">%s</span><span class="s"> E = </span><span class="si">%.2f</span><span class="s"> GeV</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="kt">String</span><span class="p">(</span><span class="n">GetParticleName</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">fParticle</span><span class="p">))</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">fEkin</span><span class="o">/</span><span class="n">GeV</span><span class="w"> </span>
+<span class="w">        </span><span class="nd">@printf</span><span class="w"> </span><span class="s">&quot; Mean number of gamma          </span><span class="si">%.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">fN_gamma</span><span class="o">*</span><span class="n">norm</span><span class="w"> </span>
+<span class="w">        </span><span class="nd">@printf</span><span class="w"> </span><span class="s">&quot; Mean number of e-             </span><span class="si">%.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">fN_elec</span><span class="o">*</span><span class="n">norm</span><span class="w"> </span>
+<span class="w">        </span><span class="nd">@printf</span><span class="w"> </span><span class="s">&quot; Mean number of e+             </span><span class="si">%.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">fN_pos</span><span class="o">*</span><span class="n">norm</span><span class="w"> </span>
+<span class="w">        </span><span class="nd">@printf</span><span class="w"> </span><span class="s">&quot; Mean number of charged steps  </span><span class="si">%f</span><span class="se">\n</span><span class="s">&quot;</span><span class="w">   </span><span class="n">data</span><span class="o">.</span><span class="n">fChargedStep</span><span class="o">*</span><span class="n">norm</span><span class="w"> </span>
+<span class="w">        </span><span class="nd">@printf</span><span class="w"> </span><span class="s">&quot; Mean number of neutral steps  </span><span class="si">%f</span><span class="se">\n</span><span class="s">&quot;</span><span class="w">   </span><span class="n">data</span><span class="o">.</span><span class="n">fNeutralStep</span><span class="o">*</span><span class="n">norm</span><span class="w"> </span>
+<span class="w">        </span><span class="nd">@printf</span><span class="w"> </span><span class="s">&quot;------------------------------------------------------------</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">G4JL_println</span><span class="p">(</span><span class="s">&quot;end-run  for worker </span><span class="si">$</span><span class="p">(</span><span class="n">G4Threading!G4GetThreadId</span><span class="p">())</span><span class="s">&quot;</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+<span class="c">#---Begin Event Action-----------------------------------------------------------------------------</span>
+<span class="k">function</span><span class="w"> </span><span class="n">beginevent</span><span class="p">(</span><span class="n">evt</span><span class="o">::</span><span class="kt">G4Event</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSIMdata</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="w">    </span><span class="n">fill!</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">fEnergyDeposit</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">fill!</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">fTrackLengthCh</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="k">end</span>
+<span class="c">#---End Event Action-------------------------------------------------------------------------------</span>
+<span class="k">function</span><span class="w"> </span><span class="n">endevent</span><span class="p">(</span><span class="n">evt</span><span class="o">::</span><span class="kt">G4Event</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSIMdata</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="w">    </span><span class="p">(;</span><span class="w"> </span><span class="n">fNbOfAbsor</span><span class="p">,</span><span class="w"> </span><span class="n">fNbOfLayers</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">detector</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">fNbOfAbsor</span>
+<span class="w">        </span><span class="n">push!</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">fEdepEventHistos</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">fEnergyDeposit</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="w">        </span><span class="n">push!</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">fTrackLengthChHistos</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">fTrackLengthCh</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>endevent (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#---Create the Application-------------------------------------------------------------------------</span>
+<span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLApplication</span><span class="p">(</span><span class="n">detector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TestEm3Detector</span><span class="p">(),</span><span class="w">               </span><span class="c"># detector with parameters</span>
+<span class="w">                      </span><span class="n">simdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TestEm3SimData</span><span class="p">(),</span><span class="w">                 </span><span class="c"># simulation data structure</span>
+<span class="w">                      </span><span class="n">generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">particlegun</span><span class="p">,</span><span class="w">                    </span><span class="c"># primary particle generator</span>
+<span class="w">                      </span><span class="n">nthreads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">                               </span><span class="c"># number of threads (MT)</span>
+<span class="w">                      </span><span class="n">physics_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FTFP_BERT</span><span class="p">,</span><span class="w">                   </span><span class="c"># what physics list to instantiate</span>
+<span class="w">                      </span><span class="c">#----Actions--------------------------------</span>
+<span class="w">                      </span><span class="n">stepaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stepaction</span><span class="p">,</span><span class="w">             </span><span class="c"># step action method</span>
+<span class="w">                      </span><span class="n">pretrackaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pretrackaction</span><span class="p">,</span><span class="w">     </span><span class="c"># pre-tracking action</span>
+<span class="w">                      </span><span class="n">posttrackaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posttrackaction</span><span class="p">,</span><span class="w">   </span><span class="c"># post-tracking action</span>
+<span class="w">                      </span><span class="n">beginrunaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beginrun</span><span class="p">,</span><span class="w">           </span><span class="c"># begin-run action (initialize counters and histograms)</span>
+<span class="w">                      </span><span class="n">endrunaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endrun</span><span class="p">,</span><span class="w">               </span><span class="c"># end-run action (print summary)               </span>
+<span class="w">                      </span><span class="n">begineventaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beginevent</span><span class="p">,</span><span class="w">       </span><span class="c"># begin-event action (initialize per-event data)</span>
+<span class="w">                      </span><span class="n">endeventaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endevent</span><span class="w">            </span><span class="c"># end-event action (fill histogram per event data)</span>
+<span class="w">                      </span><span class="p">);</span>
+<span class="w">              </span>
+
+<span class="c">#ui&quot;/tracking/verbose 1&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**************************************************************
+ Geant4 version Name: geant4-11-02 [MT]   (8-December-2023)
+  &lt;&lt; in Multi-threaded mode &gt;&gt; 
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#---Configure, Initialize and Run------------------------------------------------------------------                      </span>
+<span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">SetParticlePosition</span><span class="p">(</span><span class="n">particlegun</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="o">-</span><span class="n">app</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">fWorldSizeX</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w">  </span><span class="c"># Only now is known the size of the &#39;world&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building Geometry now!!!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>### G4LevelReader: broken transition 0 from level 24 to 24 for isotope Z= 89 A= 219 - use ground level
+</pre></div>
+</div>
+</div>
+</div>
+<section id="start-the-initial-run">
+<h3>Start the initial run<a class="headerlink" href="#start-the-initial-run" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">do_plot</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4WT2 &gt; end-run  for worker 2
+G4WT4 &gt; end-run  for worker 4
+G4WT0 &gt; end-run  for worker 0
+G4WT5 &gt; end-run  for worker 5
+G4WT1 &gt; end-run  for worker 1
+G4WT7 &gt; end-run  for worker 7
+G4WT6 &gt; end-run  for worker 6
+G4WT3 &gt; end-run  for worker 3
+------------------------------------------------------------
+ Beam particle e- E = 1.00 GeV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Mean number of gamma          521.45
+ Mean number of e-             896.18
+ Mean number of e+             53.44
+ Mean number of charged steps  3735.684000
+ Mean number of neutral steps  3703.605000
+------------------------------------------------------------
+</pre></div>
+</div>
+<img alt="../../_images/9d6934301e87a91e8e7d655a06f5290e3a398876694fd122fac0aed26b62d9c1.png" src="../../_images/9d6934301e87a91e8e7d655a06f5290e3a398876694fd122fac0aed26b62d9c1.png" />
+</div>
+</div>
+</section>
+<section id="change-the-particle-gun-energy">
+<h3>Change the particle gun energy<a class="headerlink" href="#change-the-particle-gun-energy" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">SetParticleEnergy</span><span class="p">(</span><span class="n">particlegun</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="n">MeV</span><span class="p">)</span>
+<span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="n">do_plot</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4WT6 &gt; end-run  for worker 6
+G4WT7 &gt; end-run  for worker 7
+G4WT5 &gt; end-run  for worker 5
+G4WT3 &gt; end-run  for worker 3
+G4WT1 &gt; end-run  for worker 1
+G4WT4 &gt; end-run  for worker 4
+G4WT2 &gt; end-run  for worker 2
+G4WT0 &gt; end-run  for worker 0
+------------------------------------------------------------
+ Beam particle e- E = 0.10 GeV
+ Mean number of gamma          50.63
+ Mean number of e-             87.17
+ Mean number of e+             4.89
+ Mean number of charged steps  367.930000
+ Mean number of neutral steps  362.830000
+------------------------------------------------------------
+</pre></div>
+</div>
+<img alt="../../_images/51c049d41996af4924a5a36e244a3d7cddfd118da4cd0b6743936186156e7c54.png" src="../../_images/51c049d41996af4924a5a36e244a3d7cddfd118da4cd0b6743936186156e7c54.png" />
+</div>
+</div>
+</section>
+<section id="change-the-geometry-and-re-start-the-run">
+<h3>Change the geometry and re-start the run<a class="headerlink" href="#change-the-geometry-and-re-start-the-run" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">reinitialize</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="n">TestEm3Detector</span><span class="p">(</span><span class="n">absorThickness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">2.3</span><span class="n">mm</span><span class="p">,</span><span class="w"> </span><span class="mf">5.7</span><span class="n">mm</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="n">mm</span><span class="p">],</span>
+<span class="w">                                  </span><span class="n">absorMaterial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;G4_Pb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;G4_lAr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;G4_Al&quot;</span><span class="p">]))</span>
+<span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="n">do_plot</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building Geometry now!!!
+G4WT0 &gt; end-run  for worker 0
+G4WT6 &gt; end-run  for worker 6
+G4WT7 &gt; end-run  for worker 7
+G4WT2 &gt; end-run  for worker 2
+G4WT5 &gt; end-run  for worker 5
+G4WT4 &gt; end-run  for worker 4
+G4WT1 &gt; end-run  for worker 1
+G4WT3 &gt; end-run  for worker 3
+------------------------------------------------------------
+ Beam particle e- E = 0.10 GeV
+ Mean number of gamma          49.47
+ Mean number of e-             86.45
+ Mean number of e+             4.92
+ Mean number of charged steps  397.900000
+ Mean number of neutral steps  451.630000
+------------------------------------------------------------
+</pre></div>
+</div>
+<img alt="../../_images/0d31418f2538084385436553224e0259107b3db40571dd00cab1684d7aa1ab05.png" src="../../_images/0d31418f2538084385436553224e0259107b3db40571dd00cab1684d7aa1ab05.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">10000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4WT4 &gt; end-run  for worker 4
+G4WT1 &gt; end-run  for worker 1
+G4WT2 &gt; end-run  for worker 2
+G4WT6 &gt; end-run  for worker 6
+G4WT7 &gt; end-run  for worker 7
+G4WT0 &gt; end-run  for worker 0
+G4WT3 &gt; end-run  for worker 3
+G4WT5 &gt; end-run  for worker 5
+------------------------------------------------------------
+ Beam particle e- E = 0.10 GeV
+ Mean number of gamma          49.56
+ Mean number of e-             87.50
+ Mean number of e+             4.68
+ Mean number of charged steps  397.205500
+ Mean number of neutral steps  466.789800
+------------------------------------------------------------
+  6.132792 seconds (20.23 M allocations: 308.934 MiB)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="change-the-definition-of-the-action-and-re-start">
+<h3>Change the definition of the action and re-start<a class="headerlink" href="#change-the-definition-of-the-action-and-re-start" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">posttrackaction</span><span class="p">(</span><span class="n">track</span><span class="o">::</span><span class="kt">G4Track</span><span class="p">,</span><span class="w"> </span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">    </span><span class="n">G4JL_println</span><span class="p">(</span><span class="s">&quot;Track ID: </span><span class="si">$</span><span class="p">(</span><span class="n">GetTrackID</span><span class="p">(</span><span class="n">track</span><span class="p">))</span><span class="s"> ended&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4WT4 &gt; end-run  for worker 4
+G4WT7 &gt; end-run  for worker 7
+G4WT5 &gt; end-run  for worker 5
+G4WT2 &gt; end-run  for worker 2
+G4WT0 &gt; end-run  for worker 0
+G4WT1 &gt; Track ID: 1 ended
+G4WT6 &gt; Track ID: 1 ended
+G4WT3 &gt; Track ID: 1 ended
+G4WT1 &gt; Track ID: 17 ended
+G4WT1 &gt; Track ID: 18 ended
+G4WT6 &gt; Track ID: 21 ended
+G4WT3 &gt; Track ID: 26 ended
+G4WT1 &gt; Track ID: 16 ended
+G4WT1 &gt; Track ID: 19 ended
+G4WT6 &gt; Track ID: 22 ended
+G4WT3 &gt; Track ID: 27 ended
+G4WT1 &gt; Track ID: 15 ended
+G4WT1 &gt; Track ID: 20 ended
+G4WT6 &gt; Track ID: 20 ended
+G4WT3 &gt; Track ID: 25 ended
+G4WT1 &gt; Track ID: 14 ended
+G4WT1 &gt; Track ID: 22 ended
+G4WT1 &gt; Track ID: 25 ended
+G4WT6 &gt; Track ID: 24 ended
+G4WT6 &gt; Track ID: 26 ended
+G4WT1 &gt; Track ID: 26 ended
+G4WT6 &gt; Track ID: 28 ended
+G4WT1 &gt; Track ID: 24 ended
+G4WT6 &gt; Track ID: 27 ended
+G4WT1 &gt; Track ID: 27 ended
+G4WT6 &gt; Track ID: 25 ended
+G4WT1 &gt; Track ID: 23 ended
+G4WT6 &gt; Track ID: 29 ended
+G4WT1 &gt; Track ID: 28 ended
+G4WT6 &gt; Track ID: 23 ended
+G4WT6 &gt; Track ID: 19 ended
+G4WT6 &gt; Track ID: 31 ended
+G4WT3 &gt; Track ID: 28 ended
+G4WT6 &gt; Track ID: 30 ended
+G4WT6 &gt; Track ID: 18 ended
+G4WT6 &gt; Track ID: 32 ended
+G4WT3 &gt; Track ID: 24 ended
+G4WT3 &gt; Track ID: 30 ended
+G4WT3 &gt; Track ID: 29 ended
+G4WT6 &gt; Track ID: 17 ended
+G4WT3 &gt; Track ID: 23 ended
+G4WT3 &gt; Track ID: 31 ended
+G4WT1 &gt; Track ID: 21 ended
+G4WT3 &gt; Track ID: 22 ended
+G4WT3 &gt; Track ID: 32 ended
+G4WT1 &gt; Track ID: 30 ended
+G4WT1 &gt; Track ID: 29 ended
+G4WT3 &gt; Track ID: 21 ended
+G4WT1 &gt; Track ID: 13 ended
+G4WT3 &gt; Track ID: 34 ended
+G4WT1 &gt; Track ID: 33 ended
+G4WT1 &gt; Track ID: 35 ended
+G4WT3 &gt; Track ID: 33 ended
+G4WT1 &gt; Track ID: 37 ended
+G4WT1 &gt; Track ID: 36 ended
+G4WT3 &gt; Track ID: 20 ended
+G4WT6 &gt; Track ID: 34 ended
+G4WT3 &gt; Track ID: 37 ended
+G4WT1 &gt; Track ID: 34 ended
+G4WT3 &gt; Track ID: 36 ended
+G4WT1 &gt; Track ID: 41 ended
+G4WT6 &gt; Track ID: 38 ended
+G4WT1 &gt; Track ID: 40 ended
+G4WT6 &gt; Track ID: 41 ended
+G4WT1 &gt; Track ID: 39 ended
+G4WT3 &gt; Track ID: 35 ended
+G4WT6 &gt; Track ID: 40 ended
+G4WT1 &gt; Track ID: 38 ended
+G4WT6 &gt; Track ID: 39 ended
+G4WT3 &gt; Track ID: 19 ended
+G4WT3 &gt; Track ID: 38 ended
+G4WT3 &gt; Track ID: 18 ended
+G4WT6 &gt; Track ID: 37 ended
+G4WT1 &gt; Track ID: 32 ended
+G4WT3 &gt; Track ID: 39 ended
+G4WT1 &gt; Track ID: 42 ended
+G4WT6 &gt; Track ID: 44 ended
+G4WT1 &gt; Track ID: 44 ended
+G4WT1 &gt; Track ID: 43 ended
+G4WT6 &gt; Track ID: 43 ended
+G4WT3 &gt; Track ID: 17 ended
+G4WT1 &gt; Track ID: 31 ended
+G4WT6 &gt; Track ID: 42 ended
+G4WT1 &gt; Track ID: 12 ended
+G4WT3 &gt; Track ID: 41 ended
+G4WT1 &gt; Track ID: 45 ended
+G4WT1 &gt; Track ID: 11 ended
+G4WT3 &gt; Track ID: 43 ended
+G4WT6 &gt; Track ID: 36 ended
+G4WT3 &gt; Track ID: 45 ended
+G4WT1 &gt; Track ID: 46 ended
+G4WT3 &gt; Track ID: 44 ended
+G4WT6 &gt; Track ID: 46 ended
+G4WT3 &gt; Track ID: 42 ended
+G4WT3 &gt; Track ID: 47 ended
+G4WT1 &gt; Track ID: 10 ended
+G4WT6 &gt; Track ID: 45 ended
+G4WT1 &gt; Track ID: 48 ended
+G4WT3 &gt; Track ID: 46 ended
+G4WT3 &gt; Track ID: 40 ended
+G4WT1 &gt; Track ID: 47 ended
+G4WT6 &gt; Track ID: 35 ended
+G4WT1 &gt; Track ID: 50 ended
+G4WT1 &gt; Track ID: 51 ended
+G4WT6 &gt; Track ID: 47 ended
+G4WT3 &gt; Track ID: 16 ended
+G4WT1 &gt; Track ID: 49 ended
+G4WT1 &gt; Track ID: 53 ended
+G4WT3 &gt; Track ID: 15 ended
+G4WT1 &gt; Track ID: 52 ended
+G4WT1 &gt; Track ID: 54 ended
+G4WT3 &gt; Track ID: 49 ended
+G4WT3 &gt; Track ID: 48 ended
+G4WT1 &gt; Track ID: 55 ended
+G4WT6 &gt; Track ID: 33 ended
+G4WT6 &gt; Track ID: 48 ended
+G4WT6 &gt; Track ID: 49 ended
+G4WT6 &gt; Track ID: 16 ended
+G4WT1 &gt; Track ID: 9 ended
+G4WT6 &gt; Track ID: 50 ended
+G4WT1 &gt; Track ID: 59 ended
+G4WT1 &gt; Track ID: 60 ended
+G4WT1 &gt; Track ID: 58 ended
+G4WT1 &gt; Track ID: 61 ended
+G4WT6 &gt; Track ID: 15 ended
+G4WT6 &gt; Track ID: 52 ended
+G4WT1 &gt; Track ID: 57 ended
+G4WT1 &gt; Track ID: 64 ended
+G4WT1 &gt; Track ID: 63 ended
+G4WT1 &gt; Track ID: 62 ended
+G4WT6 &gt; Track ID: 51 ended
+G4WT1 &gt; Track ID: 56 ended
+G4WT6 &gt; Track ID: 54 ended
+G4WT1 &gt; Track ID: 67 ended
+G4WT3 &gt; Track ID: 14 ended
+G4WT1 &gt; Track ID: 66 ended
+G4WT1 &gt; Track ID: 65 ended
+G4WT1 &gt; Track ID: 8 ended
+G4WT1 &gt; Track ID: 7 ended
+G4WT1 &gt; Track ID: 68 ended
+G4WT1 &gt; Track ID: 69 ended
+G4WT1 &gt; Track ID: 6 ended
+G4WT1 &gt; Track ID: 70 ended
+G4WT1 &gt; Track ID: 5 ended
+G4WT1 &gt; Track ID: 71 ended
+G4WT1 &gt; Track ID: 4 ended
+G4WT3 &gt; Track ID: 51 ended
+G4WT1 &gt; Track ID: 72 ended
+G4WT3 &gt; Track ID: 55 ended
+G4WT3 &gt; Track ID: 57 ended
+G4WT3 &gt; Track ID: 56 ended
+G4WT1 &gt; Track ID: 3 ended
+G4WT6 &gt; Track ID: 55 ended
+G4WT6 &gt; Track ID: 53 ended
+G4WT6 &gt; Track ID: 59 ended
+G4WT6 &gt; Track ID: 58 ended
+G4WT6 &gt; Track ID: 57 ended
+G4WT6 &gt; Track ID: 56 ended
+G4WT6 &gt; Track ID: 14 ended
+G4WT6 &gt; Track ID: 61 ended
+G4WT6 &gt; Track ID: 60 ended
+G4WT1 &gt; Track ID: 75 ended
+G4WT1 &gt; Track ID: 83 ended
+G4WT6 &gt; Track ID: 13 ended
+G4WT6 &gt; Track ID: 63 ended
+G4WT1 &gt; Track ID: 85 ended
+G4WT6 &gt; Track ID: 62 ended
+G4WT1 &gt; Track ID: 84 ended
+G4WT6 &gt; Track ID: 12 ended
+G4WT1 &gt; Track ID: 82 ended
+G4WT6 &gt; Track ID: 65 ended
+G4WT1 &gt; Track ID: 88 ended
+G4WT6 &gt; Track ID: 64 ended
+G4WT1 &gt; Track ID: 87 ended
+G4WT1 &gt; Track ID: 86 ended
+G4WT3 &gt; Track ID: 54 ended
+G4WT3 &gt; Track ID: 60 ended
+G4WT1 &gt; Track ID: 81 ended
+G4WT3 &gt; Track ID: 59 ended
+G4WT1 &gt; Track ID: 89 ended
+G4WT3 &gt; Track ID: 58 ended
+G4WT3 &gt; Track ID: 61 ended
+G4WT1 &gt; Track ID: 80 ended
+G4WT3 &gt; Track ID: 62 ended
+G4WT1 &gt; Track ID: 91 ended
+G4WT1 &gt; Track ID: 90 ended
+G4WT3 &gt; Track ID: 53 ended
+G4WT1 &gt; Track ID: 79 ended
+G4WT6 &gt; Track ID: 11 ended
+G4WT1 &gt; Track ID: 93 ended
+G4WT3 &gt; Track ID: 63 ended
+G4WT1 &gt; Track ID: 92 ended
+G4WT3 &gt; Track ID: 52 ended
+G4WT6 &gt; Track ID: 66 ended
+G4WT1 &gt; Track ID: 78 ended
+G4WT1 &gt; Track ID: 94 ended
+G4WT1 &gt; Track ID: 77 ended
+G4WT3 &gt; Track ID: 50 ended
+G4WT1 &gt; Track ID: 95 ended
+G4WT3 &gt; Track ID: 68 ended
+G4WT3 &gt; Track ID: 70 ended
+G4WT1 &gt; Track ID: 76 ended
+G4WT3 &gt; Track ID: 69 ended
+G4WT1 &gt; Track ID: 98 ended
+G4WT1 &gt; Track ID: 100 ended
+G4WT1 &gt; Track ID: 101 ended
+G4WT1 &gt; Track ID: 99 ended
+G4WT1 &gt; Track ID: 104 ended
+G4WT6 &gt; Track ID: 10 ended
+G4WT3 &gt; Track ID: 67 ended
+G4WT1 &gt; Track ID: 103 ended
+G4WT1 &gt; Track ID: 102 ended
+G4WT3 &gt; Track ID: 72 ended
+G4WT1 &gt; Track ID: 97 ended
+G4WT1 &gt; Track ID: 96 ended
+G4WT3 &gt; Track ID: 71 ended
+G4WT6 &gt; Track ID: 9 ended
+G4WT3 &gt; Track ID: 66 ended
+G4WT3 &gt; Track ID: 75 ended
+G4WT3 &gt; Track ID: 74 ended
+G4WT3 &gt; Track ID: 73 ended
+G4WT1 &gt; Track ID: 74 ended
+G4WT3 &gt; Track ID: 65 ended
+G4WT3 &gt; Track ID: 77 ended
+G4WT6 &gt; Track ID: 68 ended
+G4WT1 &gt; Track ID: 105 ended
+G4WT6 &gt; Track ID: 73 ended
+G4WT6 &gt; Track ID: 76 ended
+G4WT6 &gt; Track ID: 75 ended
+G4WT6 &gt; Track ID: 74 ended
+G4WT1 &gt; Track ID: 73 ended
+G4WT6 &gt; Track ID: 72 ended
+G4WT1 &gt; Track ID: 112 ended
+G4WT6 &gt; Track ID: 77 ended
+G4WT3 &gt; Track ID: 76 ended
+G4WT1 &gt; Track ID: 114 ended
+G4WT1 &gt; Track ID: 115 ended
+G4WT3 &gt; Track ID: 64 ended
+G4WT1 &gt; Track ID: 113 ended
+G4WT3 &gt; Track ID: 79 ended
+G4WT6 &gt; Track ID: 71 ended
+G4WT1 &gt; Track ID: 116 ended
+G4WT1 &gt; Track ID: 111 ended
+G4WT1 &gt; Track ID: 117 ended
+G4WT6 &gt; Track ID: 79 ended
+G4WT1 &gt; Track ID: 110 ended
+G4WT3 &gt; Track ID: 81 ended
+G4WT1 &gt; Track ID: 118 ended
+G4WT3 &gt; Track ID: 85 ended
+G4WT6 &gt; Track ID: 81 ended
+G4WT1 &gt; Track ID: 109 ended
+G4WT3 &gt; Track ID: 84 ended
+G4WT6 &gt; Track ID: 84 ended
+G4WT3 &gt; Track ID: 83 ended
+G4WT1 &gt; Track ID: 108 ended
+G4WT3 &gt; Track ID: 82 ended
+G4WT6 &gt; Track ID: 83 ended
+G4WT1 &gt; Track ID: 119 ended
+G4WT3 &gt; Track ID: 80 ended
+G4WT6 &gt; Track ID: 82 ended
+G4WT1 &gt; Track ID: 107 ended
+G4WT1 &gt; Track ID: 123 ended
+G4WT1 &gt; Track ID: 122 ended
+G4WT6 &gt; Track ID: 80 ended
+G4WT1 &gt; Track ID: 121 ended
+G4WT1 &gt; Track ID: 120 ended
+G4WT6 &gt; Track ID: 86 ended
+G4WT1 &gt; Track ID: 106 ended
+G4WT1 &gt; Track ID: 124 ended
+G4WT6 &gt; Track ID: 85 ended
+G4WT3 &gt; Track ID: 87 ended
+G4WT6 &gt; Track ID: 78 ended
+G4WT3 &gt; Track ID: 86 ended
+G4WT1 &gt; Track ID: 2 ended
+G4WT1 &gt; Track ID: 127 ended
+G4WT1 &gt; Track ID: 126 ended
+G4WT6 &gt; Track ID: 70 ended
+G4WT1 &gt; Track ID: 125 ended
+G4WT6 &gt; Track ID: 87 ended
+G4WT1 &gt; end-run  for worker 1
+G4WT6 &gt; Track ID: 69 ended
+G4WT6 &gt; Track ID: 88 ended
+G4WT6 &gt; Track ID: 67 ended
+G4WT3 &gt; Track ID: 78 ended
+G4WT3 &gt; Track ID: 88 ended
+G4WT6 &gt; Track ID: 89 ended
+G4WT3 &gt; Track ID: 13 ended
+G4WT6 &gt; Track ID: 93 ended
+G4WT6 &gt; Track ID: 96 ended
+G4WT6 &gt; Track ID: 98 ended
+G4WT6 &gt; Track ID: 97 ended
+G4WT3 &gt; Track ID: 90 ended
+G4WT3 &gt; Track ID: 97 ended
+G4WT6 &gt; Track ID: 95 ended
+G4WT3 &gt; Track ID: 98 ended
+G4WT6 &gt; Track ID: 100 ended
+G4WT6 &gt; Track ID: 99 ended
+G4WT3 &gt; Track ID: 96 ended
+G4WT6 &gt; Track ID: 94 ended
+G4WT3 &gt; Track ID: 99 ended
+G4WT6 &gt; Track ID: 101 ended
+G4WT3 &gt; Track ID: 95 ended
+G4WT3 &gt; Track ID: 100 ended
+G4WT3 &gt; Track ID: 94 ended
+G4WT3 &gt; Track ID: 101 ended
+G4WT3 &gt; Track ID: 93 ended
+G4WT3 &gt; Track ID: 102 ended
+G4WT3 &gt; Track ID: 92 ended
+G4WT3 &gt; Track ID: 106 ended
+G4WT3 &gt; Track ID: 105 ended
+G4WT3 &gt; Track ID: 104 ended
+G4WT3 &gt; Track ID: 103 ended
+G4WT3 &gt; Track ID: 91 ended
+G4WT3 &gt; Track ID: 107 ended
+G4WT3 &gt; Track ID: 89 ended
+G4WT3 &gt; Track ID: 12 ended
+G4WT3 &gt; Track ID: 111 ended
+G4WT3 &gt; Track ID: 110 ended
+G4WT3 &gt; Track ID: 109 ended
+G4WT3 &gt; Track ID: 108 ended
+G4WT6 &gt; Track ID: 92 ended
+G4WT6 &gt; Track ID: 102 ended
+G4WT6 &gt; Track ID: 106 ended
+G4WT6 &gt; Track ID: 105 ended
+G4WT6 &gt; Track ID: 104 ended
+G4WT6 &gt; Track ID: 103 ended
+G4WT6 &gt; Track ID: 91 ended
+G4WT6 &gt; Track ID: 90 ended
+G4WT3 &gt; Track ID: 11 ended
+G4WT6 &gt; Track ID: 107 ended
+G4WT3 &gt; Track ID: 118 ended
+G4WT6 &gt; Track ID: 109 ended
+G4WT6 &gt; Track ID: 108 ended
+G4WT3 &gt; Track ID: 117 ended
+G4WT3 &gt; Track ID: 119 ended
+G4WT3 &gt; Track ID: 120 ended
+G4WT3 &gt; Track ID: 116 ended
+G4WT3 &gt; Track ID: 115 ended
+G4WT6 &gt; Track ID: 8 ended
+G4WT3 &gt; Track ID: 114 ended
+G4WT3 &gt; Track ID: 113 ended
+G4WT6 &gt; Track ID: 111 ended
+G4WT3 &gt; Track ID: 112 ended
+G4WT6 &gt; Track ID: 115 ended
+G4WT3 &gt; Track ID: 121 ended
+G4WT6 &gt; Track ID: 117 ended
+G4WT3 &gt; Track ID: 122 ended
+G4WT6 &gt; Track ID: 116 ended
+G4WT3 &gt; Track ID: 10 ended
+G4WT6 &gt; Track ID: 114 ended
+G4WT6 &gt; Track ID: 119 ended
+G4WT3 &gt; Track ID: 124 ended
+G4WT6 &gt; Track ID: 118 ended
+G4WT6 &gt; Track ID: 113 ended
+G4WT6 &gt; Track ID: 120 ended
+G4WT6 &gt; Track ID: 112 ended
+G4WT6 &gt; Track ID: 121 ended
+G4WT3 &gt; Track ID: 126 ended
+G4WT6 &gt; Track ID: 110 ended
+G4WT3 &gt; Track ID: 131 ended
+G4WT6 &gt; Track ID: 122 ended
+G4WT3 &gt; Track ID: 130 ended
+G4WT3 &gt; Track ID: 129 ended
+G4WT6 &gt; Track ID: 124 ended
+G4WT3 &gt; Track ID: 128 ended
+G4WT3 &gt; Track ID: 127 ended
+G4WT6 &gt; Track ID: 127 ended
+G4WT6 &gt; Track ID: 129 ended
+G4WT6 &gt; Track ID: 128 ended
+G4WT6 &gt; Track ID: 126 ended
+G4WT6 &gt; Track ID: 131 ended
+G4WT6 &gt; Track ID: 130 ended
+G4WT6 &gt; Track ID: 132 ended
+G4WT3 &gt; Track ID: 125 ended
+G4WT6 &gt; Track ID: 133 ended
+G4WT3 &gt; Track ID: 133 ended
+G4WT3 &gt; Track ID: 132 ended
+G4WT6 &gt; Track ID: 125 ended
+G4WT6 &gt; Track ID: 136 ended
+G4WT6 &gt; Track ID: 135 ended
+G4WT3 &gt; Track ID: 123 ended
+G4WT3 &gt; Track ID: 136 ended
+G4WT3 &gt; Track ID: 138 ended
+G4WT6 &gt; Track ID: 134 ended
+G4WT3 &gt; Track ID: 137 ended
+G4WT6 &gt; Track ID: 123 ended
+G4WT3 &gt; Track ID: 135 ended
+G4WT3 &gt; Track ID: 139 ended
+G4WT3 &gt; Track ID: 134 ended
+G4WT3 &gt; Track ID: 140 ended
+G4WT6 &gt; Track ID: 7 ended
+G4WT6 &gt; Track ID: 139 ended
+G4WT6 &gt; Track ID: 138 ended
+G4WT3 &gt; Track ID: 9 ended
+G4WT3 &gt; Track ID: 143 ended
+G4WT3 &gt; Track ID: 142 ended
+G4WT6 &gt; Track ID: 137 ended
+G4WT3 &gt; Track ID: 141 ended
+G4WT3 &gt; Track ID: 8 ended
+G4WT3 &gt; Track ID: 144 ended
+G4WT3 &gt; Track ID: 7 ended
+G4WT3 &gt; Track ID: 147 ended
+G4WT3 &gt; Track ID: 146 ended
+G4WT6 &gt; Track ID: 6 ended
+G4WT3 &gt; Track ID: 145 ended
+G4WT6 &gt; Track ID: 141 ended
+G4WT3 &gt; Track ID: 6 ended
+G4WT6 &gt; Track ID: 143 ended
+G4WT3 &gt; Track ID: 149 ended
+G4WT6 &gt; Track ID: 144 ended
+G4WT3 &gt; Track ID: 148 ended
+G4WT6 &gt; Track ID: 142 ended
+G4WT6 &gt; Track ID: 146 ended
+G4WT6 &gt; Track ID: 145 ended
+G4WT3 &gt; Track ID: 5 ended
+G4WT6 &gt; Track ID: 140 ended
+G4WT6 &gt; Track ID: 5 ended
+G4WT6 &gt; Track ID: 147 ended
+G4WT3 &gt; Track ID: 151 ended
+G4WT3 &gt; Track ID: 154 ended
+G4WT3 &gt; Track ID: 155 ended
+G4WT6 &gt; Track ID: 4 ended
+G4WT3 &gt; Track ID: 153 ended
+G4WT3 &gt; Track ID: 157 ended
+G4WT6 &gt; Track ID: 150 ended
+G4WT6 &gt; Track ID: 149 ended
+G4WT6 &gt; Track ID: 148 ended
+G4WT6 &gt; Track ID: 3 ended
+G4WT3 &gt; Track ID: 156 ended
+G4WT6 &gt; Track ID: 151 ended
+G4WT6 &gt; Track ID: 2 ended
+G4WT6 &gt; Track ID: 152 ended
+G4WT6 &gt; end-run  for worker 6
+G4WT3 &gt; Track ID: 152 ended
+G4WT3 &gt; Track ID: 158 ended
+G4WT3 &gt; Track ID: 159 ended
+G4WT3 &gt; Track ID: 150 ended
+G4WT3 &gt; Track ID: 160 ended
+G4WT3 &gt; Track ID: 4 ended
+G4WT3 &gt; Track ID: 161 ended
+G4WT3 &gt; Track ID: 3 ended
+G4WT3 &gt; Track ID: 163 ended
+G4WT3 &gt; Track ID: 165 ended
+G4WT3 &gt; Track ID: 168 ended
+G4WT3 &gt; Track ID: 167 ended
+G4WT3 &gt; Track ID: 166 ended
+G4WT3 &gt; Track ID: 164 ended
+G4WT3 &gt; Track ID: 169 ended
+G4WT3 &gt; Track ID: 162 ended
+G4WT3 &gt; Track ID: 2 ended
+G4WT3 &gt; Track ID: 172 ended
+G4WT3 &gt; Track ID: 171 ended
+G4WT3 &gt; Track ID: 170 ended
+G4WT3 &gt; end-run  for worker 3
+------------------------------------------------------------
+ Beam particle e- E = 0.10 GeV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Mean number of gamma          50.67
+ Mean number of e-             93.33
+ Mean number of e+             6.33
+ Mean number of charged steps  410.666667
+ Mean number of neutral steps  440.333333
+------------------------------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.10"
+        },
+        kernelOptions: {
+            name: "julia-1.10",
+            path: "./examples/TestEm3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.10'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Scintillation/Scintillation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Scintillating Detector Example</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-geometry">The Geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-data">Simulation Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-actions">User Actions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-the-initial-run">Start the initial run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-the-particle-gun-energy">Change the particle gun energy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-the-geometry-and-re-start-the-run">Change the geometry and re-start the run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-the-definition-of-the-action-and-re-start">Change the definition of the action and re-start</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Pere Mato
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright CERN, The Contributors 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

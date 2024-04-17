@@ -196,6 +196,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples/HBC30/HBC30.html">CERN Liquid Hydrogen Bubble Chamber</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/WaterPhantom/WaterPhantom.html">Water Phantom Simulation with Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/Scintillation/Scintillation.html">Scintillating Detector Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TestEm3/TestEm3.html">TestEM3 Example</a></li>
 </ul>
 
     </div>
@@ -395,6 +396,233 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="scoring-meshes">
 <h1>Scoring Meshes<a class="headerlink" href="#scoring-meshes" title="Link to this heading">#</a></h1>
+<p>The user can specify scoring meshes to obtain quantities on the defined grid. In Geant4 this is achieved using a set of UI commands. In this Julia interface this functionality has been encapsulated in a number of data structures. The function to create a scoring mesh is <a class="reference internal" href="#&#64;ref"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">G4JLScoringMesh</span></code></span></a> and receive as arguments the the type and dimensions of the mesh, the position, the rotation, the number of bins in each dimension, and the quantities to accumulate with eventually some filter conditions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Geant4</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Geant4</span><span class="o">.</span><span class="n">SystemOfUnits</span>
+<span class="k">using</span><span class="w"> </span><span class="n">CairoMakie</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s define a simple detector (from the previous notebook on sensitive detectors)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">SimpleDetector</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4JLDetector</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">end</span>
+
+<span class="c">#---Materials----------------------------------------------------------------------------------</span>
+<span class="n">nist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4NistManager!Instance</span><span class="p">()</span>
+<span class="n">m_air</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindOrBuildMaterial</span><span class="p">(</span><span class="n">nist</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;G4_AIR&quot;</span><span class="p">)</span>
+<span class="n">m_bgo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindOrBuildMaterial</span><span class="p">(</span><span class="n">nist</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;G4_BGO&quot;</span><span class="p">)</span>
+
+<span class="c">#---Volumes------------------------------------------------------------------------------------</span>
+<span class="n">worldS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4Box</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="n">m</span><span class="p">)</span>
+<span class="n">worldLV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4LogicalVolume</span><span class="p">(</span><span class="n">worldS</span><span class="p">,</span><span class="w"> </span><span class="n">m_air</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p">)</span>
+<span class="n">worldPV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4PVPlacement</span><span class="p">(</span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(),</span><span class="w"> </span><span class="n">worldLV</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
+
+<span class="n">crystalS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4Box</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="n">cm</span><span class="p">)</span>
+<span class="n">crystalLV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4LogicalVolume</span><span class="p">(</span><span class="n">crystalS</span><span class="p">,</span><span class="w"> </span><span class="n">m_bgo</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Crystal&quot;</span><span class="p">)</span>
+<span class="n">crystalPV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4PVPlacement</span><span class="p">(</span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(),</span><span class="w"> </span><span class="n">crystalLV</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Crystal&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">worldLV</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
+
+<span class="c">#---define getConstructor</span>
+<span class="n">Geant4</span><span class="o">.</span><span class="n">getConstructor</span><span class="p">(</span><span class="o">::</span><span class="kt">SimpleDetector</span><span class="p">)</span><span class="o">::</span><span class="kt">Function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">::</span><span class="kt">SimpleDetector</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">worldPV</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We create a scoring mesh of the same size as the crystal and with bins 20, 20 and 40 in z direction to collect energy deposit, number of steps produced by gammas, electrons and positrons.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLScoringMesh</span><span class="p">(</span><span class="s">&quot;boxMesh_1&quot;</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">BoxMesh</span><span class="p">(</span><span class="mi">5</span><span class="n">cm</span><span class="p">,</span><span class="mi">5</span><span class="n">cm</span><span class="p">,</span><span class="mi">20</span><span class="n">cm</span><span class="p">),</span>
+<span class="w">                      </span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">),</span>
+<span class="w">                      </span><span class="n">quantities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">energyDeposit</span><span class="p">(</span><span class="s">&quot;eDep&quot;</span><span class="p">)</span>
+<span class="w">                                     </span><span class="n">nOfStep</span><span class="p">(</span><span class="s">&quot;nOfStepGamma&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">ParticleFilter</span><span class="p">(</span><span class="s">&quot;gammafilter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gamma&quot;</span><span class="p">)])</span>
+<span class="w">                                     </span><span class="n">nOfStep</span><span class="p">(</span><span class="s">&quot;nOfStepEMinus&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">ParticleFilter</span><span class="p">(</span><span class="s">&quot;eMinusFilter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;e-&quot;</span><span class="p">)])</span>
+<span class="w">                                     </span><span class="n">nOfStep</span><span class="p">(</span><span class="s">&quot;nOfStepEPlus&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">ParticleFilter</span><span class="p">(</span><span class="s">&quot;ePlusFilter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;e+&quot;</span><span class="p">)])</span>
+<span class="w">                                   </span><span class="p">]</span>
+<span class="w">                      </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s initialize now the application</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">particlegun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLGunGenerator</span><span class="p">(</span><span class="n">particle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;e-&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                               </span><span class="n">energy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="n">GeV</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                               </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span>
+<span class="w">                               </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="n">m</span><span class="p">))</span>
+
+<span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLApplication</span><span class="p">(;</span><span class="n">detector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SimpleDetector</span><span class="p">(),</span><span class="w">                  </span><span class="c"># detector with parameters</span>
+<span class="w">                       </span><span class="n">generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">particlegun</span><span class="p">,</span><span class="w">                      </span><span class="c"># primary particle generator</span>
+<span class="w">                       </span><span class="n">nthreads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">                                 </span><span class="c"># number of threads (MT)</span>
+<span class="w">                       </span><span class="n">physics_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FTFP_BERT</span><span class="p">,</span><span class="w">                     </span><span class="c"># what physics list to instantiate</span>
+<span class="w">                       </span><span class="n">scorers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">sc1</span><span class="p">]</span><span class="w">                               </span><span class="c"># list of scorers </span>
+<span class="w">                      </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**************************************************************
+ Geant4 version Name: geant4-11-02 [MT]   (8-December-2023)
+  &lt;&lt; in Multi-threaded mode &gt;&gt; 
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- G4CoupledTransportation is used 
+.... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4ScoringManager has 1 scoring meshes.
+G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+ Size (x, y, z): (5, 5, 20) [cm]
+ # of segments: (20, 20, 40)
+ displacement: (0, 0, 0) [cm]
+ registered primitve scorers : 
+   0  eDep
+   1  nOfStepGamma     with  gammafilter
+   2  nOfStepEMinus     with  eMinusFilter
+   3  nOfStepEPlus     with  ePlusFilter
+</pre></div>
+</div>
+</div>
+</div>
+<p>run for 1000 events</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4WT3 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT0 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT1 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT2 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT3 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT3 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT3 &gt;  Size (x, y, z): (5, 5, 20) [cm]
+G4WT0 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT3 &gt;  # of segments: (20, 20, 40)
+G4WT0 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT3 &gt;  displacement: (0, 0, 0) [cm]
+G4WT0 &gt;  Size (x, y, z): (5, 5, 20) [cm]
+G4WT0 &gt;  # of segments: (20, 20, 40)
+G4WT3 &gt;  registered primitve scorers : 
+G4WT0 &gt;  displacement: (0, 0, 0) [cm]
+G4WT3 &gt;    0  eDep
+G4WT0 &gt;  registered primitve scorers : 
+G4WT3 &gt;    1  nOfStepGamma     with  gammafilter
+G4WT3 &gt;    2  nOfStepEMinus     with  eMinusFilter
+G4WT0 &gt;    0  eDep
+G4WT1 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT0 &gt;    1  nOfStepGamma     with  gammafilter
+G4WT0 &gt;    2  nOfStepEMinus     with  eMinusFilter
+G4WT3 &gt;    3  nOfStepEPlus     with  ePlusFilter
+G4WT1 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT0 &gt;    3  nOfStepEPlus     with  ePlusFilter
+G4WT2 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT1 &gt;  Size (x, y, z): (5, 5, 20) [cm]
+G4WT1 &gt;  # of segments: (20, 20, 40)
+G4WT1 &gt;  displacement: (0, 0, 0) [cm]
+G4WT2 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT2 &gt;  Size (x, y, z): (5, 5, 20) [cm]
+G4WT2 &gt;  # of segments: (20, 20, 40)
+G4WT1 &gt;  registered primitve scorers : 
+G4WT1 &gt;    0  eDep
+G4WT1 &gt;    1  nOfStepGamma     with  gammafilter
+G4WT1 &gt;    2  nOfStepEMinus     with  eMinusFilter
+G4WT2 &gt;  displacement: (0, 0, 0) [cm]
+G4WT2 &gt;  registered primitve scorers : 
+G4WT2 &gt;    0  eDep
+G4WT2 &gt;    1  nOfStepGamma     with  gammafilter
+G4WT2 &gt;    2  nOfStepEMinus     with  eMinusFilter
+G4WT2 &gt;    3  nOfStepEPlus     with  ePlusFilter
+G4WT1 &gt;    3  nOfStepEPlus     with  ePlusFilter
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now the scoring mesh variable <code class="docutils literal notranslate"><span class="pre">sc1</span></code> holds the collected information</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">sum2</span><span class="p">,</span><span class="w"> </span><span class="n">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sc1</span><span class="o">.</span><span class="n">eDep</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each of these variables (<code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">sum2</span></code> and <code class="docutils literal notranslate"><span class="pre">entries</span></code>) is a <code class="docutils literal notranslate"><span class="pre">20×20×40</span> <span class="pre">Array</span></code> corresponding to the deposit energy.
+Let’s see a X-Y plane of it in the middle of the Z axis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="o">:</span><span class="p">,</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20×20 Matrix{Float64}:
+  5.94099   5.95442   8.0597   20.6988   …  14.7802   3.86905   3.38965
+ 12.2952    8.47801  16.6148   25.8096      28.4247  17.5356   17.3279
+ 12.6342   21.3241   27.5582   24.0225      25.0042  20.4195   11.5758
+  8.6538   23.3961   30.1463   35.02        20.164   23.6781   22.6442
+ 17.8146   25.8436   25.1231   45.4637      30.8383  11.129    14.5411
+ 21.1808   28.6477   42.675    55.7317   …  43.14    31.242    22.5675
+ 34.1686   36.0857   41.5437   80.6889      62.6971  18.546    19.1157
+ 23.1501   31.3417   47.4562  108.311       83.7823  38.5574   34.0064
+ 41.9158   61.5902   76.4895  100.302       72.2943  46.6063   26.2383
+ 35.1169   63.6285   93.1625  130.669       54.4577  56.1048   40.4825
+ 33.9777   47.0302   75.7322  139.074    …  62.9708  46.6766   26.4466
+ 48.9055   46.3535   56.8372  127.002       46.4056  35.0922   35.103
+ 26.9914   40.1434   58.3435  108.329       68.2444  46.923    25.9049
+ 32.7506   23.8403   62.719    58.7041      47.4358  23.6164   25.4509
+ 16.9339   33.5205   46.972    45.2083      24.7629  13.8992   12.91
+ 27.1514   30.8873   33.3867   47.8275   …  26.201   15.7865   17.5404
+  9.03172  11.9211   27.9348   59.3264      28.2604  18.9067   18.4095
+ 21.5622   13.6926   30.2682   24.4722      23.8286  15.1732    8.17338
+ 11.0779   14.6096   19.353    30.0208      10.6445  15.6097    9.26605
+  4.95976  10.0558    9.5979    9.04128     15.7205  15.1766   11.6101
+</pre></div>
+</div>
+</div>
+</div>
+<p>A better way to to plot a heatmap with Makie.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">heatmap</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="o">:</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:thermal</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Edep (XY)&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7c528bb3db1aee6baa5b22f504278f7872a61eafa7a9fa5def2852c1a6a0eabb.png" src="_images/7c528bb3db1aee6baa5b22f504278f7872a61eafa7a9fa5def2852c1a6a0eabb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">heatmap</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="o">:</span><span class="p">]</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:thermal</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Edep (XZ)&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fefc58f9dba3d053cd560f955d0741091788641b74681dfb44220950a7c16782.png" src="_images/fefc58f9dba3d053cd560f955d0741091788641b74681dfb44220950a7c16782.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -406,16 +634,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "julia-1.10"
         },
         kernelOptions: {
-            name: "python3",
+            name: "julia-1.10",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'julia-1.10'</script>
 
                 </article>
               

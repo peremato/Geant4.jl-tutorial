@@ -196,6 +196,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples/HBC30/HBC30.html">CERN Liquid Hydrogen Bubble Chamber</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/WaterPhantom/WaterPhantom.html">Water Phantom Simulation with Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples/Scintillation/Scintillation.html">Scintillating Detector Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TestEm3/TestEm3.html">TestEM3 Example</a></li>
 </ul>
 
     </div>
@@ -430,7 +431,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4BoxAllocated(Ptr{Nothing} @0x00000000015c0260)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4BoxAllocated(Ptr{Nothing} @0x00000000015bc120)
 </pre></div>
 </div>
 </div>
@@ -454,7 +455,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>The type hierarchy is a follows:</p>
+<p>The type hierarchy is as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                <span class="o">+-------+</span>
                 <span class="o">|</span>  <span class="n">Any</span>  <span class="o">|</span>
                 <span class="o">+-------+</span>
@@ -647,7 +648,7 @@ DistanceToIn(union, G4ThreeVector(10, 10, 10)) = 9.0
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">box1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">box2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">GC</span><span class="o">.</span><span class="n">gc</span><span class="p">()</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">union</span><span class="p">)</span><span class="w">                          </span><span class="c"># G4BooleanSolid cashes the volume</span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">DistanceToIn</span><span class="p">(</span><span class="n">union</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span><span class="w">  </span><span class="c"># this will probabluy crash the program</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">DistanceToIn</span><span class="p">(</span><span class="n">union</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span><span class="w">  </span><span class="c"># now this will not crash the program</span>
 </pre></div>
 </div>
 </div>
