@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '01-introduction';</script>
     <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -392,9 +394,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-julia">Why Julia?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-to-julia">New to Julia?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapped-classes">Wrapped classes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geant4-julia-interface">Geant4 Julia interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geant4-julia-interface">Geant4 Julia interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-examples">Complete examples</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -408,8 +415,26 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-geant4-jl">
 <h1>Introduction to Geant4.jl<a class="headerlink" href="#introduction-to-geant4-jl" title="Link to this heading">#</a></h1>
-<p>Geant4.jl provides the Julia bindings for the <a class="reference external" href="https://geant4.web.cern.ch">Geant4</a> particle transportation toolkit. It is using <a class="reference external" href="https://github.com/JuliaInterop/CxxWrap.jl">CxxWrap.jl</a> package to wrap C++ types and functions to Julia. Since the Geant4 toolkit is rather large and complex, writing the wrapper code by hand is not really an option. For this we use the package <a class="reference external" href="https://github.com/grasph/wrapit">WrapIt</a> that automates the generation of the wrapper code making use of the clang library.</p>
+<p><a class="reference external" href="https://github.com/JuliaHEP/Geant4.jl">Geant4.jl</a> provides the Julia bindings for the <a class="reference external" href="https://geant4.web.cern.ch">Geant4</a> particle transportation toolkit. It is using <a class="reference external" href="https://github.com/JuliaInterop/CxxWrap.jl">CxxWrap.jl</a> package to wrap C++ types and functions to Julia. Since the Geant4 toolkit is rather large and complex, writing the wrapper code by hand is not really an option. For this we use the package <a class="reference external" href="https://github.com/grasph/wrapit">WrapIt</a> that automates the generation of the wrapper code making use of the clang library.</p>
 <p>Documentation of the concepts and how to write applications with the Geant4 toolkit can be found with the <a class="reference external" href="https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/index.html">Application Developer Guide</a> or the <a class="reference external" href="https://geant4.kek.jp/Reference/11.2.0/index.html">Classes and Members reference guide</a> for a detailed description of each C++ class. In this tutorial we will only highlight the differences between the Julia and the C++ API. Therefore it is assumed some prior knowledge of the Geant4 C++ interfaces.</p>
+<section id="why-julia">
+<h2>Why Julia?<a class="headerlink" href="#why-julia" title="Link to this heading">#</a></h2>
+<p>The Julia programming language and ecosystem has a nice set of properties that are particularly effective for scientific workflows, in for particular simulation.</p>
+<p>Here are some of Julia’s properties</p>
+<ul class="simple">
+<li><p>High-performance (usually within a factor of 0.5 of C; often at parity)</p></li>
+<li><p>Fully Unicode supporting - including LaTeX markup support in REPL, and natural mathematical symbols for common operations (<span class="math notranslate nohighlight">\(\sin^2\theta + cos^2\theta = 1\)</span>)</p></li>
+<li><p>First-class support in Jupyter notebooks (it’s the Ju bit of the name)</p></li>
+<li><p>Supports generic programming (with multiple dispatch), functional-style method chaining, and other modern paradigms</p></li>
+<li><p>Dynamic typing, with efficient function specialisation (via JIT) and optional typing supported deeply in language (unlike Python)</p></li>
+<li><p>Has an excellent, robust package manager making installation and reproducible environments a breeze</p></li>
+</ul>
+<p>Julia is also just a really fun language to program in!</p>
+</section>
+<section id="new-to-julia">
+<h2>New to Julia?<a class="headerlink" href="#new-to-julia" title="Link to this heading">#</a></h2>
+<p>There are many good tutorials and books for the Julia programming language. A <a class="reference external" href="https://juliahep.github.io/JuliaHEP-2023/intro.html">short introduction</a> targeting people from high energy and nuclear physics with some experience with C++ has been put together by the JuliaHEP team.  Other tutorials can be found also <a class="reference external" href="https://julialang.org/learning/tutorials/">here</a>.</p>
+</section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
 <p>The Geant4.jl package does no require any special installation. Stable releases are registered to the Julia general registry, and therefore, it can be deployed with the standard <code class="docutils literal notranslate"><span class="pre">Pkg</span></code> Julia package manager.</p>
@@ -421,7 +446,7 @@ document.write(`
 </section>
 <section id="wrapped-classes">
 <h2>Wrapped classes<a class="headerlink" href="#wrapped-classes" title="Link to this heading">#</a></h2>
-<p>The notebook <a class="reference internal" href="02-wrapped-classes.html"><span class="std std-doc">02-wrapped-classes.ipynb</span></a> introduces some basics for the interaction with the Geant4 wrapped classes. it is important to follow it in order to get familiar with some basic concepts and the mapping between the Julia and C++ constructs.</p>
+<p>The notebook <a class="reference internal" href="02-wrapped-classes.html"><span class="std std-doc">02-wrapped-classes.ipynb</span></a> introduces some basics for the interaction with the Geant4 wrapped classes. It is important to follow it in order to get familiar with some basic concepts and the mapping between the Julia and C++ constructs.</p>
 </section>
 <section id="geant4-julia-interface">
 <h2>Geant4 Julia interface<a class="headerlink" href="#geant4-julia-interface" title="Link to this heading">#</a></h2>
@@ -440,6 +465,17 @@ document.write(`
 <li><p><a class="reference internal" href="10-histograms.html"><span class="std std-doc">10-histograms.ipynb</span></a> - to learn how to use the histogram extension to provide analysis functionality</p></li>
 <li><p><a class="reference internal" href="11-event-display.html"><span class="std std-doc">11-event-display.ipynb</span></a> - use the event display capability and learn how to customize it</p></li>
 </ul>
+<section id="complete-examples">
+<h3>Complete examples<a class="headerlink" href="#complete-examples" title="Link to this heading">#</a></h3>
+<p>We have also a set of complete examples that combines all the elements described previously.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="examples/TestEm3/TestEm3.html"><span class="std std-doc">TestEm3.ipynb</span></a> - TestEm3 example. HEP calorimeter made of layers, implemented with user actions.</p></li>
+<li><p><a class="reference internal" href="examples/HBC30/HBC30.html"><span class="std std-doc">HBC30.ipynb</span></a> - CERN Liquid Hydrogen Bubble Chamber. It uses user actions and is able to display events that fullfil certain conditions (veto trigger)</p></li>
+<li><p><a class="reference internal" href="examples/WaterPhantom/WaterPhantom.html"><span class="std std-doc">WaterPhantom.ipynb</span></a> - Water Phantom Simulation with scoring meshes to obtain dose distributions.</p></li>
+<li><p><a class="reference internal" href="examples/B3/B3a.html"><span class="std std-doc">B3a.ipynb</span></a> - The example simulates schematically a Positron Emitted Tomography system. It uses a custom primary particle generator, a custom physics list and makes use of two sensitive detectors.</p></li>
+<li><p><a class="reference internal" href="examples/Scintillation/Scintillation.html"><span class="std std-doc">Scintillation.ipynb</span></a> - Example from the original at <a class="github reference external" href="https://github.com/settwi/g4-basic-scintillation">settwi/g4-basic-scintillation</a> and adapted to the G4JL interface. Introduces optical photons and a custom physics list. It produces histograms as a result.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -507,9 +543,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-julia">Why Julia?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-to-julia">New to Julia?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapped-classes">Wrapped classes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geant4-julia-interface">Geant4 Julia interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geant4-julia-interface">Geant4 Julia interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-examples">Complete examples</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

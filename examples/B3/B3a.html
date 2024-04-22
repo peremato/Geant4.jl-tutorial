@@ -1,0 +1,933 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Basic/B3a Example &#8212; Geant4.jl Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/B3/B3a';</script>
+    <script data-domain="hepsoftwarefoundation.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/juliaheplogo.png" class="logo__image only-light" alt="Geant4.jl Tutorials - Home"/>
+    <script>document.write(`<img src="../../_static/juliaheplogo.png" class="logo__image only-dark" alt="Geant4.jl Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Welcome to Geant4.jl Tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Building Simulation Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../01-introduction.html">Introduction to Geant4.jl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02-wrapped-classes.html">Interacting with the wrapped classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03-geometry.html">Defining Geant4.jl Geometries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04-physics-list.html">Defining Physics Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05-primary-particles.html">Defining Primary Particles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06-field.html">Defining Magnetic Field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07-applications.html">Building Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08-sensitive-detectors.html">Sensitive Detectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09-scoring-meshes.html">Scoring Meshes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10-histograms.html">Histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11-event-display.html">Event Display</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Complete Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HBC30/HBC30.html">CERN Liquid Hydrogen Bubble Chamber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WaterPhantom/WaterPhantom.html">Water Phantom Simulation with Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Scintillation/Scintillation.html">Scintillating Detector Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestEm3/TestEm3.html">TestEM3 Example</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/peremato/Geant4.jl-tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/peremato/Geant4.jl-tutorial/issues/new?title=Issue%20on%20page%20%2Fexamples/B3/B3a.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/examples/B3/B3a.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Basic/B3a Example</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-modules">Load modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-detector">Define Detector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physics-list">Physics List</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-particle-generator">Primary Particle Generator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-simulation-data-structures">Define the simulation data structures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitive-detector-crystal">Sensitive Detector Crystal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitive-detector-patient">Sensitive Detector Patient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-actions">User Actions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geant4-application">Geant4 Application</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-detector">Display Detector</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="basic-b3a-example">
+<h1>Basic/B3a Example<a class="headerlink" href="#basic-b3a-example" title="Link to this heading">#</a></h1>
+<p>It is equivalent to the B3a example in Geant4 but re-written with a new more Julia friendly interface. See <a class="reference external" href="https://raw.githubusercontent.com/Geant4/geant4/master/examples/basic/B3/README">README</a> file for the example.</p>
+<section id="load-modules">
+<h2>Load modules<a class="headerlink" href="#load-modules" title="Link to this heading">#</a></h2>
+<p>In this example we only need to load the general Geant4 module and the SystemOfUnits one. Please note that not all the units are exported from the SystemOfUnits therefore we explicitly import the ones that ar used in this example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Geant4</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Geant4</span><span class="o">.</span><span class="n">SystemOfUnits</span><span class="o">:</span><span class="w">  </span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="n">cm3</span><span class="p">,</span><span class="w"> </span><span class="n">mm</span><span class="p">,</span><span class="w"> </span><span class="n">pGy</span><span class="p">,</span><span class="w"> </span><span class="n">eplus</span><span class="p">,</span><span class="w"> </span><span class="n">keV</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">eV</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-detector">
+<h2>Define Detector<a class="headerlink" href="#define-detector" title="Link to this heading">#</a></h2>
+<p>We use here a separated file to define the geometry of the detector. It uses the G4 geometry classes, therefore is not too different from the C++ code found in the original example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="n">joinpath</span><span class="p">(</span><span class="nd">@__DIR__</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DetectorB3.jl&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="physics-list">
+<h2>Physics List<a class="headerlink" href="#physics-list" title="Link to this heading">#</a></h2>
+<p>We could use already made physics lists such as <code class="docutils literal notranslate"><span class="pre">FTFP_BERT</span></code> or <code class="docutils literal notranslate"><span class="pre">QGS_BIC</span></code>, but in this example we construct one by selecting the required physics. This is done by providing a struct type inheriting from the type <code class="docutils literal notranslate"><span class="pre">G4VUserPhysicsList</span></code>, and in the constructor construct a <code class="docutils literal notranslate"><span class="pre">G4VModularPhysicsList</span></code> instance add register the needed physics. We do not need to create an instance at this moment, we need just to provide the type to the <code class="docutils literal notranslate"><span class="pre">G4JLApplication</span></code>, which will instantiate it at the appropriate moment in the initialization sequence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">PhysicsB3a</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4VUserPhysicsList</span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">PhysicsB3a</span><span class="p">(</span><span class="n">verbose</span><span class="p">)</span>
+<span class="w">        </span><span class="n">pl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4VModularPhysicsList</span><span class="p">()</span>
+<span class="w">        </span><span class="n">RegisterPhysics</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="w"> </span><span class="n">move!</span><span class="p">(</span><span class="n">G4DecayPhysics</span><span class="p">(</span><span class="n">verbose</span><span class="p">)))</span><span class="w">           </span><span class="c"># Default physics</span>
+<span class="w">        </span><span class="n">RegisterPhysics</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="w"> </span><span class="n">move!</span><span class="p">(</span><span class="n">G4EmStandardPhysics</span><span class="p">(</span><span class="n">verbose</span><span class="p">)))</span><span class="w">      </span><span class="c"># EM physics</span>
+<span class="w">        </span><span class="n">RegisterPhysics</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="w"> </span><span class="n">move!</span><span class="p">(</span><span class="n">G4RadioactiveDecayPhysics</span><span class="p">(</span><span class="n">verbose</span><span class="p">)))</span><span class="w"> </span><span class="c"># Radioactive decay</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">pl</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="primary-particle-generator">
+<h2>Primary Particle Generator<a class="headerlink" href="#primary-particle-generator" title="Link to this heading">#</a></h2>
+<p>In this example the user provides a custom made primary particle generator using the <code class="docutils literal notranslate"><span class="pre">G4ParticleGun</span></code> class. A custom particle generator consists of three elements:</p>
+<ul class="simple">
+<li><p>A custom data structure to hold the configuration parameters of the generator. In this case the struct <code class="docutils literal notranslate"><span class="pre">GeneratorB3aData</span></code> keeps the <code class="docutils literal notranslate"><span class="pre">Z</span></code>, <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">charge</span></code>, <code class="docutils literal notranslate"><span class="pre">direction</span></code>, etc.  of the ion that will be created.</p></li>
+<li><p>A user function (<code class="docutils literal notranslate"><span class="pre">_init</span></code>) to initialize the generator called by the toolkit at initialization time. In this case, we crate an instance of <code class="docutils literal notranslate"><span class="pre">G4ParticleGun</span></code> that will be used later at each event to create the vertex and primary particle.</p></li>
+<li><p>A user function (<code class="docutils literal notranslate"><span class="pre">_gen</span></code>) that will be called for each event. In this particular case we also do a late initialization of the creation of the ion since it needs to be done after the physics lists is configured.</p></li>
+</ul>
+<p>Both user functions receive the generate data with the configuration parameters as one of the input arguments. The final step is to instantiate an object of the type <code class="docutils literal notranslate"><span class="pre">G4JLPrimaryGenerator</span></code> with the configuration data and both user functions.
+Please note that user data has been declared with <code class="docutils literal notranslate"><span class="pre">&#64;with_kw</span></code>, which provides a constructor with all keywords arguments defaults. See <code class="docutils literal notranslate"><span class="pre">Parameters.jl</span></code> module for the details.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@with_kw</span><span class="w"> </span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">GeneratorB3aData</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4JLGeneratorData</span>
+<span class="w">    </span><span class="n">gun</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">Nothing</span><span class="p">,</span><span class="w"> </span><span class="kt">CxxPtr</span><span class="p">{</span><span class="kt">G4ParticleGun</span><span class="p">}}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w">    </span><span class="n">ion</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">Nothing</span><span class="p">,</span><span class="w"> </span><span class="kt">CxxPtr</span><span class="p">{</span><span class="kt">G4ParticleDefinition</span><span class="p">}}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w">    </span><span class="n">Z</span><span class="o">::</span><span class="kt">Int64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span>
+<span class="w">    </span><span class="n">A</span><span class="o">::</span><span class="kt">Int64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">18</span>
+<span class="w">    </span><span class="n">ionCharge</span><span class="o">::</span><span class="kt">Float64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="n">eplus</span>
+<span class="w">    </span><span class="n">excitEnergy</span><span class="o">::</span><span class="kt">Float64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="n">keV</span>
+<span class="w">    </span><span class="n">position</span><span class="o">::</span><span class="kt">G4ThreeVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">4</span><span class="n">cm</span><span class="p">,</span><span class="mi">4</span><span class="n">cm</span><span class="p">,</span><span class="mi">4</span><span class="n">cm</span><span class="p">)</span>
+<span class="w">    </span><span class="n">direction</span><span class="o">::</span><span class="kt">G4ThreeVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">GeneratorB3a</span><span class="p">(;</span><span class="n">kwargs</span><span class="o">...</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GeneratorB3aData</span><span class="p">(;</span><span class="n">kwargs</span><span class="o">...</span><span class="p">)</span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">_init</span><span class="p">(</span><span class="n">data</span><span class="o">::</span><span class="kt">GeneratorB3aData</span><span class="p">,</span><span class="w"> </span><span class="o">::</span><span class="kt">Any</span><span class="p">)</span>
+<span class="w">        </span><span class="n">gun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">gun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">move!</span><span class="p">(</span><span class="n">G4ParticleGun</span><span class="p">())</span>
+<span class="w">        </span><span class="n">SetParticleMomentumDirection</span><span class="p">(</span><span class="n">gun</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="w">        </span><span class="n">SetParticleEnergy</span><span class="p">(</span><span class="n">gun</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="n">eV</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">_gen</span><span class="p">(</span><span class="n">evt</span><span class="o">::</span><span class="kt">G4Event</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">::</span><span class="kt">GeneratorB3aData</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isnothing</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">ion</span><span class="p">)</span><span class="w">  </span><span class="c"># late initialize (after physics processes)</span>
+<span class="w">            </span><span class="n">ion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">ion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetIon</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Z</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">excitEnergy</span><span class="p">)</span>
+<span class="w">            </span><span class="n">SetParticleDefinition</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">gun</span><span class="p">,</span><span class="w"> </span><span class="n">ion</span><span class="p">)</span>
+<span class="w">            </span><span class="n">SetParticleCharge</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">gun</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">ionCharge</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">position</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">((</span><span class="n">rand</span><span class="p">()</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span><span class="n">cm</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span><span class="n">cm</span><span class="p">)</span>
+<span class="w">        </span><span class="n">SetParticlePosition</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">gun</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="p">)</span>
+<span class="w">        </span><span class="n">GeneratePrimaryVertex</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">gun</span><span class="p">,</span><span class="w"> </span><span class="n">CxxPtr</span><span class="p">(</span><span class="n">evt</span><span class="p">))</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">G4JLPrimaryGenerator</span><span class="p">(</span><span class="s">&quot;GeneratorB3a&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w"> </span><span class="n">init_method</span><span class="o">=</span><span class="n">_init</span><span class="p">,</span><span class="w"> </span><span class="n">generate_method</span><span class="o">=</span><span class="n">_gen</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GeneratorB3a (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-the-simulation-data-structures">
+<h2>Define the simulation data structures<a class="headerlink" href="#define-the-simulation-data-structures" title="Link to this heading">#</a></h2>
+<p>The main outcome of the simulation is a custom struct with what the user wants to obtain. This is typically a set of counters, histograms, etc. In this example we want to to collect the number of ‘good’ events (two crystals with energy deposited &gt;500keV) and the accumulated dose in the ‘patient’ volume. These are the two members of the struct. In addition, if the user wants to run in MT mode, it needs to provide a <code class="docutils literal notranslate"><span class="pre">add!</span></code> function to reduce the results that has been obtained by the different worker threads. In this case is very simple, we just need to sum both counters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">SimDataB3a</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4JLSimulationData</span>
+<span class="w">    </span><span class="c">#---Run data</span>
+<span class="w">    </span><span class="n">goodEvents</span><span class="o">::</span><span class="kt">Int64</span>
+<span class="w">    </span><span class="n">sumDose</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">SimDataB3a</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">add!</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">SimDataB3a</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">::</span><span class="kt">SimDataB3a</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="o">.</span><span class="n">goodEvents</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="o">.</span><span class="n">goodEvents</span>
+<span class="w">    </span><span class="n">x</span><span class="o">.</span><span class="n">sumDose</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="o">.</span><span class="n">sumDose</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>add! (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sensitive-detector-crystal">
+<h2>Sensitive Detector Crystal<a class="headerlink" href="#sensitive-detector-crystal" title="Link to this heading">#</a></h2>
+<p>We will collect the energy deposited in the crystals a ‘sensitive detector’. This is done, similarly to the way we have created the custom primary particle generator by providing three elements:</p>
+<ul class="simple">
+<li><p>A custom data structure with what data we want to collect every time a particle enters the ‘sensitive detector’. In this case, we want to fill a dictionary with the crystal number and the accumulated deposited energy.</p></li>
+<li><p>A custom function to initialize the data structure, that is called for each event. In this case, the user simply empties the dictionary.</p></li>
+<li><p>A custom function to collect the information that is called for each particle entering the associated volume. In this function, the use navigates the G4 data structures to obtain the required information.</p></li>
+</ul>
+<p>Both functions receive the custom data structure as one of the arguments. The final step is to instance a <code class="docutils literal notranslate"><span class="pre">G4JLSensitiveDetector</span></code> with the 3 elements.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">CrystalData</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4JLSDData</span>
+<span class="w">    </span><span class="n">edep</span><span class="o">::</span><span class="kt">Dict</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Float64</span><span class="p">}</span><span class="w"> </span><span class="c"># (CopyNo, Edep)</span>
+<span class="w">    </span><span class="n">CrystalData</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="p">(</span><span class="kt">Dict</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Float64</span><span class="p">}())</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">c_initialize</span><span class="p">(</span><span class="o">::</span><span class="kt">G4HCofThisEvent</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">::</span><span class="kt">CrystalData</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">    </span><span class="n">empty!</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edep</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">c_processHits</span><span class="p">(</span><span class="n">step</span><span class="o">::</span><span class="kt">G4Step</span><span class="p">,</span><span class="w"> </span><span class="o">::</span><span class="kt">G4TouchableHistory</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">::</span><span class="kt">CrystalData</span><span class="p">)</span><span class="o">::</span><span class="kt">Bool</span>
+<span class="w">    </span><span class="n">edep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetTotalEnergyDeposit</span>
+<span class="w">    </span><span class="n">edep</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="mf">0.</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span>
+<span class="w">    </span><span class="n">copy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetPreStepPoint</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetTouchable</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetCopyNumber</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">edep</span><span class="p">[</span><span class="n">copy</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">haskey</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edep</span><span class="p">,</span><span class="w"> </span><span class="n">copy</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="n">edep</span><span class="p">[</span><span class="n">copy</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">edep</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">edep</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span>
+<span class="k">end</span>
+<span class="c">#---Create SD instance</span>
+<span class="n">crystalSD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLSensitiveDetector</span><span class="p">(</span><span class="s">&quot;CrystalSD&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CrystalData</span><span class="p">();</span><span class="w">          </span><span class="c"># SD name an associated data are mandatory</span>
+<span class="w">                                   </span><span class="n">processhits_method</span><span class="o">=</span><span class="n">c_processHits</span><span class="p">,</span><span class="w">   </span><span class="c"># process hist method (also mandatory)</span>
+<span class="w">                                   </span><span class="n">initialize_method</span><span class="o">=</span><span class="n">c_initialize</span><span class="p">)</span><span class="w">     </span><span class="c"># intialize method</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4JLProtoSD{CrystalData}(&quot;CrystalSD&quot;, CrystalData(Dict{Int64, Float64}()), c_processHits, c_initialize, nothing)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sensitive-detector-patient">
+<h2>Sensitive Detector Patient<a class="headerlink" href="#sensitive-detector-patient" title="Link to this heading">#</a></h2>
+<p>This is similar to the previous one but for the ‘patient’ volume. In this case we simply sum the dose produced by each particle entering the volume.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">PatientData</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">G4JLSDData</span>
+<span class="w">    </span><span class="n">dose</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">PatientData</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">p_initialize</span><span class="p">(</span><span class="o">::</span><span class="kt">G4HCofThisEvent</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">::</span><span class="kt">PatientData</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">dose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">p_processHits</span><span class="p">(</span><span class="n">step</span><span class="o">::</span><span class="kt">G4Step</span><span class="p">,</span><span class="w"> </span><span class="o">::</span><span class="kt">G4TouchableHistory</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">::</span><span class="kt">PatientData</span><span class="p">)</span><span class="o">::</span><span class="kt">Bool</span>
+<span class="w">    </span><span class="n">edep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetTotalEnergyDeposit</span>
+<span class="w">    </span><span class="n">edep</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="mf">0.</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span>
+<span class="w">    </span><span class="n">volume</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetPreStepPoint</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetTouchable</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetSolid</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetCubicVolume</span>
+<span class="w">    </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetPreStepPoint</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetMaterial</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetDensity</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">dose</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">edep</span><span class="w"> </span><span class="o">/</span><span class="p">(</span><span class="n">density</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">volume</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span>
+<span class="k">end</span>
+<span class="c">#---Create SD instance</span>
+<span class="n">patientSD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLSensitiveDetector</span><span class="p">(</span><span class="s">&quot;PatientSD&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">PatientData</span><span class="p">();</span><span class="w">           </span><span class="c"># SD name an associated data are mandatory</span>
+<span class="w">                                   </span><span class="n">processhits_method</span><span class="o">=</span><span class="n">p_processHits</span><span class="p">,</span><span class="w">    </span><span class="c"># process hist method (also mandatory)</span>
+<span class="w">                                   </span><span class="n">initialize_method</span><span class="o">=</span><span class="n">p_initialize</span><span class="p">)</span><span class="w">      </span><span class="c"># intialize method</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4JLProtoSD{PatientData}(&quot;PatientSD&quot;, PatientData(0.0), p_processHits, p_initialize, nothing)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="user-actions">
+<h2>User Actions<a class="headerlink" href="#user-actions" title="Link to this heading">#</a></h2>
+<p>User actions at the proper moment during the execution of the simulation.</p>
+<ul class="simple">
+<li><p>Run actions: in this example we use the run actions to initialize the simulation data (beginrun) and print the results of the run (endrun). Please note that the end on run action is called by each worker thread, therefore we need to use the master one (thread_id == -1) to accumulate the results of all workers. This is done by calling the defined <code class="docutils literal notranslate"><span class="pre">add!</span></code> function.</p></li>
+<li><p>Event action: the event action is used to get the data from the sensitive detector structure, which can be accessed with <code class="docutils literal notranslate"><span class="pre">getSDdata(app,</span> <span class="pre">&quot;CrystalSD&quot;)</span></code> or <code class="docutils literal notranslate"><span class="pre">getSDdata(app,</span> <span class="pre">&quot;PatientSD&quot;)</span></code> with <code class="docutils literal notranslate"><span class="pre">CrystalSD</span></code> and <code class="docutils literal notranslate"><span class="pre">PatientSD</span></code> being the names given to the sensitive detectors, and accumulate it in the simulation data.</p></li>
+<li><p>Stacking action: it is used to kill neutrinos that we do not need to track.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">beginrun</span><span class="p">(</span><span class="n">run</span><span class="o">::</span><span class="kt">G4Run</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSIMdata</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">goodEvents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">sumDose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span>
+<span class="w">    </span><span class="nb">nothing</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">endrun</span><span class="p">(</span><span class="n">run</span><span class="o">::</span><span class="kt">G4Run</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
+<span class="w">    </span><span class="n">partName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">gun</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetParticleDefinition</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetParticleName</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="kt">String</span>
+<span class="w">    </span><span class="c">#---end run action is called for each workwer thread and the master one</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">G4Threading!G4GetThreadId</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">        </span><span class="c">#---This is the master thread, so we need to add all the simuation results-----------------</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span>
+<span class="w">            </span><span class="n">add!</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="n">noEvents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetNumberOfEvent</span>
+<span class="w">        </span><span class="n">G4JL_println</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">                     --------------------End of Run------------------------------</span>
+<span class="s">                      The run was </span><span class="si">$noEvents</span><span class="s"> </span><span class="si">$partName</span><span class="s"> Nb of &#39;good&#39; e+ annihilations: </span><span class="si">$</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">goodEvents</span><span class="p">)</span>
+<span class="s">                      Total dose in patient : </span><span class="si">$</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">sumDose</span><span class="o">/</span><span class="n">pGy</span><span class="p">)</span><span class="s"> pGy</span>
+<span class="s">                     ------------------------------------------------------------ </span>
+<span class="s">                     &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span><span class="w"> </span>
+<span class="c">#---Event Action</span>
+<span class="k">function</span><span class="w"> </span><span class="n">endevent</span><span class="p">(</span><span class="n">evt</span><span class="o">::</span><span class="kt">G4Event</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span>
+<span class="w">    </span><span class="n">edep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSDdata</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CrystalSD&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">edep</span>
+<span class="w">    </span><span class="n">dose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSDdata</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PatientSD&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dose</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSIMdata</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">500</span><span class="n">keV</span><span class="p">),</span><span class="w"> </span><span class="n">values</span><span class="p">(</span><span class="n">edep</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">        </span><span class="n">data</span><span class="o">.</span><span class="n">goodEvents</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">data</span><span class="o">.</span><span class="n">sumDose</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">dose</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="k">end</span>
+<span class="c">#---Stacking Action</span>
+<span class="k">let</span><span class="w"> </span><span class="n">G4NeutrinoE</span><span class="p">,</span><span class="w"> </span><span class="n">first</span><span class="o">=</span><span class="nb">true</span>
+<span class="k">global</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">stacking</span><span class="p">(</span><span class="n">trk</span><span class="o">::</span><span class="kt">G4Track</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span><span class="o">::</span><span class="kt">G4ClassificationOfNewTrack</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">first</span><span class="w">  </span><span class="c"># emulation of C++ static </span>
+<span class="w">        </span><span class="n">G4NeutrinoE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FindParticle</span><span class="p">(</span><span class="s">&quot;nu_e&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="p">(</span><span class="n">trk</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetParentID</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">fUrgent</span><span class="w">               </span><span class="c"># keep primary particle</span>
+<span class="w">    </span><span class="p">(</span><span class="n">trk</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetDefinition</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">G4NeutrinoE</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">fKill</span><span class="w">     </span><span class="c"># kill neutrino</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">fUrgent</span>
+<span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stacking (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="geant4-application">
+<h2>Geant4 Application<a class="headerlink" href="#geant4-application" title="Link to this heading">#</a></h2>
+<p>Finally we create an instance of <code class="docutils literal notranslate"><span class="pre">G4JLApplication</span></code> with all the defined elements: detector, simulation data, generator, type of the physics list, the user actions and the mapping between sensitive detector and volume in the geometry.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#---Application------------------------------------------------------------------------------------</span>
+<span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4JLApplication</span><span class="p">(;</span><span class="w"> </span><span class="n">detector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DetectorB3</span><span class="p">(),</span><span class="w">                      </span><span class="c"># detector with parameters</span>
+<span class="w">                        </span><span class="n">simdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SimDataB3a</span><span class="p">(),</span><span class="w">                       </span><span class="c"># simulation data structure</span>
+<span class="w">                        </span><span class="n">generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GeneratorB3a</span><span class="p">(),</span><span class="w">                   </span><span class="c"># primary particle generator</span>
+<span class="w">                        </span><span class="n">nthreads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                                 </span><span class="c"># # of threads (0 = no MT)</span>
+<span class="w">                        </span><span class="n">physics_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PhysicsB3a</span><span class="p">,</span><span class="w">                    </span><span class="c"># what physics list to instantiate</span>
+<span class="w">                        </span><span class="c">#evtdisplay =  display,                        # set event display </span>
+<span class="w">                        </span><span class="n">endeventaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endevent</span><span class="p">,</span><span class="w">             </span><span class="c"># end-event action (fill histograms per event)</span>
+<span class="w">                        </span><span class="n">beginrunaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beginrun</span><span class="p">,</span><span class="w">             </span><span class="c"># begin run action</span>
+<span class="w">                        </span><span class="n">endrunaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endrun</span><span class="p">,</span><span class="w">                 </span><span class="c"># end run action</span>
+<span class="w">                        </span><span class="n">stackaction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stacking</span><span class="p">,</span><span class="w">                </span><span class="c"># track classification action</span>
+<span class="w">                        </span><span class="n">sdetectors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;CrystalLV+&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">crystalSD</span><span class="p">,</span>
+<span class="w">                                      </span><span class="s">&quot;PatientLV&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">patientSD</span><span class="p">]</span><span class="w">       </span><span class="c"># mapping of LVs to SDs (+ means multiple LVs with same name)</span>
+<span class="w">                      </span><span class="p">);</span>
+
+<span class="n">configure</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**************************************************************
+ Geant4 version Name: geant4-11-02 [MT]   (8-December-2023)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+cryst_mat = CxxPtr{G4Material}(Ptr{G4Material} @0x000000000230a890)
+Checking overlaps for volume crystal:0 (G4Box) ... OK! 
+Checking overlaps for volume crystal:1 (G4Box) ... OK! 
+Checking overlaps for volume crystal:2 (G4Box) ... OK! 
+Checking overlaps for volume crystal:3 (G4Box) ... OK! 
+Checking overlaps for volume crystal:4 (G4Box) ... OK! 
+Checking overlaps for volume crystal:5 (G4Box) ... OK! 
+Checking overlaps for volume crystal:6 (G4Box) ... OK! 
+Checking overlaps for volume crystal:7 (G4Box) ... OK! 
+Checking overlaps for volume crystal:8 (G4Box) ... OK! 
+Checking overlaps for volume crystal:9 (G4Box) ... OK! 
+Checking overlaps for volume crystal:10 (G4Box) ... OK! 
+Checking overlaps for volume crystal:11 (G4Box) ... OK! 
+Checking overlaps for volume crystal:12 (G4Box) ... OK! 
+Checking overlaps for volume crystal:13 (G4Box) ... OK! 
+Checking overlaps for volume crystal:14 (G4Box) ... OK! 
+Checking overlaps for volume crystal:15 (G4Box) ... OK! 
+Checking overlaps for volume crystal:16 (G4Box) ... OK! 
+Checking overlaps for volume crystal:17 (G4Box) ... OK! 
+Checking overlaps for volume crystal:18 (G4Box) ... OK! 
+Checking overlaps for volume crystal:19 (G4Box) ... OK! 
+Checking overlaps for volume crystal:20 (G4Box) ... OK! 
+Checking overlaps for volume crystal:21 (G4Box) ... OK! 
+Checking overlaps for volume crystal:22 (G4Box) ... OK! 
+Checking overlaps for volume crystal:23 (G4Box) ... OK! 
+Checking overlaps for volume crystal:24 (G4Box) ... OK! 
+Checking overlaps for volume crystal:25 (G4Box) ... OK! 
+Checking overlaps for volume crystal:26 (G4Box) ... OK! 
+Checking overlaps for volume crystal:27 (G4Box) ... OK! 
+Checking overlaps for volume crystal:28 (G4Box) ... OK! 
+Checking overlaps for volume crystal:29 (G4Box) ... OK! 
+Checking overlaps for volume crystal:30 (G4Box) ... OK! 
+Checking overlaps for volume crystal:31 (G4Box) ... OK! 
+Checking overlaps for volume ring:0 (G4Tubs) ... OK! 
+Checking overlaps for volume ring:1 (G4Tubs) ... OK! 
+Checking overlaps for volume ring:2 (G4Tubs) ... OK! 
+Checking overlaps for volume ring:3 (G4Tubs) ... OK! 
+Checking overlaps for volume ring:4 (G4Tubs) ... OK! 
+Checking overlaps for volume ring:5 (G4Tubs) ... OK! 
+Checking overlaps for volume ring:6 (G4Tubs) ... OK! 
+Checking overlaps for volume ring:7 (G4Tubs) ... OK! 
+Checking overlaps for volume ring:8 (G4Tubs) ... OK! 
+Checking overlaps for volume Detector:0 (G4Tubs) ... OK! 
+Checking overlaps for volume Patient:0 (G4Tubs) ... OK! 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="display-detector">
+<h2>Display Detector<a class="headerlink" href="#display-detector" title="Link to this heading">#</a></h2>
+<p>In case we want to visualize the detector, the user can trigger the loading of the visualization extension by loading this 3 modules.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">CairoMakie</span><span class="p">,</span><span class="w"> </span><span class="n">Rotations</span><span class="p">,</span><span class="w"> </span><span class="n">IGLWrap_jll</span><span class="w">  </span><span class="c"># to force loding G4Vis extension</span>
+
+<span class="n">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetWorldVolume</span><span class="p">()</span>
+<span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">draw</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9594ece4fb5e1e9438c9c26db252d11f078c90244a3426d2ad9d3f2d42d7c844.png" src="../../_images/9594ece4fb5e1e9438c9c26db252d11f078c90244a3426d2ad9d3f2d42d7c844.png" />
+</div>
+</div>
+<p>Execute a run with 10000 events</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">10000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>======================================================================
+======          Radioactive Decay Physics Parameters           =======
+======================================================================
+min MeanLife (from G4NuclideTable)                1 ns 
+Max life time (from G4DeexPrecoParameters)        1000 ps 
+Internal e- conversion flag                       1
+Stored internal conversion coefficients           1
+Enabled atomic relaxation mode                    1
+Enable correlated gamma emission                  0
+Max 2J for sampling of angular correlations       10
+Atomic de-excitation enabled                      1
+Auger electron emission enabled                   1
+Check EM cuts disabled for atomic de-excitation   1
+Use Bearden atomic level energies                 0
+Use ANSTO fluorescence model                      0
+Threshold for very long decay time at rest        1 y  
+======================================================================
+
+====================================================================
+                  HADRONIC PROCESSES SUMMARY (verbose level 1)
+-------------------------------------------------------------------------
+                           Hadronic Processes for GenericIon
+  Process: Radioactivation
+--------------------End of Run------------------------------
+ The run was 10000 F18 Nb of &#39;good&#39; e+ annihilations: 1225
+ Total dose in patient : 305.75855967044504 pGy
+------------------------------------------------------------ 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.10"
+        },
+        kernelOptions: {
+            name: "julia-1.10",
+            path: "./examples/B3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.10'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-modules">Load modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-detector">Define Detector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physics-list">Physics List</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-particle-generator">Primary Particle Generator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-simulation-data-structures">Define the simulation data structures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitive-detector-crystal">Sensitive Detector Crystal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitive-detector-patient">Sensitive Detector Patient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-actions">User Actions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geant4-application">Geant4 Application</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-detector">Display Detector</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Pere Mato
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright CERN, The Contributors 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

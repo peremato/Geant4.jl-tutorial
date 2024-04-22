@@ -441,7 +441,7 @@ The definition of the constructor parameters can be found <a class="reference ex
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4TubsAllocated(Ptr{Nothing} @0x000000000225b370)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4TubsAllocated(Ptr{Nothing} @0x0000000001d54090)
 </pre></div>
 </div>
 </div>
@@ -487,7 +487,7 @@ The definition of the constructor parameters can be found <a class="reference ex
 <img alt="_images/4bbc49256eb67abeec00df15b1da99052597dcf00bfce43d72f885a55c84ca56.png" src="_images/4bbc49256eb67abeec00df15b1da99052597dcf00bfce43d72f885a55c84ca56.png" />
 </div>
 </div>
-<p>Lets use some geometry functionality to experiment with the created solid</p>
+<p>Lets use some geometry functionality to experiment with the created solid. In this example we get the limits for the boolean solid and create a number if radom 3D points within the limits. Then select the ones that return <code class="docutils literal notranslate"><span class="pre">kInside</span></code> when calling the function <code class="docutils literal notranslate"><span class="pre">Inside(solid,</span> <span class="pre">point)</span></code>. And finally, we plot the points with <code class="docutils literal notranslate"><span class="pre">scatter</span></code> function from <code class="docutils literal notranslate"><span class="pre">Makie</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">StaticArrays</span>
@@ -505,7 +505,7 @@ The definition of the constructor parameters can be found <a class="reference ex
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/96e35da408524d565be5b6987b831329d483e2145bfa7aa16a44f53a3edeb357.png" src="_images/96e35da408524d565be5b6987b831329d483e2145bfa7aa16a44f53a3edeb357.png" />
+<img alt="_images/1b44d05bc550ed2c6e1811286613b87ce7c649e2b177deb45cd2df4b2d7cfc5c.png" src="_images/1b44d05bc550ed2c6e1811286613b87ce7c649e2b177deb45cd2df4b2d7cfc5c.png" />
 </div>
 </div>
 </section>
@@ -606,7 +606,7 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4LogicalVolumeAllocated(Ptr{Nothing} @0x0000000003db7c70)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4LogicalVolumeAllocated(Ptr{Nothing} @0x0000000002ee0790)
 </pre></div>
 </div>
 </div>
@@ -846,7 +846,7 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4PVPlacementAllocated(Ptr{Nothing} @0x000000000438efd0)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4PVPlacementAllocated(Ptr{Nothing} @0x0000000003e01f40)
 </pre></div>
 </div>
 </div>

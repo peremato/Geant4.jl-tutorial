@@ -395,7 +395,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-instantiation">Object instantiation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-object-methods">Calling object methods</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-static-class-methods">Calling static class methods</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-in-the-inheritance">Working in the inheritance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-inheritance">Working with inheritance</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-ownership">Object ownership</a></li>
 </ul>
 </li>
@@ -418,11 +418,6 @@ document.write(`
 <section id="object-instantiation">
 <h2>Object instantiation<a class="headerlink" href="#object-instantiation" title="Link to this heading">#</a></h2>
 <p>We start by instantiating some very simple object of type <code class="docutils literal notranslate"><span class="pre">G4Box</span></code>.</p>
-<p>Note that:</p>
-<ul class="simple">
-<li><p>the C++ constructor that is called is <code class="docutils literal notranslate"><span class="pre">G4Box::G4Box(const</span> <span class="pre">G4String</span> <span class="pre">&amp;pName,</span> <span class="pre">G4double</span> <span class="pre">pX,</span> <span class="pre">G4double</span> <span class="pre">pY,</span> <span class="pre">G4double</span> <span class="pre">pZ)</span></code></p></li>
-<li><p>the conversion of Julia type <code class="docutils literal notranslate"><span class="pre">Int64</span></code> to C++ <code class="docutils literal notranslate"><span class="pre">G4double</span></code> is implicit, as well as the <code class="docutils literal notranslate"><span class="pre">String</span></code> to <code class="docutils literal notranslate"><span class="pre">G4String</span></code></p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Geant4</span>
@@ -431,11 +426,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4BoxAllocated(Ptr{Nothing} @0x00000000023ffc70)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4BoxAllocated(Ptr{Nothing} @0x0000000001ec1e50)
 </pre></div>
 </div>
 </div>
 </div>
+<p>Note that:</p>
+<ul class="simple">
+<li><p>the C++ constructor that is called is <code class="docutils literal notranslate"><span class="pre">G4Box::G4Box(const</span> <span class="pre">G4String</span> <span class="pre">&amp;pName,</span> <span class="pre">G4double</span> <span class="pre">pX,</span> <span class="pre">G4double</span> <span class="pre">pY,</span> <span class="pre">G4double</span> <span class="pre">pZ)</span></code></p></li>
+<li><p>the conversion of Julia type <code class="docutils literal notranslate"><span class="pre">Int64</span></code> to C++ <code class="docutils literal notranslate"><span class="pre">G4double</span></code> is implicit, as well as the <code class="docutils literal notranslate"><span class="pre">String</span></code> to <code class="docutils literal notranslate"><span class="pre">G4String</span></code></p></li>
+</ul>
 <p>The returned object is a pointer (<code class="docutils literal notranslate"><span class="pre">Ptr</span></code>) to the wrapped C++ object. You can see the printed memory address where the object resides. The <code class="docutils literal notranslate"><span class="pre">CxxWrap</span></code> package encodes (with the type <code class="docutils literal notranslate"><span class="pre">Geant4.G4BoxAllocated</span></code>) that the object has been allocated from Julia and will be by default garbage collected when not needed (i.e. no reference to it).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -516,7 +516,7 @@ typeof(p_box[]) = Geant4.G4BoxDereferenced
 </div>
 <section id="calling-object-methods">
 <h3>Calling object methods<a class="headerlink" href="#calling-object-methods" title="Link to this heading">#</a></h3>
-<p>In julia, <code class="docutils literal notranslate"><span class="pre">methods</span></code> are instances of functions of a given name, of which the multi-dispatch functionality will select the best one that matches the actual argument types. To call a C++ method of a class we need to pass the wrapped object as first argument.</p>
+<p>In Julia, <code class="docutils literal notranslate"><span class="pre">methods</span></code> are instances of functions of a given name, of which the multi-dispatch functionality will select the best one that matches the actual argument types. To call a C++ method of a class we need to pass the wrapped object as first argument.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">vol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="w">   </span><span class="c"># In C++ this would be box.GetCubicVolume()</span>
@@ -557,8 +557,8 @@ typeof(p_box[]) = Geant4.G4BoxDereferenced
 </div>
 </div>
 </section>
-<section id="working-in-the-inheritance">
-<h3>Working in the inheritance<a class="headerlink" href="#working-in-the-inheritance" title="Link to this heading">#</a></h3>
+<section id="working-with-inheritance">
+<h3>Working with inheritance<a class="headerlink" href="#working-with-inheritance" title="Link to this heading">#</a></h3>
 <p>In Geant4 all solid types inherit from a common base class <code class="docutils literal notranslate"><span class="pre">G4VSolid</span></code>. The method <code class="docutils literal notranslate"><span class="pre">Clone</span></code> returns a pointer to this base class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -579,7 +579,7 @@ typeof(p_box[]) = Geant4.G4BoxDereferenced
 </section>
 <section id="object-ownership">
 <h3>Object ownership<a class="headerlink" href="#object-ownership" title="Link to this heading">#</a></h3>
-<p>By default all objects instantiated by Julia will garbage collected (deleted) by Julia. this may pose problems with Geant4 since in many occasions the ownership is transferred implicitly to the toolkit, which will take care of doing a cleanup at the adequate moment. If we do nor pay attention we may get crashes (use a deleted objects and double deletions).</p>
+<p>By default all objects instantiated by Julia will be garbage collected (deleted) by Julia. This may pose problems with Geant4 since in many occasions the ownership of the object is transferred implicitly to the toolkit, which will take care of doing a cleanup at the adequate moment. If we do not pay attention we may get crashes (use a deleted object or eventually double deletions).</p>
 <p>There are nevertheless some exceptions that have been added to simplify the interactions for the following classes: <code class="docutils literal notranslate"><span class="pre">G4PVPlacement</span></code>,
 <code class="docutils literal notranslate"><span class="pre">G4LogicalVolume</span></code>, <code class="docutils literal notranslate"><span class="pre">G4PVReplica</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Material</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Isotope</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Element</span></code>, <code class="docutils literal notranslate"><span class="pre">G4JLParticleGun</span></code>,
 <code class="docutils literal notranslate"><span class="pre">G4JLDetectorConstruction</span></code>, <code class="docutils literal notranslate"><span class="pre">G4JLGeneratorAction</span></code>, <code class="docutils literal notranslate"><span class="pre">G4JLRunAction</span></code>, <code class="docutils literal notranslate"><span class="pre">G4JLSensDet</span></code>, <code class="docutils literal notranslate"><span class="pre">G4JLWorkerInitialization</span></code>, <code class="docutils literal notranslate"><span class="pre">G4JLStateDependent</span></code>,
@@ -589,7 +589,7 @@ typeof(p_box[]) = Geant4.G4BoxDereferenced
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">box1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4Box</span><span class="p">(</span><span class="s">&quot;box1&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w">                                   </span><span class="c"># construct boxes</span>
 <span class="n">box2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4Box</span><span class="p">(</span><span class="s">&quot;box2&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">                                  </span>
-<span class="n">union</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4UnionSolid</span><span class="p">(</span><span class="s">&quot;union&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CxxPtr</span><span class="p">(</span><span class="n">box1</span><span class="p">),</span><span class="w"> </span><span class="n">CxxPtr</span><span class="p">(</span><span class="n">box2</span><span class="p">))</span><span class="w">     </span><span class="c"># construct a union solid with the same box</span>
+<span class="n">union</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">G4UnionSolid</span><span class="p">(</span><span class="s">&quot;union&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CxxPtr</span><span class="p">(</span><span class="n">box1</span><span class="p">),</span><span class="w"> </span><span class="n">CxxPtr</span><span class="p">(</span><span class="n">box2</span><span class="p">))</span><span class="w">     </span><span class="c"># construct a union solid with the two boxes</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">union</span><span class="p">)</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">DistanceToIn</span><span class="p">(</span><span class="n">union</span><span class="p">,</span><span class="w"> </span><span class="n">G4ThreeVector</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
@@ -608,8 +608,8 @@ DistanceToIn(union, G4ThreeVector(10, 10, 10)) = 9.0
 <p>now force a GC</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">box1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">box2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nothing</span>
-<span class="n">GC</span><span class="o">.</span><span class="n">gc</span><span class="p">()</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">box1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">box2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nothing</span><span class="w">                           </span><span class="c"># removed the reference to the G4Box objects</span>
+<span class="n">GC</span><span class="o">.</span><span class="n">gc</span><span class="p">()</span><span class="w">                                         </span><span class="c"># force a garbage collection now</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">GetCubicVolume</span><span class="p">(</span><span class="n">union</span><span class="p">)</span><span class="w">                     </span><span class="c"># G4BooleanSolid cashes the volume</span>
 <span class="c"># DistanceToIn(union, G4ThreeVector(10,10,10))  # this will probably crash the program</span>
 </pre></div>
@@ -730,7 +730,7 @@ DistanceToIn(union, G4ThreeVector(10, 10, 10)) = 9.0
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-instantiation">Object instantiation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-object-methods">Calling object methods</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-static-class-methods">Calling static class methods</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-in-the-inheritance">Working in the inheritance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-inheritance">Working with inheritance</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-ownership">Object ownership</a></li>
 </ul>
 </li>
