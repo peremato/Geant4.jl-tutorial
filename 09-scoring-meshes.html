@@ -466,7 +466,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**************************************************************
- Geant4 version Name: geant4-11-02 [MT]   (8-December-2023)
+ Geant4 version Name: geant4-11-02-patch-01 [MT]   (16-February-2024)
   &lt;&lt; in Multi-threaded mode &gt;&gt; 
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
@@ -510,44 +510,44 @@ G4ScoringBox : boxMesh_1 --- Shape: Box mesh
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4WT1 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4WT2 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
 G4WT0 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
 G4WT3 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
-G4WT2 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT1 &gt; .... G4ScoringMessenger::MeshBinCommand - G4ScoringBox
+G4WT2 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT2 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT2 &gt;  Size (x, y, z): (5, 5, 20) [cm]
+G4WT2 &gt;  # of segments: (20, 20, 40)
+G4WT2 &gt;  displacement: (0, 0, 0) [cm]
+G4WT2 &gt;  registered primitve scorers : 
+G4WT2 &gt;    0  eDep
+G4WT3 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT2 &gt;    1  nOfStepGamma     with  gammafilter
+G4WT0 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT2 &gt;    2  nOfStepEMinus     with  eMinusFilter
+G4WT2 &gt;    3  nOfStepEPlus     with  ePlusFilter
 G4WT1 &gt; G4ScoringManager has 1 scoring meshes.
 G4WT1 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
-G4WT1 &gt;  Size (x, y, z): (5, 5, 20) [cm]
-G4WT0 &gt; G4ScoringManager has 1 scoring meshes.
-G4WT2 &gt; G4ScoringManager has 1 scoring meshes.
 G4WT0 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT1 &gt;  Size (x, y, z): (5, 5, 20) [cm]
 G4WT1 &gt;  # of segments: (20, 20, 40)
-G4WT1 &gt;  displacement: (0, 0, 0) [cm]
 G4WT0 &gt;  Size (x, y, z): (5, 5, 20) [cm]
-G4WT2 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
+G4WT1 &gt;  displacement: (0, 0, 0) [cm]
 G4WT1 &gt;  registered primitve scorers : 
-G4WT2 &gt;  Size (x, y, z): (5, 5, 20) [cm]
+G4WT0 &gt;  # of segments: (20, 20, 40)
+G4WT0 &gt;  displacement: (0, 0, 0) [cm]
+G4WT0 &gt;  registered primitve scorers : 
+G4WT0 &gt;    0  eDep
 G4WT1 &gt;    0  eDep
-G4WT3 &gt; G4ScoringManager has 1 scoring meshes.
+G4WT0 &gt;    1  nOfStepGamma     with  gammafilter
+G4WT0 &gt;    2  nOfStepEMinus     with  eMinusFilter
+G4WT0 &gt;    3  nOfStepEPlus     with  ePlusFilter
 G4WT1 &gt;    1  nOfStepGamma     with  gammafilter
 G4WT1 &gt;    2  nOfStepEMinus     with  eMinusFilter
 G4WT3 &gt; G4ScoringBox : boxMesh_1 --- Shape: Box mesh
-G4WT1 &gt;    3  nOfStepEPlus     with  ePlusFilter
-G4WT0 &gt;  # of segments: (20, 20, 40)
 G4WT3 &gt;  Size (x, y, z): (5, 5, 20) [cm]
+G4WT1 &gt;    3  nOfStepEPlus     with  ePlusFilter
 G4WT3 &gt;  # of segments: (20, 20, 40)
-G4WT0 &gt;  displacement: (0, 0, 0) [cm]
-G4WT2 &gt;  # of segments: (20, 20, 40)
-G4WT0 &gt;  registered primitve scorers : 
-G4WT2 &gt;  displacement: (0, 0, 0) [cm]
-G4WT0 &gt;    0  eDep
-G4WT2 &gt;  registered primitve scorers : 
-G4WT0 &gt;    1  nOfStepGamma     with  gammafilter
-G4WT2 &gt;    0  eDep
-G4WT2 &gt;    1  nOfStepGamma     with  gammafilter
-G4WT0 &gt;    2  nOfStepEMinus     with  eMinusFilter
-G4WT2 &gt;    2  nOfStepEMinus     with  eMinusFilter
-G4WT0 &gt;    3  nOfStepEPlus     with  ePlusFilter
-G4WT2 &gt;    3  nOfStepEPlus     with  ePlusFilter
 G4WT3 &gt;  displacement: (0, 0, 0) [cm]
 G4WT3 &gt;  registered primitve scorers : 
 G4WT3 &gt;    0  eDep
@@ -576,26 +576,26 @@ Let’s see a X-Y plane of it in the middle of the Z axis:</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20×20 Matrix{Float64}:
-  5.94099   5.95442   8.0597   20.6988   …  14.7802   3.86905   3.38965
- 12.2952    8.47801  16.6148   25.8096      28.4247  17.5356   17.3279
- 12.6342   21.3241   27.5582   24.0225      25.0042  20.4195   11.5758
-  8.6538   23.3961   30.1463   35.02        20.164   23.6781   22.6442
- 17.8146   25.8436   25.1231   45.4637      30.8383  11.129    14.5411
- 21.1808   28.6477   42.675    55.7317   …  43.14    31.242    22.5675
- 34.1686   36.0857   41.5437   80.6889      62.6971  18.546    19.1157
- 23.1501   31.3417   47.4562  108.311       83.7823  38.5574   34.0064
- 41.9158   61.5902   76.4895  100.302       72.2943  46.6063   26.2383
- 35.1169   63.6285   93.1625  130.669       54.4577  56.1048   40.4825
- 33.9777   47.0302   75.7322  139.074    …  62.9708  46.6766   26.4466
- 48.9055   46.3535   56.8372  127.002       46.4056  35.0922   35.103
- 26.9914   40.1434   58.3435  108.329       68.2444  46.923    25.9049
- 32.7506   23.8403   62.719    58.7041      47.4358  23.6164   25.4509
- 16.9339   33.5205   46.972    45.2083      24.7629  13.8992   12.91
- 27.1514   30.8873   33.3867   47.8275   …  26.201   15.7865   17.5404
-  9.03172  11.9211   27.9348   59.3264      28.2604  18.9067   18.4095
- 21.5622   13.6926   30.2682   24.4722      23.8286  15.1732    8.17338
- 11.0779   14.6096   19.353    30.0208      10.6445  15.6097    9.26605
-  4.95976  10.0558    9.5979    9.04128     15.7205  15.1766   11.6101
+ 22.6907    8.23238   9.53181   14.7324  …  12.409     7.39246  17.7415
+ 11.2568   10.365    21.2517    24.7346     17.5209   15.3881    1.71277
+ 12.9987   15.2373   14.4912    48.1607     22.5194   19.1845   11.8564
+  9.42243  19.6698   23.8529    37.7654     19.5384   21.3335   13.5281
+ 22.8952   24.6838   37.5823    52.9955     30.5014   33.8069   13.4116
+ 25.7023   25.9152   33.594     74.3156  …  26.7333   24.8169   28.8356
+ 32.9647   38.8203   49.2023    69.869      34.747    17.5358   23.1117
+ 26.5994   42.2314   62.3937    68.9426     74.4483   26.0788   33.6273
+ 11.4288   38.1839   59.5371   116.112      54.4134   35.2306   21.319
+ 16.6416   46.9006   65.8704   109.926      40.7341   46.4459   27.2181
+ 19.2279   44.3896   75.6179   104.706   …  73.4129   59.2247   32.4233
+ 20.4118   47.9795   59.2302   126.023      58.434    62.0383   41.5008
+ 24.6917   46.6389   60.4266    95.9413     80.301    29.0629   28.9642
+ 17.0803   32.8747   49.331     87.1838     37.8035   38.9716   39.1364
+ 12.9969   36.0215   43.2987    53.7823     57.9662   18.7645   20.4736
+ 13.24     24.9719   27.4121    42.8602  …  29.3471   21.7373   11.0561
+  9.799    21.3981   30.4914    31.8881     35.2386   31.7529   11.3309
+  6.4313   15.8679   37.8778    28.2031     33.2141    9.74859  10.3116
+  5.79865  13.9472   13.9546    27.2462     14.7916    8.13246  11.2221
+  6.29478  14.4728    7.10103   16.5264      7.39579  14.2824    9.63563
 </pre></div>
 </div>
 </div>
@@ -609,7 +609,7 @@ Let’s see a X-Y plane of it in the middle of the Z axis:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7c528bb3db1aee6baa5b22f504278f7872a61eafa7a9fa5def2852c1a6a0eabb.png" src="_images/7c528bb3db1aee6baa5b22f504278f7872a61eafa7a9fa5def2852c1a6a0eabb.png" />
+<img alt="_images/e679fde6f784a1fc0f396f371db3041a3479c2871ff1f647131c7dd2d404b716.png" src="_images/e679fde6f784a1fc0f396f371db3041a3479c2871ff1f647131c7dd2d404b716.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -620,7 +620,7 @@ Let’s see a X-Y plane of it in the middle of the Z axis:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fefc58f9dba3d053cd560f955d0741091788641b74681dfb44220950a7c16782.png" src="_images/fefc58f9dba3d053cd560f955d0741091788641b74681dfb44220950a7c16782.png" />
+<img alt="_images/d58e389db409fe62c875fa6dd1a76e56e52fb7df6bac8be51c02ef1fca848f09.png" src="_images/d58e389db409fe62c875fa6dd1a76e56e52fb7df6bac8be51c02ef1fca848f09.png" />
 </div>
 </div>
 </section>

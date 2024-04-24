@@ -629,7 +629,7 @@ Please note that user data has been declared with <code class="docutils literal 
 <span class="k">function</span><span class="w"> </span><span class="n">endrun</span><span class="p">(</span><span class="n">run</span><span class="o">::</span><span class="kt">G4Run</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="o">::</span><span class="kt">G4JLApplication</span><span class="p">)</span><span class="o">::</span><span class="kt">Nothing</span>
 <span class="w">    </span><span class="n">partName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">gun</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetParticleDefinition</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">GetParticleName</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="kt">String</span>
 <span class="w">    </span><span class="c">#---end run action is called for each workwer thread and the master one</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">G4Threading!G4GetThreadId</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">G4Threading!G4GetThreadId</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="w">        </span><span class="c">#---This is the master thread, so we need to add all the simuation results-----------------</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span>
@@ -704,7 +704,7 @@ Please note that user data has been declared with <code class="docutils literal 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**************************************************************
- Geant4 version Name: geant4-11-02 [MT]   (8-December-2023)
+ Geant4 version Name: geant4-11-02-patch-01 [MT]   (16-February-2024)
                        Copyright : Geant4 Collaboration
                       References : NIM A 506 (2003), 250-303
                                  : IEEE-TNS 53 (2006), 270-278
@@ -712,7 +712,7 @@ Please note that user data has been declared with <code class="docutils literal 
                              WWW : http://geant4.org/
 **************************************************************
 
-cryst_mat = CxxPtr{G4Material}(Ptr{G4Material} @0x000000000230a890)
+cryst_mat = CxxPtr{G4Material}(Ptr{G4Material} @0x000000000468d4d0)
 Checking overlaps for volume crystal:0 (G4Box) ... OK! 
 Checking overlaps for volume crystal:1 (G4Box) ... OK! 
 Checking overlaps for volume crystal:2 (G4Box) ... OK! 
@@ -775,7 +775,7 @@ Checking overlaps for volume Patient:0 (G4Tubs) ... OK!
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9594ece4fb5e1e9438c9c26db252d11f078c90244a3426d2ad9d3f2d42d7c844.png" src="../../_images/9594ece4fb5e1e9438c9c26db252d11f078c90244a3426d2ad9d3f2d42d7c844.png" />
+<img alt="../../_images/6232f7276abdf3b1045448462c9455487e6190a43669b23edbafb26e211902ed.png" src="../../_images/6232f7276abdf3b1045448462c9455487e6190a43669b23edbafb26e211902ed.png" />
 </div>
 </div>
 <p>Execute a run with 10000 events</p>
@@ -810,8 +810,8 @@ Threshold for very long decay time at rest        1 y
                            Hadronic Processes for GenericIon
   Process: Radioactivation
 --------------------End of Run------------------------------
- The run was 10000 F18 Nb of &#39;good&#39; e+ annihilations: 1225
- Total dose in patient : 305.75855967044504 pGy
+ The run was 10000 F18 Nb of &#39;good&#39; e+ annihilations: 1248
+ Total dose in patient : 306.4739019244688 pGy
 ------------------------------------------------------------ 
 </pre></div>
 </div>
