@@ -1,4 +1,4 @@
-`# Geant4.jl-tutorial
+# Geant4.jl-tutorial
 Materials for the Geant4.jl Tutorial.
 
 Read the rendered Jupyter book: https://peremato.github.io/Geant4.jl-tutorial/index.html
