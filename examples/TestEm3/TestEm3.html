@@ -14,45 +14,48 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-
-  
-  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -64,6 +67,7 @@
     <link rel="prev" title="Scintillating Detector Example" href="../Scintillation/Scintillation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -71,31 +75,16 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -103,7 +92,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -111,10 +99,15 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -123,7 +116,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -138,6 +132,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../../index.html">
   
@@ -151,21 +147,17 @@
     
     
     <img src="../../_static/juliaheplogo.png" class="logo__image only-light" alt="Geant4.jl Tutorials - Home"/>
-    <script>document.write(`<img src="../../_static/juliaheplogo.png" class="logo__image only-dark" alt="Geant4.jl Tutorials - Home"/>`);</script>
+    <img src="../../_static/juliaheplogo.png" class="logo__image only-dark pst-js-only" alt="Geant4.jl Tutorials - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -211,7 +203,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -220,14 +212,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -350,27 +342,19 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -740,9 +724,6 @@ defined in the DetectorMessenger class.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building Geometry now!!!
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>### G4LevelReader: broken transition 0 from level 24 to 24 for isotope Z= 89 A= 219 - use ground level
-</pre></div>
-</div>
 </div>
 </div>
 <section id="start-the-initial-run">
@@ -753,29 +734,6 @@ defined in the DetectorMessenger class.</p>
 <span class="n">do_plot</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4WT2 &gt; end-run  for worker 2
-G4WT4 &gt; end-run  for worker 4
-G4WT7 &gt; end-run  for worker 7
-G4WT5 &gt; end-run  for worker 5
-G4WT0 &gt; end-run  for worker 0
-G4WT3 &gt; end-run  for worker 3
-G4WT1 &gt; end-run  for worker 1
-G4WT6 &gt; end-run  for worker 6
-------------------------------------------------------------
- Beam particle e- E = 1.00 GeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Mean number of gamma          520.61
- Mean number of e-             894.80
- Mean number of e+             53.32
- Mean number of charged steps  3727.175000
- Mean number of neutral steps  3724.099000
-------------------------------------------------------------
-</pre></div>
-</div>
-<img alt="../../_images/50e7882b468ae5391a5a774ca10d34592ccbbfbe2cece9b463d73f7145a18808.png" src="../../_images/50e7882b468ae5391a5a774ca10d34592ccbbfbe2cece9b463d73f7145a18808.png" />
 </div>
 </div>
 </section>
@@ -788,27 +746,6 @@ G4WT6 &gt; end-run  for worker 6
 <span class="n">do_plot</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">simdata</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4WT5 &gt; end-run  for worker 5
-G4WT7 &gt; end-run  for worker 7
-G4WT6 &gt; end-run  for worker 6
-G4WT1 &gt; end-run  for worker 1
-G4WT2 &gt; end-run  for worker 2
-G4WT4 &gt; end-run  for worker 4
-G4WT3 &gt; end-run  for worker 3
-G4WT0 &gt; end-run  for worker 0
-------------------------------------------------------------
- Beam particle e- E = 0.10 GeV
- Mean number of gamma          51.22
- Mean number of e-             89.88
- Mean number of e+             4.77
- Mean number of charged steps  369.980000
- Mean number of neutral steps  374.400000
-------------------------------------------------------------
-</pre></div>
-</div>
-<img alt="../../_images/9448a87c183cedb5075e61fe967689dfd5e4ff0a37b2e3a1a788873a80c0001e.png" src="../../_images/9448a87c183cedb5075e61fe967689dfd5e4ff0a37b2e3a1a788873a80c0001e.png" />
 </div>
 </div>
 </section>
@@ -823,53 +760,10 @@ G4WT0 &gt; end-run  for worker 0
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building Geometry now!!!
-G4WT2 &gt; end-run  for worker 2
-G4WT4 &gt; end-run  for worker 4
-G4WT6 &gt; end-run  for worker 6
-G4WT3 &gt; end-run  for worker 3
-G4WT5 &gt; end-run  for worker 5
-G4WT0 &gt; end-run  for worker 0
-G4WT7 &gt; end-run  for worker 7
-G4WT1 &gt; end-run  for worker 1
-------------------------------------------------------------
- Beam particle e- E = 0.10 GeV
- Mean number of gamma          48.94
- Mean number of e-             86.95
- Mean number of e+             4.43
- Mean number of charged steps  406.210000
- Mean number of neutral steps  461.200000
-------------------------------------------------------------
-</pre></div>
-</div>
-<img alt="../../_images/65e31963cf394aed2883c7935ddbbe3d86cf12dbfcaed2aa6448ea99d30c724f.png" src="../../_images/65e31963cf394aed2883c7935ddbbe3d86cf12dbfcaed2aa6448ea99d30c724f.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">10000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4WT7 &gt; end-run  for worker 7
-G4WT0 &gt; end-run  for worker 0
-G4WT5 &gt; end-run  for worker 5
-G4WT6 &gt; end-run  for worker 6
-G4WT2 &gt; end-run  for worker 2
-G4WT1 &gt; end-run  for worker 1
-G4WT4 &gt; end-run  for worker 4
-G4WT3 &gt; end-run  for worker 3
-------------------------------------------------------------
- Beam particle e- E = 0.10 GeV
- Mean number of gamma          49.38
- Mean number of e-             87.43
- Mean number of e+             4.65
- Mean number of charged steps  396.380500
- Mean number of neutral steps  468.174500
-------------------------------------------------------------
-  6.128091 seconds (20.23 M allocations: 309.024 MiB)
 </pre></div>
 </div>
 </div>
@@ -883,398 +777,6 @@ G4WT3 &gt; end-run  for worker 3
 <span class="w">    </span><span class="n">G4JL_println</span><span class="p">(</span><span class="s">&quot;Track ID: </span><span class="si">$</span><span class="p">(</span><span class="n">GetTrackID</span><span class="p">(</span><span class="n">track</span><span class="p">))</span><span class="s"> ended&quot;</span><span class="p">)</span>
 <span class="k">end</span>
 <span class="n">beamOn</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G4WT4 &gt; end-run  for worker 4
-G4WT6 &gt; end-run  for worker 6
-G4WT2 &gt; end-run  for worker 2
-G4WT3 &gt; end-run  for worker 3
-G4WT1 &gt; end-run  for worker 1
-G4WT5 &gt; Track ID: 1 ended
-G4WT7 &gt; Track ID: 1 ended
-G4WT5 &gt; Track ID: 7 ended
-G4WT5 &gt; Track ID: 8 ended
-G4WT0 &gt; Track ID: 1 ended
-G4WT5 &gt; Track ID: 6 ended
-G4WT5 &gt; Track ID: 5 ended
-G4WT5 &gt; Track ID: 9 ended
-G4WT7 &gt; Track ID: 18 ended
-G4WT7 &gt; Track ID: 21 ended
-G4WT5 &gt; Track ID: 4 ended
-G4WT7 &gt; Track ID: 20 ended
-G4WT5 &gt; Track ID: 10 ended
-G4WT0 &gt; Track ID: 16 ended
-G4WT5 &gt; Track ID: 3 ended
-G4WT7 &gt; Track ID: 19 ended
-G4WT7 &gt; Track ID: 17 ended
-G4WT7 &gt; Track ID: 16 ended
-G4WT0 &gt; Track ID: 18 ended
-G4WT7 &gt; Track ID: 22 ended
-G4WT7 &gt; Track ID: 23 ended
-G4WT0 &gt; Track ID: 21 ended
-G4WT0 &gt; Track ID: 23 ended
-G4WT0 &gt; Track ID: 22 ended
-G4WT0 &gt; Track ID: 20 ended
-G4WT7 &gt; Track ID: 15 ended
-G4WT0 &gt; Track ID: 24 ended
-G4WT7 &gt; Track ID: 24 ended
-G4WT0 &gt; Track ID: 19 ended
-G4WT7 &gt; Track ID: 14 ended
-G4WT5 &gt; Track ID: 12 ended
-G4WT7 &gt; Track ID: 25 ended
-G4WT5 &gt; Track ID: 33 ended
-G4WT5 &gt; Track ID: 34 ended
-G4WT5 &gt; Track ID: 32 ended
-G4WT5 &gt; Track ID: 35 ended
-G4WT5 &gt; Track ID: 31 ended
-G4WT5 &gt; Track ID: 36 ended
-G4WT7 &gt; Track ID: 13 ended
-G4WT5 &gt; Track ID: 30 ended
-G4WT5 &gt; Track ID: 37 ended
-G4WT7 &gt; Track ID: 28 ended
-G4WT5 &gt; Track ID: 29 ended
-G4WT0 &gt; Track ID: 17 ended
-G4WT5 &gt; Track ID: 38 ended
-G4WT7 &gt; Track ID: 27 ended
-G4WT7 &gt; Track ID: 26 ended
-G4WT5 &gt; Track ID: 28 ended
-G4WT5 &gt; Track ID: 40 ended
-G4WT7 &gt; Track ID: 12 ended
-G4WT7 &gt; Track ID: 29 ended
-G4WT7 &gt; Track ID: 11 ended
-G4WT5 &gt; Track ID: 39 ended
-G4WT7 &gt; Track ID: 30 ended
-G4WT0 &gt; Track ID: 26 ended
-G4WT5 &gt; Track ID: 42 ended
-G4WT5 &gt; Track ID: 41 ended
-G4WT0 &gt; Track ID: 28 ended
-G4WT5 &gt; Track ID: 27 ended
-G4WT5 &gt; Track ID: 43 ended
-G4WT0 &gt; Track ID: 27 ended
-G4WT5 &gt; Track ID: 26 ended
-G4WT7 &gt; Track ID: 10 ended
-G4WT0 &gt; Track ID: 25 ended
-G4WT5 &gt; Track ID: 45 ended
-G4WT0 &gt; Track ID: 30 ended
-G4WT5 &gt; Track ID: 44 ended
-G4WT5 &gt; Track ID: 25 ended
-G4WT0 &gt; Track ID: 29 ended
-G4WT5 &gt; Track ID: 46 ended
-G4WT5 &gt; Track ID: 24 ended
-G4WT7 &gt; Track ID: 32 ended
-G4WT5 &gt; Track ID: 47 ended
-G4WT7 &gt; Track ID: 37 ended
-G4WT7 &gt; Track ID: 38 ended
-G4WT0 &gt; Track ID: 15 ended
-G4WT5 &gt; Track ID: 23 ended
-G4WT5 &gt; Track ID: 52 ended
-G4WT5 &gt; Track ID: 51 ended
-G4WT7 &gt; Track ID: 36 ended
-G4WT5 &gt; Track ID: 50 ended
-G4WT5 &gt; Track ID: 49 ended
-G4WT7 &gt; Track ID: 40 ended
-G4WT0 &gt; Track ID: 14 ended
-G4WT5 &gt; Track ID: 48 ended
-G4WT7 &gt; Track ID: 39 ended
-G4WT0 &gt; Track ID: 31 ended
-G4WT5 &gt; Track ID: 22 ended
-G4WT5 &gt; Track ID: 53 ended
-G4WT7 &gt; Track ID: 35 ended
-G4WT0 &gt; Track ID: 13 ended
-G4WT7 &gt; Track ID: 41 ended
-G4WT0 &gt; Track ID: 32 ended
-G4WT5 &gt; Track ID: 21 ended
-G4WT0 &gt; Track ID: 12 ended
-G4WT7 &gt; Track ID: 34 ended
-G4WT7 &gt; Track ID: 45 ended
-G4WT0 &gt; Track ID: 34 ended
-G4WT7 &gt; Track ID: 44 ended
-G4WT0 &gt; Track ID: 33 ended
-G4WT7 &gt; Track ID: 43 ended
-G4WT5 &gt; Track ID: 55 ended
-G4WT5 &gt; Track ID: 63 ended
-G4WT5 &gt; Track ID: 64 ended
-G4WT5 &gt; Track ID: 62 ended
-G4WT0 &gt; Track ID: 11 ended
-G4WT5 &gt; Track ID: 66 ended
-G4WT5 &gt; Track ID: 65 ended
-G4WT0 &gt; Track ID: 37 ended
-G4WT0 &gt; Track ID: 36 ended
-G4WT7 &gt; Track ID: 42 ended
-G4WT5 &gt; Track ID: 61 ended
-G4WT5 &gt; Track ID: 67 ended
-G4WT5 &gt; Track ID: 70 ended
-G4WT0 &gt; Track ID: 35 ended
-G4WT7 &gt; Track ID: 33 ended
-G4WT5 &gt; Track ID: 69 ended
-G4WT0 &gt; Track ID: 40 ended
-G4WT7 &gt; Track ID: 46 ended
-G4WT5 &gt; Track ID: 68 ended
-G4WT0 &gt; Track ID: 41 ended
-G4WT5 &gt; Track ID: 71 ended
-G4WT0 &gt; Track ID: 39 ended
-G4WT5 &gt; Track ID: 72 ended
-G4WT0 &gt; Track ID: 42 ended
-G4WT5 &gt; Track ID: 60 ended
-G4WT5 &gt; Track ID: 74 ended
-G4WT0 &gt; Track ID: 38 ended
-G4WT0 &gt; Track ID: 43 ended
-G4WT5 &gt; Track ID: 73 ended
-G4WT5 &gt; Track ID: 59 ended
-G4WT5 &gt; Track ID: 75 ended
-G4WT0 &gt; Track ID: 10 ended
-G4WT7 &gt; Track ID: 31 ended
-G4WT5 &gt; Track ID: 58 ended
-G4WT0 &gt; Track ID: 45 ended
-G4WT5 &gt; Track ID: 76 ended
-G4WT0 &gt; Track ID: 44 ended
-G4WT7 &gt; Track ID: 52 ended
-G4WT5 &gt; Track ID: 57 ended
-G4WT7 &gt; Track ID: 54 ended
-G4WT5 &gt; Track ID: 78 ended
-G4WT0 &gt; Track ID: 9 ended
-G4WT5 &gt; Track ID: 77 ended
-G4WT7 &gt; Track ID: 53 ended
-G4WT5 &gt; Track ID: 56 ended
-G4WT0 &gt; Track ID: 46 ended
-G4WT0 &gt; Track ID: 8 ended
-G4WT0 &gt; Track ID: 7 ended
-G4WT5 &gt; Track ID: 54 ended
-G4WT5 &gt; Track ID: 84 ended
-G4WT5 &gt; Track ID: 85 ended
-G4WT5 &gt; Track ID: 83 ended
-G4WT5 &gt; Track ID: 87 ended
-G4WT5 &gt; Track ID: 86 ended
-G4WT5 &gt; Track ID: 88 ended
-G4WT5 &gt; Track ID: 89 ended
-G4WT5 &gt; Track ID: 82 ended
-G4WT5 &gt; Track ID: 90 ended
-G4WT7 &gt; Track ID: 51 ended
-G4WT5 &gt; Track ID: 81 ended
-G4WT5 &gt; Track ID: 91 ended
-G4WT7 &gt; Track ID: 56 ended
-G4WT5 &gt; Track ID: 80 ended
-G4WT7 &gt; Track ID: 55 ended
-G4WT0 &gt; Track ID: 48 ended
-G4WT5 &gt; Track ID: 92 ended
-G4WT7 &gt; Track ID: 57 ended
-G4WT0 &gt; Track ID: 59 ended
-G4WT5 &gt; Track ID: 79 ended
-G4WT5 &gt; Track ID: 95 ended
-G4WT0 &gt; Track ID: 60 ended
-G4WT5 &gt; Track ID: 94 ended
-G4WT5 &gt; Track ID: 93 ended
-G4WT5 &gt; Track ID: 20 ended
-G4WT5 &gt; Track ID: 96 ended
-G4WT0 &gt; Track ID: 58 ended
-G4WT5 &gt; Track ID: 19 ended
-G4WT0 &gt; Track ID: 62 ended
-G4WT5 &gt; Track ID: 98 ended
-G4WT0 &gt; Track ID: 61 ended
-G4WT0 &gt; Track ID: 57 ended
-G4WT0 &gt; Track ID: 64 ended
-G4WT0 &gt; Track ID: 63 ended
-G4WT0 &gt; Track ID: 56 ended
-G4WT0 &gt; Track ID: 65 ended
-G4WT0 &gt; Track ID: 55 ended
-G4WT0 &gt; Track ID: 67 ended
-G4WT5 &gt; Track ID: 97 ended
-G4WT5 &gt; Track ID: 99 ended
-G4WT0 &gt; Track ID: 66 ended
-G4WT5 &gt; Track ID: 100 ended
-G4WT5 &gt; Track ID: 18 ended
-G4WT5 &gt; Track ID: 101 ended
-G4WT0 &gt; Track ID: 54 ended
-G4WT7 &gt; Track ID: 50 ended
-G4WT0 &gt; Track ID: 69 ended
-G4WT0 &gt; Track ID: 68 ended
-G4WT0 &gt; Track ID: 53 ended
-G4WT0 &gt; Track ID: 71 ended
-G4WT7 &gt; Track ID: 49 ended
-G4WT0 &gt; Track ID: 70 ended
-G4WT0 &gt; Track ID: 52 ended
-G4WT0 &gt; Track ID: 74 ended
-G4WT0 &gt; Track ID: 73 ended
-G4WT0 &gt; Track ID: 72 ended
-G4WT0 &gt; Track ID: 51 ended
-G4WT0 &gt; Track ID: 76 ended
-G4WT0 &gt; Track ID: 75 ended
-G4WT7 &gt; Track ID: 59 ended
-G4WT0 &gt; Track ID: 50 ended
-G4WT5 &gt; Track ID: 17 ended
-G4WT7 &gt; Track ID: 61 ended
-G4WT5 &gt; Track ID: 16 ended
-G4WT5 &gt; Track ID: 15 ended
-G4WT0 &gt; Track ID: 80 ended
-G4WT5 &gt; Track ID: 102 ended
-G4WT0 &gt; Track ID: 79 ended
-G4WT5 &gt; Track ID: 14 ended
-G4WT5 &gt; Track ID: 106 ended
-G4WT7 &gt; Track ID: 63 ended
-G4WT0 &gt; Track ID: 78 ended
-G4WT0 &gt; Track ID: 77 ended
-G4WT7 &gt; Track ID: 62 ended
-G4WT5 &gt; Track ID: 105 ended
-G4WT5 &gt; Track ID: 104 ended
-G4WT5 &gt; Track ID: 103 ended
-G4WT5 &gt; Track ID: 13 ended
-G4WT5 &gt; Track ID: 108 ended
-G4WT5 &gt; Track ID: 107 ended
-G4WT7 &gt; Track ID: 60 ended
-G4WT7 &gt; Track ID: 64 ended
-G4WT7 &gt; Track ID: 58 ended
-G4WT0 &gt; Track ID: 49 ended
-G4WT0 &gt; Track ID: 84 ended
-G4WT5 &gt; Track ID: 11 ended
-G4WT0 &gt; Track ID: 83 ended
-G4WT5 &gt; Track ID: 113 ended
-G4WT5 &gt; Track ID: 114 ended
-G4WT0 &gt; Track ID: 82 ended
-G4WT5 &gt; Track ID: 112 ended
-G4WT5 &gt; Track ID: 115 ended
-G4WT0 &gt; Track ID: 81 ended
-G4WT5 &gt; Track ID: 111 ended
-G4WT5 &gt; Track ID: 117 ended
-G4WT5 &gt; Track ID: 119 ended
-G4WT5 &gt; Track ID: 120 ended
-G4WT7 &gt; Track ID: 48 ended
-G4WT5 &gt; Track ID: 118 ended
-G4WT5 &gt; Track ID: 122 ended
-G4WT5 &gt; Track ID: 121 ended
-G4WT5 &gt; Track ID: 116 ended
-G4WT7 &gt; Track ID: 47 ended
-G4WT5 &gt; Track ID: 110 ended
-G4WT7 &gt; Track ID: 66 ended
-G4WT5 &gt; Track ID: 124 ended
-G4WT7 &gt; Track ID: 65 ended
-G4WT5 &gt; Track ID: 123 ended
-G4WT5 &gt; Track ID: 109 ended
-G4WT7 &gt; Track ID: 9 ended
-G4WT5 &gt; Track ID: 125 ended
-G4WT5 &gt; Track ID: 2 ended
-G4WT5 &gt; Track ID: 127 ended
-G4WT5 &gt; Track ID: 129 ended
-G4WT5 &gt; Track ID: 130 ended
-G4WT5 &gt; Track ID: 128 ended
-G4WT5 &gt; Track ID: 132 ended
-G4WT5 &gt; Track ID: 131 ended
-G4WT5 &gt; Track ID: 126 ended
-G4WT5 &gt; Track ID: 133 ended
-G4WT0 &gt; Track ID: 47 ended
-G4WT5 &gt; end-run  for worker 5
-G4WT0 &gt; Track ID: 86 ended
-G4WT7 &gt; Track ID: 68 ended
-G4WT7 &gt; Track ID: 67 ended
-G4WT0 &gt; Track ID: 87 ended
-G4WT7 &gt; Track ID: 8 ended
-G4WT7 &gt; Track ID: 7 ended
-G4WT0 &gt; Track ID: 85 ended
-G4WT7 &gt; Track ID: 69 ended
-G4WT0 &gt; Track ID: 91 ended
-G4WT0 &gt; Track ID: 90 ended
-G4WT7 &gt; Track ID: 6 ended
-G4WT0 &gt; Track ID: 89 ended
-G4WT0 &gt; Track ID: 88 ended
-G4WT0 &gt; Track ID: 95 ended
-G4WT0 &gt; Track ID: 96 ended
-G4WT7 &gt; Track ID: 71 ended
-G4WT0 &gt; Track ID: 94 ended
-G4WT0 &gt; Track ID: 97 ended
-G4WT0 &gt; Track ID: 93 ended
-G4WT7 &gt; Track ID: 76 ended
-G4WT0 &gt; Track ID: 98 ended
-G4WT7 &gt; Track ID: 77 ended
-G4WT0 &gt; Track ID: 92 ended
-G4WT7 &gt; Track ID: 75 ended
-G4WT0 &gt; Track ID: 99 ended
-G4WT7 &gt; Track ID: 78 ended
-G4WT7 &gt; Track ID: 74 ended
-G4WT7 &gt; Track ID: 79 ended
-G4WT7 &gt; Track ID: 73 ended
-G4WT0 &gt; Track ID: 6 ended
-G4WT7 &gt; Track ID: 80 ended
-G4WT0 &gt; Track ID: 101 ended
-G4WT7 &gt; Track ID: 81 ended
-G4WT0 &gt; Track ID: 100 ended
-G4WT7 &gt; Track ID: 82 ended
-G4WT7 &gt; Track ID: 72 ended
-G4WT0 &gt; Track ID: 5 ended
-G4WT0 &gt; Track ID: 103 ended
-G4WT7 &gt; Track ID: 70 ended
-G4WT0 &gt; Track ID: 102 ended
-G4WT7 &gt; Track ID: 86 ended
-G4WT7 &gt; Track ID: 88 ended
-G4WT0 &gt; Track ID: 104 ended
-G4WT7 &gt; Track ID: 87 ended
-G4WT0 &gt; Track ID: 106 ended
-G4WT0 &gt; Track ID: 105 ended
-G4WT7 &gt; Track ID: 85 ended
-G4WT7 &gt; Track ID: 90 ended
-G4WT0 &gt; Track ID: 4 ended
-G4WT7 &gt; Track ID: 89 ended
-G4WT7 &gt; Track ID: 84 ended
-G4WT0 &gt; Track ID: 108 ended
-G4WT7 &gt; Track ID: 83 ended
-G4WT7 &gt; Track ID: 91 ended
-G4WT0 &gt; Track ID: 107 ended
-G4WT7 &gt; Track ID: 5 ended
-G4WT7 &gt; Track ID: 92 ended
-G4WT0 &gt; Track ID: 110 ended
-G4WT0 &gt; Track ID: 113 ended
-G4WT7 &gt; Track ID: 4 ended
-G4WT0 &gt; Track ID: 112 ended
-G4WT7 &gt; Track ID: 93 ended
-G4WT0 &gt; Track ID: 111 ended
-G4WT0 &gt; Track ID: 109 ended
-G4WT7 &gt; Track ID: 3 ended
-G4WT0 &gt; Track ID: 114 ended
-G4WT0 &gt; Track ID: 3 ended
-G4WT0 &gt; Track ID: 115 ended
-G4WT0 &gt; Track ID: 2 ended
-G4WT0 &gt; Track ID: 118 ended
-G4WT7 &gt; Track ID: 95 ended
-G4WT7 &gt; Track ID: 100 ended
-G4WT0 &gt; Track ID: 117 ended
-G4WT7 &gt; Track ID: 103 ended
-G4WT7 &gt; Track ID: 102 ended
-G4WT7 &gt; Track ID: 101 ended
-G4WT7 &gt; Track ID: 99 ended
-G4WT7 &gt; Track ID: 104 ended
-G4WT7 &gt; Track ID: 98 ended
-G4WT7 &gt; Track ID: 106 ended
-G4WT0 &gt; Track ID: 116 ended
-G4WT7 &gt; Track ID: 105 ended
-G4WT0 &gt; end-run  for worker 0
-G4WT7 &gt; Track ID: 97 ended
-G4WT7 &gt; Track ID: 107 ended
-G4WT7 &gt; Track ID: 96 ended
-G4WT7 &gt; Track ID: 110 ended
-G4WT7 &gt; Track ID: 109 ended
-G4WT7 &gt; Track ID: 108 ended
-G4WT7 &gt; Track ID: 94 ended
-G4WT7 &gt; Track ID: 111 ended
-G4WT7 &gt; Track ID: 112 ended
-G4WT7 &gt; Track ID: 2 ended
-G4WT7 &gt; Track ID: 115 ended
-G4WT7 &gt; Track ID: 114 ended
-G4WT7 &gt; Track ID: 113 ended
-G4WT7 &gt; Track ID: 117 ended
-G4WT7 &gt; Track ID: 118 ended
-G4WT7 &gt; Track ID: 116 ended
-G4WT7 &gt; Track ID: 119 ended
-G4WT7 &gt; end-run  for worker 7
-------------------------------------------------------------
- Beam particle e- E = 0.10 GeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Mean number of gamma          44.00
- Mean number of e-             76.00
- Mean number of e+             3.33
- Mean number of charged steps  422.666667
- Mean number of neutral steps  322.666667
-------------------------------------------------------------
 </pre></div>
 </div>
 </div>
@@ -1292,16 +794,16 @@ G4WT7 &gt; end-run  for worker 7
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.10"
+            mode: "julia-1.11"
         },
         kernelOptions: {
-            name: "julia-1.10",
+            name: "julia-1.11",
             path: "./examples/TestEm3"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.10'</script>
+    <script>kernelName = 'julia-1.11'</script>
 
                 </article>
               
@@ -1310,7 +812,7 @@ G4WT7 &gt; end-run  for worker 7
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1329,7 +831,8 @@ G4WT7 &gt; end-run  for worker 7
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1395,8 +898,8 @@ By Pere Mato
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

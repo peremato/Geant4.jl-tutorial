@@ -1,0 +1,40 @@
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/julia-intro/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/runner/micromamba/envs/julia-intro/lib/python3.12/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/julia-intro/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/julia-intro/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/runner/micromamba/envs/julia-intro/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/runner/micromamba/envs/julia-intro/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/runner/micromamba/envs/julia-intro/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+using CairoMakie, Rotations, IGLWrap_jll  # to force loding G4Vis extension
+
+world = GetWorldVolume()
+img = draw(world)
+display("image/png", img)
+------------------
+
+
+MethodError: no method matching draw(::Geant4.G4VPhysicalVolumeDereferenced)
+The function `draw` exists, but no method is defined for this combination of argument types.
+
+[0mClosest candidates are:
+[0m  draw()
+[0m[90m   @[39m [35mGeant4[39m [90m~/.julia/packages/Geant4/LOysg/src/[39m[90m[4mGeant4.jl:43[24m[39m
+
+
+Stacktrace:
+ [1] top-level scope
+   @ In[10]:4
+

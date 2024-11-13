@@ -14,45 +14,48 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -65,6 +68,7 @@
     <link rel="prev" title="Interacting with the wrapped classes" href="02-wrapped-classes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -72,31 +76,16 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -104,7 +93,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -112,10 +100,15 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -124,7 +117,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -139,6 +133,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="index.html">
   
@@ -152,21 +148,17 @@
     
     
     <img src="_static/juliaheplogo.png" class="logo__image only-light" alt="Geant4.jl Tutorials - Home"/>
-    <script>document.write(`<img src="_static/juliaheplogo.png" class="logo__image only-dark" alt="Geant4.jl Tutorials - Home"/>`);</script>
+    <img src="_static/juliaheplogo.png" class="logo__image only-dark pst-js-only" alt="Geant4.jl Tutorials - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -212,7 +204,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -221,14 +213,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -351,27 +343,19 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -418,17 +402,17 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Geant4</span>
-<span class="k">using</span><span class="w"> </span><span class="n">Geant4</span><span class="o">.</span><span class="n">SystemOfUnits</span><span class="w">                </span><span class="c"># defines the usints used by Geant4 </span>
-<span class="k">using</span><span class="w"> </span><span class="n">CairoMakie</span><span class="p">,</span><span class="w"> </span><span class="n">Rotations</span><span class="p">,</span><span class="w"> </span><span class="n">IGLWrap_jll</span><span class="w">  </span><span class="c"># to force loading G4Vis extension</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Geant4</span><span class="o">.</span><span class="n">SystemOfUnits</span><span class="w">                </span><span class="c"># defines the units used by Geant4 (e.g. MeV, mm, ns, ...) </span>
+<span class="k">using</span><span class="w"> </span><span class="n">CairoMakie</span><span class="p">,</span><span class="w"> </span><span class="n">Rotations</span><span class="p">,</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="p">,</span><span class="w"> </span><span class="n">IGLWrap_jll</span><span class="w">  </span><span class="c"># to force loading G4Vis extension</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="defining-solids">
 <h2>Defining Solids<a class="headerlink" href="#defining-solids" title="Link to this heading">#</a></h2>
-<p>The first step is to define the solids. The following shapes are defined: <code class="docutils literal notranslate"><span class="pre">G4Box</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Cons</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Tubs</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Orb</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Sphere</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Trd</span></code>, <code class="docutils literal notranslate"><span class="pre">G4CutTubs</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Para</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Trap</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Torus</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Polycone</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Polyhedra</span></code>, <code class="docutils literal notranslate"><span class="pre">G4EllipticalTube</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Ellipsoid</span></code>, <code class="docutils literal notranslate"><span class="pre">G4EllipticalCone</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Paraboloid</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Hype</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Tet</span></code>, <code class="docutils literal notranslate"><span class="pre">G4ExtrudedSolid</span></code>, <code class="docutils literal notranslate"><span class="pre">G4TwistedBox</span></code>, <code class="docutils literal notranslate"><span class="pre">G4TwistedTrap</span></code>, <code class="docutils literal notranslate"><span class="pre">G4TwistedTrd</span></code>, <code class="docutils literal notranslate"><span class="pre">G4GenericTrap</span></code>, <code class="docutils literal notranslate"><span class="pre">G4TwistedTubs</span></code>. In addition there are the boolean shapes: <code class="docutils literal notranslate"><span class="pre">G4UnionSolid</span></code>, <code class="docutils literal notranslate"><span class="pre">G4SubtractionSolid</span></code>, <code class="docutils literal notranslate"><span class="pre">G4IntersectionSolid</span></code>.
-The definition of the constructor parameters can be found <a class="reference external" href="https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Detector/Geometry/geomSolids.html#constructed-solid-geometry-csg-solids">documentation</a></p>
-<p>Lets define a tube section like the following</p>
+<p>The first step is to define the solids. The following shapes are defined: <code class="docutils literal notranslate"><span class="pre">G4Box</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Cons</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Tubs</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Orb</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Sphere</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Trd</span></code>, <code class="docutils literal notranslate"><span class="pre">G4CutTubs</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Para</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Trap</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Torus</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Polycone</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Polyhedra</span></code>, <code class="docutils literal notranslate"><span class="pre">G4EllipticalTube</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Ellipsoid</span></code>, <code class="docutils literal notranslate"><span class="pre">G4EllipticalCone</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Paraboloid</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Hype</span></code>, <code class="docutils literal notranslate"><span class="pre">G4Tet</span></code>, <code class="docutils literal notranslate"><span class="pre">G4ExtrudedSolid</span></code>, <code class="docutils literal notranslate"><span class="pre">G4TwistedBox</span></code>, <code class="docutils literal notranslate"><span class="pre">G4TwistedTrap</span></code>, <code class="docutils literal notranslate"><span class="pre">G4TwistedTrd</span></code>, <code class="docutils literal notranslate"><span class="pre">G4GenericTrap</span></code>, <code class="docutils literal notranslate"><span class="pre">G4TwistedTubs</span></code>. In addition, there are the boolean shapes: <code class="docutils literal notranslate"><span class="pre">G4UnionSolid</span></code>, <code class="docutils literal notranslate"><span class="pre">G4SubtractionSolid</span></code>, <code class="docutils literal notranslate"><span class="pre">G4IntersectionSolid</span></code>.
+The definition of the constructor parameters can be found in the <a class="reference external" href="https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Detector/Geometry/geomSolids.html#constructed-solid-geometry-csg-solids">documentation</a></p>
+<p>Lets define a tube section like the following:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="n">cm</span>
@@ -441,7 +425,7 @@ The definition of the constructor parameters can be found <a class="reference ex
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4TubsAllocated(Ptr{Nothing} @0x00000000039a7ae0)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4TubsAllocated(Ptr{Nothing} @0x0000000004d91940)
 </pre></div>
 </div>
 </div>
@@ -455,7 +439,7 @@ The definition of the constructor parameters can be found <a class="reference ex
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/182a29520313df70f540216c5cc95751de03bdafeca962732a3c486b0bce328c.png" src="_images/182a29520313df70f540216c5cc95751de03bdafeca962732a3c486b0bce328c.png" />
+<img alt="_images/56a56fd8e286d9b4c63910671bbb4fff25d6b1aa4db019dda17c1a6d44b1fb92.png" src="_images/56a56fd8e286d9b4c63910671bbb4fff25d6b1aa4db019dda17c1a6d44b1fb92.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -467,7 +451,7 @@ The definition of the constructor parameters can be found <a class="reference ex
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/33fc3e2b7ee2533957f33b8ee52cd157f9db6678926bbb7634dec43584401ca4.png" src="_images/33fc3e2b7ee2533957f33b8ee52cd157f9db6678926bbb7634dec43584401ca4.png" />
+<img alt="_images/f0010de7b7421ecc4017c51970d620ac78fa78b0427051e19078f9094d4e69f4.png" src="_images/f0010de7b7421ecc4017c51970d620ac78fa78b0427051e19078f9094d4e69f4.png" />
 </div>
 </div>
 <section id="building-boolean-solids">
@@ -484,7 +468,7 @@ The definition of the constructor parameters can be found <a class="reference ex
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a83831dd06010b0f859273a46b53464cde858bec293002ce4a611b41281a3202.png" src="_images/a83831dd06010b0f859273a46b53464cde858bec293002ce4a611b41281a3202.png" />
+<img alt="_images/220741174f90ae1c429777ce56de917c13810bc220014abb5564e7d14d4c6222.png" src="_images/220741174f90ae1c429777ce56de917c13810bc220014abb5564e7d14d4c6222.png" />
 </div>
 </div>
 <p>Lets use some geometry functionality to experiment with the created solid. In this example we get the limits for the boolean solid and create a number if radom 3D points within the limits. Then select the ones that return <code class="docutils literal notranslate"><span class="pre">kInside</span></code> when calling the function <code class="docutils literal notranslate"><span class="pre">Inside(solid,</span> <span class="pre">point)</span></code>. And finally, we plot the points with <code class="docutils literal notranslate"><span class="pre">scatter</span></code> function from <code class="docutils literal notranslate"><span class="pre">Makie</span></code>.</p>
@@ -505,7 +489,7 @@ The definition of the constructor parameters can be found <a class="reference ex
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ce95e27ba506853a3aa1d40524cdbc8284da8d7c60422cb09c737f34709cd530.png" src="_images/ce95e27ba506853a3aa1d40524cdbc8284da8d7c60422cb09c737f34709cd530.png" />
+<img alt="_images/c52a1858f37c5e563e613bb3c80a000eec2a0d956533e73230103df04ba702aa.png" src="_images/c52a1858f37c5e563e613bb3c80a000eec2a0d956533e73230103df04ba702aa.png" />
 </div>
 </div>
 </section>
@@ -581,6 +565,9 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GetRadlen(Lu₂SiO₅) / cm = 1.1427324172087883
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1427324172087883
 </pre></div>
 </div>
@@ -606,7 +593,7 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4LogicalVolumeAllocated(Ptr{Nothing} @0x00000000035839a0)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4LogicalVolumeAllocated(Ptr{Nothing} @0x0000000003964400)
 </pre></div>
 </div>
 </div>
@@ -620,7 +607,7 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6048f2315b7a0cd23b93d038482045cf58098e2016f3cec7e00de88f2e4dbab8.png" src="_images/6048f2315b7a0cd23b93d038482045cf58098e2016f3cec7e00de88f2e4dbab8.png" />
+<img alt="_images/ae64a7c0c04b7aae6d76dba292ba6201d867e33b671637a0f661e05a9c1dd30a.png" src="_images/ae64a7c0c04b7aae6d76dba292ba6201d867e33b671637a0f661e05a9c1dd30a.png" />
 </div>
 </div>
 </section>
@@ -668,7 +655,7 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e8f8b6c19881ad51b7c5d60efcb6f9c3ceffbe3d8bcbf143cf8c209423d51d06.png" src="_images/e8f8b6c19881ad51b7c5d60efcb6f9c3ceffbe3d8bcbf143cf8c209423d51d06.png" />
+<img alt="_images/98c6e765816aa52a8595a84268d38431a4684b015001d05ebe0985da43ec35ff.png" src="_images/98c6e765816aa52a8595a84268d38431a4684b015001d05ebe0985da43ec35ff.png" />
 </div>
 </div>
 </section>
@@ -846,7 +833,7 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4PVPlacementAllocated(Ptr{Nothing} @0x0000000004ad01d0)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geant4.G4PVPlacementAllocated(Ptr{Nothing} @0x0000000005866cb0)
 </pre></div>
 </div>
 </div>
@@ -859,7 +846,7 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/42710fb67d0d15581f46d986b799fab9fe1f15a2cb72d9b37ee6deba310a7a7a.png" src="_images/42710fb67d0d15581f46d986b799fab9fe1f15a2cb72d9b37ee6deba310a7a7a.png" />
+<img alt="_images/e0314d522cbb305fba1df0d3ce75873385024dc3045762a46809204bbb93de5a.png" src="_images/e0314d522cbb305fba1df0d3ce75873385024dc3045762a46809204bbb93de5a.png" />
 </div>
 </div>
 </section>
@@ -874,16 +861,16 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.10"
+            mode: "julia-1.11"
         },
         kernelOptions: {
-            name: "julia-1.10",
+            name: "julia-1.11",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.10'</script>
+    <script>kernelName = 'julia-1.11'</script>
 
                 </article>
               
@@ -892,7 +879,7 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -920,7 +907,8 @@ GetA(m_eU) / (g / mole) = 237.72800000000004
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -985,8 +973,8 @@ By Pere Mato
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>
